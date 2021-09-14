@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Counter from './components/Counter';
 import GenreToggle from './components/GenreToggle/GenreToggle';
+import SearchInput from './components/SearchInput/SearchInput';
 
 const genresList = [ 'Comedy', 'Drama', 'Detective', 'Fantasy' ];
 
@@ -12,6 +13,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <Counter />
         <GenreToggle genresList={genresList} />
+        <SearchInput />
         <a
           className="App-link"
           href="https://reactjs.org"
