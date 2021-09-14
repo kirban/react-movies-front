@@ -17,10 +17,12 @@ export default class Counter extends React.Component {
     }
 
     render() {
+        const amountOutput = React.createElement("p", null, this.state.amount);
         return (
             <div>
                 <button onClick={this.increaseValue}>+</button>
-                <p>{this.state.amount}</p>
+                {amountOutput}
+                {/* <p>{this.state.amount}</p> */}
                 <button onClick={this.decreaseValue}>-</button>
             </div>
         )
