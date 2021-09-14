@@ -3,15 +3,14 @@ import './App.css';
 import Counter from './components/Counter';
 import GenreToggle from './components/GenreToggle/GenreToggle';
 
-// const genresList = [ 'All', 'Comedy', 'Drama' ];
-const genresList = [ 'Comedy', 'Drama' ];
+const genresList = [ 'Comedy', 'Drama', 'Detective', 'Fantasy' ];
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        {/* <Counter /> */}
+        <Counter />
         <GenreToggle genresList={genresList} />
         <a
           className="App-link"
