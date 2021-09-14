@@ -1,0 +1,22 @@
+.genresList {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-around;
+    list-style: none;
+}
+
+input:checked+label {
+    color:blueviolet;
+    text-decoration: underline;
+    text-underline-offset: 0.5rem;
+}
+
+label:hover {
+    cursor: pointer;
+    color:blueviolet;
+}
+
+input[type="radio"] {
+    left: -999em;
+    position: absolute;
+}

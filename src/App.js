@@ -1,15 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
 import Counter from './components/Counter';
+import GenreToggle from './components/GenreToggle/GenreToggle';
+
+// const genresList = [ 'All', 'Comedy', 'Drama' ];
+const genresList = [ 'Comedy', 'Drama' ];
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <div>
-          <Counter />
-        </div>
+        {/* <Counter /> */}
+        <GenreToggle genresList={genresList} />
         <a
           className="App-link"
           href="https://reactjs.org"
