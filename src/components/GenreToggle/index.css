@@ -1,0 +1,33 @@
+.genresList {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-around;
+    list-style: none;
+
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+    letter-spacing: 0px;
+    text-align: left;
+    text-transform: uppercase;
+
+}
+
+input:checked+label {
+    color:#FFF;
+    text-decoration: underline;
+    text-decoration-color: #F65261;
+    text-underline-offset: 0.5rem;
+}
+
+label:hover {
+    cursor: pointer;
+    color:#F65261;
+}
+
+input[type="radio"] {
+    left: -999em;
+    position: absolute;
+}
