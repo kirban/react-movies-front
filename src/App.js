@@ -4,11 +4,13 @@ import { Header, MoviesList, Footer } from '@components';
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Header />
-      <MoviesList />
+      <div className="content">
+        <MoviesList />
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }
 

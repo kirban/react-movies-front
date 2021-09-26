@@ -3,8 +3,7 @@
 
 header {
     height: 24.75rem;
-    margin: 3.375rem 3.625rem 1.875rem 3.625rem;
-    margin-right: 3.625rem;
+    margin-bottom: 1.875rem;
     background: linear-gradient(0deg, #000000, #000000);
 
     .headerBg {
@@ -12,10 +11,10 @@ header {
         background-size: 110%;
         background-position-y: -13rem;
         background-repeat: no-repeat;
-        position: fixed;
+        position: absolute;
         top: -48px;
         left: 28px;
-        width: 124rem; /*TODO: change to width according container*/
+        width: 100%; /*TODO: change to width according container*/
         height: 42.67rem;
         mix-blend-mode: normal;
         opacity: 0.3;
@@ -52,7 +51,7 @@ header {
             text-align: right;
             text-transform: uppercase;
 
-            :hover {
+            &:hover {
                 cursor: pointer;
             }
         }
