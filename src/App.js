@@ -1,17 +1,13 @@
 import React from 'react';
-import './styles/index.css';
-import GenreToggle from '@components/GenreToggle';
-import SearchInput from '@components/SearchInput';
-
-const genresList = ['Comedy', 'Drama', 'Detective', 'Fantasy'];
+import '@styles/index.css';
+import { Header, MoviesList, Footer } from '@components';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <GenreToggle genresList={genresList} />
-        <SearchInput />
-      </header>
+      <Header />
+      <MoviesList />
+      <Footer />
     </div>
   );
 }
