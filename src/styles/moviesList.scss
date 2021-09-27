@@ -90,6 +90,10 @@
                 letter-spacing: 0.888889px;
                 text-transform: uppercase;
 
+                &:hover {
+                    cursor: pointer;
+                }
+
                 &::after {
                     content: "▼";
                     padding: 12px 8px;
