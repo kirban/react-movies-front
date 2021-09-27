@@ -6,9 +6,9 @@ function App() {
   return (
     <>
       <Header />
-      <div className="content">
+      <main className="content">
         <MoviesList />
-      </div>
+      </main>
       <Footer />
     </>
   );
