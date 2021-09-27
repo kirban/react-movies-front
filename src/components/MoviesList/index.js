@@ -28,90 +28,89 @@ export default class MoviesList extends React.Component {
                 <div className="searchResultsCounter"><b>{this.counter}</b> movies found</div>
                 {/* for loop will be here. Later iterate over props & add MovieCard component */}
                 <div className="cardsGrid">
-
-                <div className="card">
-                    <div className="cardContent-top">
-                        <div className="cardContentImage img1">
-                            <div className="breadcrumbs"></div>
+                    <div className="card">
+                        <div className="cardContent-top">
+                            <div className="cardContentImage img1">
+                                <div className="breadcrumbs"></div>
+                            </div>
+                        </div>
+                        <div className="cardContent-bottom">
+                            <div className="cardContentRow-top">
+                                <div className="cardContentTitle">Pulp Fiction</div>
+                                <div className="cardContentLabel">2004</div>
+                            </div>
+                            <div className="cardContentDescription">Action & Adventure</div>
                         </div>
                     </div>
-                    <div className="cardContent-bottom">
-                        <div className="cardContentRow-top">
-                            <div className="cardContentTitle">Pulp Fiction</div>
-                            <div className="cardContentLabel">2004</div>
-                        </div>
-                        <div className="cardContentDescription">Action & Adventure</div>
-                    </div>
-                </div>
-
 
 
-                <div className="card">
-                    <div className="cardContent-top">
-                        <div className="cardContentImage img1">
-                            <div className="breadcrumbs"></div>
+
+                    <div className="card">
+                        <div className="cardContent-top">
+                            <div className="cardContentImage img1">
+                                <div className="breadcrumbs"></div>
+                            </div>
+                        </div>
+                        <div className="cardContent-bottom">
+                            <div className="cardContentRow-top">
+                                <div className="cardContentTitle">Pulp Fiction</div>
+                                <div className="cardContentLabel">2004</div>
+                            </div>
+                            <div className="cardContentDescription">Action & Adventure</div>
+                        </div>
+                    </div><div className="card">
+                        <div className="cardContent-top">
+                            <div className="cardContentImage img1">
+                                <div className="breadcrumbs"></div>
+                            </div>
+                        </div>
+                        <div className="cardContent-bottom">
+                            <div className="cardContentRow-top">
+                                <div className="cardContentTitle">Pulp Fiction</div>
+                                <div className="cardContentLabel">2004</div>
+                            </div>
+                            <div className="cardContentDescription">Action & Adventure</div>
+                        </div>
+                    </div><div className="card">
+                        <div className="cardContent-top">
+                            <div className="cardContentImage img1">
+                                <div className="breadcrumbs"></div>
+                            </div>
+                        </div>
+                        <div className="cardContent-bottom">
+                            <div className="cardContentRow-top">
+                                <div className="cardContentTitle">Pulp Fiction</div>
+                                <div className="cardContentLabel">2004</div>
+                            </div>
+                            <div className="cardContentDescription">Action & Adventure</div>
+                        </div>
+                    </div><div className="card">
+                        <div className="cardContent-top">
+                            <div className="cardContentImage img1">
+                                <div className="breadcrumbs"></div>
+                            </div>
+                        </div>
+                        <div className="cardContent-bottom">
+                            <div className="cardContentRow-top">
+                                <div className="cardContentTitle">Pulp Fiction</div>
+                                <div className="cardContentLabel">2004</div>
+                            </div>
+                            <div className="cardContentDescription">Action & Adventure</div>
+                        </div>
+                    </div><div className="card">
+                        <div className="cardContent-top">
+                            <div className="cardContentImage img1">
+                                <div className="breadcrumbs"></div>
+                            </div>
+                        </div>
+                        <div className="cardContent-bottom">
+                            <div className="cardContentRow-top">
+                                <div className="cardContentTitle">Pulp Fiction</div>
+                                <div className="cardContentLabel">2004</div>
+                            </div>
+                            <div className="cardContentDescription">Action & Adventure</div>
                         </div>
                     </div>
-                    <div className="cardContent-bottom">
-                        <div className="cardContentRow-top">
-                            <div className="cardContentTitle">Pulp Fiction</div>
-                            <div className="cardContentLabel">2004</div>
-                        </div>
-                        <div className="cardContentDescription">Action & Adventure</div>
-                    </div>
-                </div><div className="card">
-                    <div className="cardContent-top">
-                        <div className="cardContentImage img1">
-                            <div className="breadcrumbs"></div>
-                        </div>
-                    </div>
-                    <div className="cardContent-bottom">
-                        <div className="cardContentRow-top">
-                            <div className="cardContentTitle">Pulp Fiction</div>
-                            <div className="cardContentLabel">2004</div>
-                        </div>
-                        <div className="cardContentDescription">Action & Adventure</div>
-                    </div>
-                </div><div className="card">
-                    <div className="cardContent-top">
-                        <div className="cardContentImage img1">
-                            <div className="breadcrumbs"></div>
-                        </div>
-                    </div>
-                    <div className="cardContent-bottom">
-                        <div className="cardContentRow-top">
-                            <div className="cardContentTitle">Pulp Fiction</div>
-                            <div className="cardContentLabel">2004</div>
-                        </div>
-                        <div className="cardContentDescription">Action & Adventure</div>
-                    </div>
-                </div><div className="card">
-                    <div className="cardContent-top">
-                        <div className="cardContentImage img1">
-                            <div className="breadcrumbs"></div>
-                        </div>
-                    </div>
-                    <div className="cardContent-bottom">
-                        <div className="cardContentRow-top">
-                            <div className="cardContentTitle">Pulp Fiction</div>
-                            <div className="cardContentLabel">2004</div>
-                        </div>
-                        <div className="cardContentDescription">Action & Adventure</div>
-                    </div>
-                </div><div className="card">
-                    <div className="cardContent-top">
-                        <div className="cardContentImage img1">
-                            <div className="breadcrumbs"></div>
-                        </div>
-                    </div>
-                    <div className="cardContent-bottom">
-                        <div className="cardContentRow-top">
-                            <div className="cardContentTitle">Pulp Fiction</div>
-                            <div className="cardContentLabel">2004</div>
-                        </div>
-                        <div className="cardContentDescription">Action & Adventure</div>
-                    </div>
-                </div>
                 </div>
             </>
         )

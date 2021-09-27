@@ -1,13 +1,15 @@
 import React from 'react';
 import '@styles/index.css';
-import { Header, MoviesList, Footer } from '@components';
+import { Header, MoviesList, Footer, ErrorBoundary } from '@components';
 
 function App() {
   return (
     <>
       <Header />
       <main className="content">
-        <MoviesList />
+        <ErrorBoundary>
+          <MoviesList />
+        </ErrorBoundary>
       </main>
       <Footer />
     </>
