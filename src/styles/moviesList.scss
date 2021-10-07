@@ -1,0 +1,237 @@
+@import "colors";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.content {
+    background-color: $black;
+    padding: 1.25rem 3.75rem;
+
+    hr {
+        height: 2px;
+        border-radius: 0px;
+        background: #424242;
+        border: none;
+    }
+
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .genresList {
+            padding-inline-start: 0;
+            width: 31rem;
+
+            display: inline-flex;
+            justify-content: space-around;
+            list-style: none;
+        
+            font-family: Montserrat;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.25rem;
+            letter-spacing: 0px;
+            text-align: left;
+            text-transform: uppercase;
+            color:$white;
+
+            input:checked+label {
+                text-decoration: underline;
+                text-decoration-color: $red;
+                text-underline-offset: 1.7rem;
+            }
+            
+            label:hover {
+                cursor: pointer;
+                color:$red;
+            }
+            
+            input[type="radio"] {
+                left: -999em;
+                position: absolute;
+            }
+        }
+    
+        .sortItemsContainer {
+            label {
+                font-family: Montserrat;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 20px;
+                letter-spacing: 0.8888887763023376px;
+                text-align: left;
+                text-transform: uppercase;
+                color: $white;
+                mix-blend-mode: normal;
+                opacity: 0.4 /* (?)FIXME: in design was 0.6*/
+            }
+
+            select {
+                overflow: hidden;
+                position: relative;
+                appearance: none;
+                background-color: transparent;
+                border: none;
+                padding: 0 1rem;
+                outline: none;
+                color: $white;
+
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 20px;
+                letter-spacing: 0.888889px;
+                text-transform: uppercase;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &::after {
+                    content: "▼";
+                    padding: 12px 8px;
+                    position: absolute;
+                    right: 10px;
+                    top: 0;
+                    z-index: 1;
+                    text-align: center;
+                    width: 10%;
+                    height: 100%;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+
+    .searchResultsCounter {
+        margin-top: 1.5rem;
+        margin-bottom: 1.75rem;
+        width: 11rem;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+
+        color: $white;
+
+        b {
+            font-weight: 600;
+        }
+    }
+
+    .cardsGrid {
+        display: grid;
+        grid-gap: 55px;
+        grid-template-columns: repeat(3, 1fr);
+        
+        
+        .card {
+            width: 21rem;
+            padding: 10px;
+            
+            
+            font-family: Montserrat;
+            color: $white;
+            cursor: pointer;
+            
+            .cardContent-top {
+                .cardContentImage {
+                    height: 28.5rem;
+    
+                    .breadcrumbs {
+                        visibility: hidden;
+                        opacity: 0;
+                        transition: visibility 0s, opacity 0.5s linear;
+                        width: 36px;
+                        height: 36px;
+                        border-radius: 50%;
+                        position: relative;
+                        left: 269px;
+                        top: 20px;
+        
+                        background: #2A202D;
+                        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.196596);
+    
+                        &:after {
+                            content: '•••';
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotate(90deg);
+                            font-size: 28px;
+                        }
+                    }
+                    
+                    &.img1 {
+                        background-image: url("../../public/img/1.png");
+                    }
+    
+                    &:hover div.breadcrumbs {
+                        visibility: visible;
+                        opacity: 1;
+                    }
+                }
+    
+            }
+    
+            .cardContent-bottom {
+                margin-top: 1.5rem;
+                margin-bottom: 3.25rem;
+    
+                .cardContentRow-top {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 0.5rem;
+    
+                    .cardContentTitle {
+                        font-family: Montserrat;
+                        font-style: normal;
+                        font-weight: 500;
+                        font-size: 18px;
+                        line-height: 22px;
+                        /* identical to box height */
+    
+                        color: $white;
+    
+                        mix-blend-mode: normal;
+                        opacity: 0.7;
+                    }
+    
+                    .cardContentLabel {
+                        padding: 4px 8px;
+                        mix-blend-mode: normal;
+                        opacity: 0.5;
+                        border: 1px solid #979797;
+                        box-sizing: border-box;
+                        border-radius: 4px;
+                    }
+                }
+    
+                .cardContentDescription {
+                    font-family: Montserrat;
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 17px;
+                    /* identical to box height */
+    
+    
+                    color: #FFFFFF;
+    
+                    mix-blend-mode: normal;
+                    opacity: 0.5;
+                }
+            }
+    
+        }
+    }
+
+}

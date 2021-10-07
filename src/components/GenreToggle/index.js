@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './index.css';
 
 export default class GenreToggle extends React.Component {
   render() {
@@ -14,7 +13,6 @@ export default class GenreToggle extends React.Component {
     ));
 
     return (
-      <div style={{ width: '100%' }}>
         <ul className="genresList">
           <li key="default">
             <input type="radio" name="genres" id="genres_default" />
@@ -22,8 +20,6 @@ export default class GenreToggle extends React.Component {
           </li>
           {genreItems}
         </ul>
-  
-      </div>
     );
   }
 }
