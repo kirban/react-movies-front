@@ -1,9 +1,9 @@
-import Header from "@components/Header"
-import MoviesList from "@components/MoviesList"
-import Footer from "@components/Footer"
-import SearchInput from "@components/SearchInput"
-import GenreToggle from "@components/GenreToggle"
-import ErrorBoundary from "@components/ErrorBoundary"
+import Header from "./Header"
+import MoviesList from "./MoviesList"
+import Footer from "./Footer"
+import SearchInput from "./SearchInput"
+import GenreToggle from "./GenreToggle"
+import ErrorBoundary from "./ErrorBoundary"
 
 export {
     Header,

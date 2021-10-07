@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from '../../logo.svg';
 import "@styles/footer.scss";
-
 export default class Footer extends React.Component {
     render() {
         return (

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import "@styles/moviesList.scss"
 import { GenreToggle, ErrorBoundary } from '@components';
+import * as moviesListSchema from '../../schemas/moviesList' ;
 
 const mockedMovieGenres = [ 'documentary', 'comedy', 'horror', 'crime' ];
 
@@ -26,91 +27,23 @@ export default class MoviesList extends React.Component {
                 </div>
                 <hr />
                 <div className="searchResultsCounter"><b>{this.counter}</b> movies found</div>
-                {/* for loop will be here. Later iterate over props & add MovieCard component */}
                 <div className="cardsGrid">
-                    <div className="card">
-                        <div className="cardContent-top">
-                            <div className="cardContentImage img1">
-                                <div className="breadcrumbs"></div>
+                    {[1,2,3,4,5,6].map((id) => (
+                        <div key={id} className="card">
+                            <div className="cardContent-top">
+                                <div className={"cardContentImage img1"}>
+                                    <div className="breadcrumbs"></div>
+                                </div>
+                            </div>
+                            <div className="cardContent-bottom">
+                                <div className="cardContentRow-top">
+                                    <div className="cardContentTitle">Pulp Fiction</div>
+                                    <div className="cardContentLabel">2004</div>
+                                </div>
+                                <div className="cardContentDescription">Action & Adventure</div>
                             </div>
                         </div>
-                        <div className="cardContent-bottom">
-                            <div className="cardContentRow-top">
-                                <div className="cardContentTitle">Pulp Fiction</div>
-                                <div className="cardContentLabel">2004</div>
-                            </div>
-                            <div className="cardContentDescription">Action & Adventure</div>
-                        </div>
-                    </div>
-
-
-
-                    <div className="card">
-                        <div className="cardContent-top">
-                            <div className="cardContentImage img1">
-                                <div className="breadcrumbs"></div>
-                            </div>
-                        </div>
-                        <div className="cardContent-bottom">
-                            <div className="cardContentRow-top">
-                                <div className="cardContentTitle">Pulp Fiction</div>
-                                <div className="cardContentLabel">2004</div>
-                            </div>
-                            <div className="cardContentDescription">Action & Adventure</div>
-                        </div>
-                    </div><div className="card">
-                        <div className="cardContent-top">
-                            <div className="cardContentImage img1">
-                                <div className="breadcrumbs"></div>
-                            </div>
-                        </div>
-                        <div className="cardContent-bottom">
-                            <div className="cardContentRow-top">
-                                <div className="cardContentTitle">Pulp Fiction</div>
-                                <div className="cardContentLabel">2004</div>
-                            </div>
-                            <div className="cardContentDescription">Action & Adventure</div>
-                        </div>
-                    </div><div className="card">
-                        <div className="cardContent-top">
-                            <div className="cardContentImage img1">
-                                <div className="breadcrumbs"></div>
-                            </div>
-                        </div>
-                        <div className="cardContent-bottom">
-                            <div className="cardContentRow-top">
-                                <div className="cardContentTitle">Pulp Fiction</div>
-                                <div className="cardContentLabel">2004</div>
-                            </div>
-                            <div className="cardContentDescription">Action & Adventure</div>
-                        </div>
-                    </div><div className="card">
-                        <div className="cardContent-top">
-                            <div className="cardContentImage img1">
-                                <div className="breadcrumbs"></div>
-                            </div>
-                        </div>
-                        <div className="cardContent-bottom">
-                            <div className="cardContentRow-top">
-                                <div className="cardContentTitle">Pulp Fiction</div>
-                                <div className="cardContentLabel">2004</div>
-                            </div>
-                            <div className="cardContentDescription">Action & Adventure</div>
-                        </div>
-                    </div><div className="card">
-                        <div className="cardContent-top">
-                            <div className="cardContentImage img1">
-                                <div className="breadcrumbs"></div>
-                            </div>
-                        </div>
-                        <div className="cardContent-bottom">
-                            <div className="cardContentRow-top">
-                                <div className="cardContentTitle">Pulp Fiction</div>
-                                <div className="cardContentLabel">2004</div>
-                            </div>
-                            <div className="cardContentDescription">Action & Adventure</div>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </>
         )
@@ -118,5 +51,5 @@ export default class MoviesList extends React.Component {
 }
 
 MoviesList.propTypes = {
-    moviesList: PropTypes.arrayOf(PropTypes.object)
+    moviesList: PropTypes.arrayOf(PropTypes.shape(moviesListSchema))
 }

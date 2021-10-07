@@ -13,7 +13,6 @@ export default class GenreToggle extends React.Component {
     ));
 
     return (
-      <>
         <ul className="genresList">
           <li key="default">
             <input type="radio" name="genres" id="genres_default" />
@@ -21,8 +20,6 @@ export default class GenreToggle extends React.Component {
           </li>
           {genreItems}
         </ul>
-  
-      </>
     );
   }
 }
