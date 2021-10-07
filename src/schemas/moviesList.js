@@ -8,4 +8,5 @@ export default {
     genre: PropTypes.string,
     runtime: PropTypes.number,
     overview: PropTypes.string,
+    imageUrl: PropTypes.string
 }

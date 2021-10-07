@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import "@styles/moviesList.scss"
 import { GenreToggle, ErrorBoundary } from '@components';
-import * as moviesListSchema from '../../schemas/moviesList' ;
+import * as moviesListSchema from '../../schemas/moviesList';
+import moviesList from '../../mocks/movies.js';
 
 const mockedMovieGenres = [ 'documentary', 'comedy', 'horror', 'crime' ];
 
@@ -28,19 +29,18 @@ export default class MoviesList extends React.Component {
                 <hr />
                 <div className="searchResultsCounter"><b>{this.counter}</b> movies found</div>
                 <div className="cardsGrid">
-                    {[1,2,3,4,5,6].map((id) => (
-                        <div key={id} className="card">
+                    {moviesList.map((item, idx) => (
+                        <div key={idx} className="card">
                             <div className="cardContent-top">
-                                <div className={"cardContentImage img1"}>
-                                    <div className="breadcrumbs"></div>
-                                </div>
+                                <div className="breadcrumbs"></div>
+                                <img className="cardContentImage" src={"img/"+item.imageUrl} alt="" />
                             </div>
                             <div className="cardContent-bottom">
                                 <div className="cardContentRow-top">
-                                    <div className="cardContentTitle">Pulp Fiction</div>
-                                    <div className="cardContentLabel">2004</div>
+                                    <div className="cardContentTitle">{item.title}</div>
+                                    <div className="cardContentLabel">{item.releaseDate.slice(6)}</div>
                                 </div>
-                                <div className="cardContentDescription">Action & Adventure</div>
+                                <div className="cardContentDescription">{item.genre}</div>
                             </div>
                         </div>
                     ))}
