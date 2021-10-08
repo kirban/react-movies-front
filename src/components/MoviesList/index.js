@@ -12,6 +12,15 @@ export default class MoviesList extends React.Component {
         super();
         this.counter = 0;
     }
+
+    handleToggleActionsMenu(e) {
+        const moviesMenu = e.target.closest(".moviesActionMenu");
+        if (!moviesMenu) {
+            e.target.nextSibling.classList.toggle("active");
+        }
+        moviesMenu.classList.toggle("active")
+    }
+
     render() {
         return (
             <>
@@ -32,7 +41,15 @@ export default class MoviesList extends React.Component {
                     {moviesList.map((item, idx) => (
                         <div key={idx} className="card">
                             <div className="cardContent-top">
-                                <div className="breadcrumbs"></div>
+                                <div className="breadcrumbs" onClick={this.handleToggleActionsMenu}></div>
+                                <div className="moviesActionMenu">
+                                    <a href="#" className="cross-close" onClick={this.handleToggleActionsMenu}></a>
+                                    <ul className="actions-list">
+                                        <li className="edit-item"><a>Edit</a></li>
+                                        <li className="remove-item"><a>Delete</a></li>
+                                    </ul>
+                                </div>
+                                
                                 <img className="cardContentImage" src={"img/"+item.imageUrl} alt="" />
                             </div>
                             <div className="cardContent-bottom">
