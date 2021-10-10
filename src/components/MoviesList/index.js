@@ -16,19 +16,14 @@ export default class MoviesList extends React.Component {
         };
     }
 
-    showModal = e => {
-        const itemId = e.target.dataset.itemId;
-        console.log("item id", itemId);
-        this.setState({
-            show: !this.state.show
-        })
-    }
-
     handleToggleActionsMenu(e) {
+        console.log('toggle');
         const moviesMenu = e.target.closest(".moviesActionMenu");
         if (!moviesMenu) {
+            console.log('was closed');
             e.target.nextSibling.classList.toggle("active");
         } else {
+            console.log('was opened');
             moviesMenu.classList.toggle("active")
         }
     }
@@ -36,9 +31,9 @@ export default class MoviesList extends React.Component {
     render() {
         return (
             <>
-                <Modal title="" onClose={this.showModal} show={this.state.show}>
+                {/* <Modal title="" onClose={this.showModal} show={this.state.show}>
                     <p>Test Here</p>
-                </Modal>
+                </Modal> */}
                 <div className="navbar">
                     <ErrorBoundary>
                         <GenreToggle genresList={mockedMovieGenres}/>
@@ -59,9 +54,9 @@ export default class MoviesList extends React.Component {
                                 <div className="breadcrumbs" onClick={this.handleToggleActionsMenu}></div>
                                 <div className="moviesActionMenu">
                                     <a href="#" className="cross-close" onClick={this.handleToggleActionsMenu}></a>
-                                    <ul className="actions-list">
-                                        <li className="edit-item" data-action="edit" data-item-id={item.id} onClick={this.showModal}><a>Edit</a></li>
-                                        <li className="remove-item" data-action="delete" data-item-id={item.id} onClick={this.showModal}><a>Delete</a></li>
+                                    <ul className="actions-list" onClick={this.handleToggleActionsMenu}>
+                                        <li className="edit-item" data-action="edit" data-item-id={item.id} onClick={this.props.showModal}><a>Edit</a></li>
+                                        <li className="remove-item" data-action="delete" data-item-id={item.id} onClick={this.props.showModal}><a>Delete</a></li>
                                     </ul>
                                 </div>
                                 

@@ -1,57 +1,68 @@
 import React from 'react';
 import '@styles/index.scss';
-import { Header, MoviesList, Footer, ErrorBoundary } from '@components';
+import { Header, MoviesList, Footer, ErrorBoundary, Modal } from '@components';
 
-// class App extends React.Component {
-//   constructor(props) {
-//     super(props)
-//   }
-//   onMovieCreate = e => {
-//     console.log('onmoviecreate')
-//   }
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      show: false
+    }
+  }
 
-//   onMovieEdit = e => {
-//     console.log('onmovieedit')
-//   }
+  onMovieCreate = e => {
+    console.log('onmoviecreate')
+  }
 
-//   onMovieDelete = e => {
-//     console.log('onmoviedelete')
-//   }
+  onMovieEdit = e => {
+    console.log('onmovieedit')
+  }
 
-//   showModal = e => {
+  onMovieDelete = e => {
+    console.log('onmoviedelete')
+  }
+
+  showModal = e => {
+    const { action, itemId } = e.target.dataset;
+
+    console.log("item id", itemId);
+    console.log("action", action);
+
+    if (action) {
+      switch(action) {
+        case "add":
+          this.onMovieCreate(e)
+          break;
+        case "edit":
+          this.onMovieEdit(e, itemId)
+          break;
+        case "delete":
+          this.onMovieDelete(e, itemId)
+          break;
+      }
+    }
     
-//   }
+    this.setState({
+        show: !this.state.show
+    })
+  }
 
-//   render() {
-//     return (
-//       <>
-//         <Modal title="" onClose={this.showModal} show={this.state.show}>
-//           <p>Test Here</p>
-//         </Modal>
-//         <Header onMovieCreate={this.onMovieCreate}/>
-//         <main className="content">
-//           <ErrorBoundary>
-//             <MoviesList />
-//           </ErrorBoundary>
-//         </main>
-//         <Footer />
-//       </>
-//     );
-//   }
-// }
-
-function App() {
-  return (
-    <>
-      <Header />
-      <main className="content">
-        <ErrorBoundary>
-          <MoviesList />
-        </ErrorBoundary>
-      </main>
-      <Footer />
-    </>
-  );
+  render() {
+    return (
+      <>
+        <Modal title="" onClose={this.showModal} show={this.state.show}>
+          <p>Test Here</p>
+        </Modal>
+        <Header onMovieCreate={this.showModal}/>
+        <main className="content">
+          <ErrorBoundary>
+            <MoviesList showModal={this.showModal}/>
+          </ErrorBoundary>
+        </main>
+        <Footer />
+      </>
+    );
+  }
 }
 
 export default App;

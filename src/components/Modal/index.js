@@ -19,7 +19,7 @@ export default class Modal extends React.Component {
     render(){
         if (!this.props.show) return null
         return(
-            <div className="modalWindow">
+            <div className="modalWindow" onClick={this.onClose}>
                 <div className="modalContent">
                     <h2 className="modalHead">{this.props.title}</h2>
                     <span className="closeModal" onClick={this.onClose}>&times;</span>
