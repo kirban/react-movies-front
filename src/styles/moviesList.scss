@@ -73,6 +73,7 @@
             }
 
             select {
+                text-align: right;
                 overflow: hidden;
                 position: relative;
                 appearance: none;
@@ -93,19 +94,19 @@
                 &:hover {
                     cursor: pointer;
                 }
+            }
 
-                &::after {
-                    content: "▼";
-                    padding: 12px 8px;
-                    position: absolute;
-                    right: 10px;
-                    top: 0;
-                    z-index: 1;
-                    text-align: center;
-                    width: 10%;
-                    height: 100%;
-                    pointer-events: none;
-                }
+            .sort-asc {
+                cursor: pointer;
+                left: 3px;
+                display: inline-block;
+                width: 0;
+                height: 0;
+                border: solid 5px transparent;
+                margin: 4px 4px 0 3px;
+                background: transparent;
+                border-bottom: solid 7px $red;
+                border-top-width: 0;
             }
         }
     }

@@ -1,4 +1,4 @@
-const moviesList = [
+const mockedMoviesList = [
     {
         "id": "1",
         "imageUrl": "1.png",
@@ -67,4 +67,4 @@ const moviesList = [
     }
 ]
 
-export default moviesList;
+export default mockedMoviesList;

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import "@styles/moviesList.scss"
-import { GenreToggle, ErrorBoundary, Modal } from '@components';
+import { GenreToggle, ErrorBoundary } from '@components';
 import * as moviesListSchema from '../../schemas/moviesList';
-import moviesList from '../../mocks/movies.js';
+import mockedMoviesList from '../../mocks/movies.js';
 
 const mockedMovieGenres = [ 'documentary', 'comedy', 'horror', 'crime' ];
 
@@ -13,8 +13,18 @@ export default class MoviesList extends React.Component {
         this.state = {
             counter: 0,
             show: false,
+            moviesList: []
         };
     }
+
+    componentDidMount() {
+        // get from mocked file or API
+        this.setState({
+            moviesList: mockedMoviesList
+        })
+    }
+
+    componentWillUnmount() {}
 
     handleToggleActionsMenu(e) {
         console.log('toggle');
@@ -28,27 +38,36 @@ export default class MoviesList extends React.Component {
         }
     }
 
+    moviesSort = e => {
+        const sortPropertyValue = e.target.value;
+
+        this.setState({
+            moviesList: this.state.moviesList.sort((a, b) => (a[sortPropertyValue] > b[sortPropertyValue]) ? 1 : -1)
+        })
+
+        const sortingIcon = e.target.nextSibling;
+    }
+
     render() {
         return (
             <>
-                {/* <Modal title="" onClose={this.showModal} show={this.state.show}>
-                    <p>Test Here</p>
-                </Modal> */}
                 <div className="navbar">
                     <ErrorBoundary>
                         <GenreToggle genresList={mockedMovieGenres}/>
                     </ErrorBoundary>
                     <div className="sortItemsContainer">
                         <label htmlFor="sortItems">sort by</label>
-                        <select id="sortItems">
-                            <option defaultValue>release date</option>
+                        <select id="sortItems" onChange={this.moviesSort}>
+                            <option defaultValue value="releaseDate">release date</option>
+                            <option value="title">title</option>
                         </select>
+                        <i className="sort sort-asc"></i>
                     </div>
                 </div>
                 <hr />
                 <div className="searchResultsCounter"><b>{this.state.counter}</b> movies found</div>
                 <div className="cardsGrid">
-                    {moviesList.map((item) => (
+                    {this.state.moviesList.map((item) => (
                         <div key={item.id} className="card">
                             <div className="cardContent-top">
                                 <div className="breadcrumbs" onClick={this.handleToggleActionsMenu}></div>
@@ -78,5 +97,5 @@ export default class MoviesList extends React.Component {
 }
 
 MoviesList.propTypes = {
-    moviesList: PropTypes.arrayOf(PropTypes.shape(moviesListSchema))
+    // moviesList: PropTypes.arrayOf(PropTypes.shape(moviesListSchema))
 }
