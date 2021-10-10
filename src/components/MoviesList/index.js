@@ -2,17 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import "@styles/moviesList.scss"
 import { GenreToggle, ErrorBoundary } from '@components';
-import * as moviesListSchema from '../../schemas/moviesList';
 import mockedMoviesList from '../../mocks/movies.js';
-
-const mockedMovieGenres = [ 'documentary', 'comedy', 'horror', 'crime' ];
+import { genres } from '../../constant';
 
 export default class MoviesList extends React.Component {
     constructor(){
         super();
         this.state = {
             counter: 0,
-            show: false,
             moviesList: []
         };
     }
@@ -26,7 +23,7 @@ export default class MoviesList extends React.Component {
 
     componentWillUnmount() {}
 
-    handleToggleActionsMenu(e) {
+    handleToggleActionsMenu = e => {
         console.log('toggle');
         const moviesMenu = e.target.closest(".moviesActionMenu");
         if (!moviesMenu) {
@@ -46,6 +43,7 @@ export default class MoviesList extends React.Component {
         })
 
         const sortingIcon = e.target.nextSibling;
+        // TODO: rotate icon
     }
 
     render() {
@@ -53,7 +51,7 @@ export default class MoviesList extends React.Component {
             <>
                 <div className="navbar">
                     <ErrorBoundary>
-                        <GenreToggle genresList={mockedMovieGenres}/>
+                        <GenreToggle genresList={genres}/>
                     </ErrorBoundary>
                     <div className="sortItemsContainer">
                         <label htmlFor="sortItems">sort by</label>
@@ -97,5 +95,5 @@ export default class MoviesList extends React.Component {
 }
 
 MoviesList.propTypes = {
-    // moviesList: PropTypes.arrayOf(PropTypes.shape(moviesListSchema))
+    showModal: PropTypes.func.isRequired
 }

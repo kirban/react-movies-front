@@ -1,12 +1,12 @@
 import React from 'react';
 import '@styles/index.scss';
-import { Header, MoviesList, Footer, ErrorBoundary, Modal } from '@components';
+import { Header, MoviesList, Footer, ErrorBoundary, Modal, ModalForm } from '@components';
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      show: false
+      show: true
     }
   }
 
@@ -51,7 +51,7 @@ class App extends React.Component {
     return (
       <>
         <Modal title="" onClose={this.showModal} show={this.state.show}>
-          <p>Test Here</p>
+          <ModalForm />
         </Modal>
         <Header onMovieCreate={this.showModal}/>
         <main className="content">

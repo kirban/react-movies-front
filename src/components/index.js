@@ -5,6 +5,7 @@ import SearchInput from "./SearchInput"
 import GenreToggle from "./GenreToggle"
 import ErrorBoundary from "./ErrorBoundary"
 import Modal from "./Modal"
+import ModalForm from "./ModalForm"
 
 export {
     Header,
@@ -13,5 +14,6 @@ export {
     SearchInput,
     GenreToggle,
     ErrorBoundary,
-    Modal
+    Modal,
+    ModalForm
 }
