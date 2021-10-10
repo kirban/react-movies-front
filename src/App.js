@@ -1,12 +1,15 @@
 import React from 'react';
 import '@styles/index.scss';
-import { Header, MoviesList, Footer, ErrorBoundary, Modal, ModalForm } from '@components';
+import { Header, MoviesList, Footer, ErrorBoundary, Modal } from '@components';
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       show: true,
+      modalType: "form",
+      modalTitle: "add movie",
+      movieId: 0
     }
   }
 
@@ -14,12 +17,14 @@ class App extends React.Component {
     console.log('onmoviecreate')
   }
 
-  onMovieEdit = e => {
+  onMovieEdit = (e, itemId) => {
     console.log('onmovieedit')
+    this.setState({ modalTitle: "edit movie", movieId: itemId })
   }
 
-  onMovieDelete = e => {
+  onMovieDelete = (e, movieId) => {
     console.log('onmoviedelete')
+    this.setState({ modalType: "confirm", modalTitle: "delete movie", movieId })
   }
 
   showModal = e => {
@@ -50,9 +55,7 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <Modal title="add movie" type="form" onClose={this.showModal} show={this.state.show}>
-          <ModalForm />
-        </Modal>
+        <Modal title={this.state.modalTitle} type={this.state.modalType} onClose={this.showModal} show={this.state.show} movieId={this.state.movieId}/>
         <Header onMovieCreate={this.showModal}/>
         <main className="content">
           <ErrorBoundary>
