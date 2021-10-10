@@ -39,6 +39,8 @@
         p {}
 
         .modalControls {
+            display: flex;
+            justify-content: flex-end;
             margin-top: 60px;
 
             button.btn {

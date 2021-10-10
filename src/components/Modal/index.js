@@ -17,7 +17,8 @@ export default class Modal extends React.Component {
     }
 
     render(){
-        if (!this.props.show) return null
+        if (!this.props.show) return null;
+        if (!this.props.type) return null;
         return(
             <div className="modalWindow">
                 <div className="modalContent">
@@ -25,8 +26,10 @@ export default class Modal extends React.Component {
                     <span className="closeModal" onClick={this.onClose}>&times;</span>
                     <div className="modalBody">{this.props.children}</div>
                     <div className="modalControls">
+                        {
+                            (this.props.type === "form") ? <button className="btn btn-outlined">Reset</button> : ""
+                        }
                         <button className="btn btn-primary" onClick={this.onSubmit}>Confirm</button>
-                        <button className="btn btn-outlined">Reset</button>
                     </div>
                 </div>
             </div>
@@ -35,8 +38,8 @@ export default class Modal extends React.Component {
 }
 
 Modal.propTypes = {
-    title: PropTypes.string,
-    children: PropTypes.node,
-    callerId: PropTypes.number,
-    show: PropTypes.bool
+    title: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
+    show: PropTypes.bool.isRequired,
+    type: "form" || "confirm"
 } 

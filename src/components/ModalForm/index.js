@@ -3,8 +3,8 @@ import { genres } from '../../constant'
 import '@styles/modalForm.scss'
 
 export default class ModalForm extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
     }
 
     handleSubmit = e => {}

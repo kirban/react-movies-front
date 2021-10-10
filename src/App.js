@@ -6,7 +6,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      show: true
+      show: true,
     }
   }
 
@@ -50,7 +50,7 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <Modal title="" onClose={this.showModal} show={this.state.show}>
+        <Modal title="add movie" type="form" onClose={this.showModal} show={this.state.show}>
           <ModalForm />
         </Modal>
         <Header onMovieCreate={this.showModal}/>
