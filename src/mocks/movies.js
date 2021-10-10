@@ -1,5 +1,6 @@
 const moviesList = [
     {
+        "id": "1",
         "imageUrl": "1.png",
         "title": "Pulp Fiction",
         "releaseDate": "01-01-2004",
@@ -10,6 +11,7 @@ const moviesList = [
         "overview": "Pulp Fiction"
     },
     {
+        "id": "2",
         "imageUrl": "2.png",
         "title": "Bohemian Rhapsody",
         "releaseDate": "01-01-2003",
@@ -20,6 +22,7 @@ const moviesList = [
         "overview": "Bohemian Rhapsody"
     },
     {
+        "id": "3",
         "imageUrl": "3.png",
         "title": "Kill Bill: Vol 2",
         "releaseDate": "01-01-1994",
@@ -30,6 +33,7 @@ const moviesList = [
         "overview": "Kill Bill: Vol 2"
     },
     {
+        "id": "4",
         "imageUrl": "4.png",
         "title": "Avengers: War of Infinity",
         "releaseDate": "01-01-2004",
@@ -40,6 +44,7 @@ const moviesList = [
         "overview": "Avengers: War of Infinity"
     },
     {
+        "id": "5",
         "imageUrl": "5.png",
         "title": "Inception",
         "releaseDate": "01-01-2003",
@@ -50,6 +55,7 @@ const moviesList = [
         "overview": "Inception"
     },
     {
+        "id": "6",
         "imageUrl": "6.png",
         "title": "Reservoir dogs",
         "releaseDate": "01-01-1994",

@@ -4,6 +4,10 @@ import logo from '../../logo.svg';
 import '@styles/header.scss';
 
 export default class Header extends React.Component {
+    onMovieCreate = e => {
+        this.props.onMovieCreate && this.props.onMovieCreate(e);
+    }
+
     render() {
         return (
             <>  
@@ -11,7 +15,7 @@ export default class Header extends React.Component {
                     <div className="headerBg"></div>
                     <div className="headerContent-top">
                         <img src={logo} alt="App Logo" className="logo" />
-                        <button className="btn addMovieBtn">+ add movie</button>
+                        <button className="btn addMovieBtn" data-action="add" onClick={this.onMovieCreate}>+ add movie</button>
                     </div>
                     <div className="headerContent-main">
                         <h1>Find your movie</h1>
