@@ -10,7 +10,7 @@ class App extends React.Component {
       modalType: "form",
       modalTitle: "add movie",
       movieId: 0,
-      selectedMovie: null,
+      selectedMovie: {},
     }
   }
 
@@ -63,7 +63,7 @@ class App extends React.Component {
     return (
       <>
         <Modal title={this.state.modalTitle} type={this.state.modalType} onClose={this.showModal} show={this.state.show} movieId={this.state.movieId}/>
-        <Header selectedMovie={this.state.selectedMovie} onMovieCreate={this.showModal}/>
+        <Header selectedMovie={this.state.selectedMovie} onMovieCreate={this.showModal} onMovieSelect={this.handleMovieSelect}/>
         <main className="content">
           <ErrorBoundary>
             <MoviesList onMovieSelected={this.handleMovieSelect} showModal={this.showModal}/>
