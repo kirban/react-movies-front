@@ -6,7 +6,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      show: true,
+      show: false,
       modalType: "form",
       modalTitle: "add movie",
       movieId: 0
