@@ -35,6 +35,10 @@ export default class MoviesList extends React.Component {
         }
     }
 
+    handleMovieSelect = movie => {
+        this.props.onMovieSelected(movie)
+    }
+
     moviesSort = e => {
         const sortPropertyValue = e.target.value;
 
@@ -77,9 +81,9 @@ export default class MoviesList extends React.Component {
                                     </ul>
                                 </div>
                                 
-                                <img className="cardContentImage" src={"img/"+item.imageUrl} alt="" />
+                                <img className="cardContentImage" src={"img/"+item.imageUrl} alt="" onClick={this.handleMovieSelect.bind({}, item)}/>
                             </div>
-                            <div className="cardContent-bottom">
+                            <div className="cardContent-bottom" onClick={this.handleMovieSelect.bind({}, item)}>
                                 <div className="cardContentRow-top">
                                     <div className="cardContentTitle">{item.title}</div>
                                     <div className="cardContentLabel">{item.releaseDate.slice(6)}</div>

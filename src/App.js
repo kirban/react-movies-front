@@ -9,7 +9,8 @@ class App extends React.Component {
       show: false,
       modalType: "form",
       modalTitle: "add movie",
-      movieId: 0
+      movieId: 0,
+      selectedMovie: null,
     }
   }
 
@@ -52,14 +53,20 @@ class App extends React.Component {
     })
   }
 
+  handleMovieSelect = movie => {
+    this.setState({
+      selectedMovie: movie,
+    })
+  }
+
   render() {
     return (
       <>
         <Modal title={this.state.modalTitle} type={this.state.modalType} onClose={this.showModal} show={this.state.show} movieId={this.state.movieId}/>
-        <Header onMovieCreate={this.showModal}/>
+        <Header selectedMovie={this.state.selectedMovie} onMovieCreate={this.showModal}/>
         <main className="content">
           <ErrorBoundary>
-            <MoviesList showModal={this.showModal}/>
+            <MoviesList onMovieSelected={this.handleMovieSelect} showModal={this.showModal}/>
           </ErrorBoundary>
         </main>
         <Footer />
