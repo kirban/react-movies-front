@@ -1,6 +1,7 @@
 import React from 'react';
 import '@styles/index.scss';
 import { Header, MoviesList, Footer, ErrorBoundary, Modal } from '@components';
+import { Context } from './context'
 
 class App extends React.Component {
   constructor(props) {
@@ -59,18 +60,23 @@ class App extends React.Component {
     })
   }
 
+  
   render() {
     return (
-      <>
-        <Modal title={this.state.modalTitle} type={this.state.modalType} onClose={this.showModal} show={this.state.show} movieId={this.state.movieId}/>
-        <Header selectedMovie={this.state.selectedMovie} onMovieCreate={this.showModal} onMovieSelect={this.handleMovieSelect}/>
-        <main className="content">
-          <ErrorBoundary>
-            <MoviesList onMovieSelected={this.handleMovieSelect} showModal={this.showModal}/>
-          </ErrorBoundary>
-        </main>
-        <Footer />
-      </>
+      <Context.Provider value={{
+        handleMovieSelect: this.handleMovieSelect.bind(this, ...arguments)
+      }}>
+        <>
+          <Modal title={this.state.modalTitle} type={this.state.modalType} onClose={this.showModal} show={this.state.show} movieId={this.state.movieId}/>
+          <Header selectedMovie={this.state.selectedMovie} onMovieCreate={this.showModal} onMovieSelect={this.handleMovieSelect}/>
+          <main className="content">
+            <ErrorBoundary>
+              <MoviesList onMovieSelected={this.handleMovieSelect} showModal={this.showModal}/>
+            </ErrorBoundary>
+          </main>
+          <Footer />
+        </>
+      </Context.Provider>
     );
   }
 }

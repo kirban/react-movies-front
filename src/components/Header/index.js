@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { SearchInput, MoviePreview } from '@components';
 import PropTypes from 'prop-types';
 import logo from '../../logo.svg';
 import '@styles/header.scss';
 import * as _ from 'lodash';
+import { Context } from '../../context'
 
 const Header = (props) => {
     const initialMovie = {}
-    const [selectedMovie, setSelectedMovie] = useState(initialMovie)
+    // const [selectedMovie, setSelectedMovie] = useState(initialMovie)
     const [previewActive, setPreviewActive] = useState(false)
+
+    const { handleMovieSelect } = useContext(Context)
 
     useEffect(() => {
         
@@ -16,7 +19,7 @@ const Header = (props) => {
             setPreviewActive(true)
         }
 
-        setSelectedMovie(props.selectedMovie)
+        handleMovieSelect(props.selectedMovie)
 
         return () => {
             return initialMovie
@@ -30,27 +33,30 @@ const Header = (props) => {
 
     const handleSearchButtonClick = () => {
         setPreviewActive(false)
-        setSelectedMovie(initialMovie)
-        props.onMovieSelect(initialMovie)
+        handleMovieSelect(initialMovie)
     }
 
     return(
-        <header>
-            <div id="selectedMovie" className="">
-                {(props.selectedMovie) ? <MoviePreview selectedMovie={selectedMovie} onSearchButtonClick={handleSearchButtonClick}/> : ""}
-            </div>
-            <div id="searchSection" className="hidden">
-                <div className="headerBg"></div>
-                <div className="headerContent-top">
-                    <img src={logo} alt="App Logo" className="logo" />
-                    <button className="btn addMovieBtn" data-action="add" onClick={props.onMovieCreate}>+ add movie</button>
+        <Context.Provider value={{
+            handleSearchButtonClick
+        }}>
+            <header>
+                <div id="selectedMovie" className="">
+                    {(Object.keys(props.selectedMovie).length) ? <MoviePreview selectedMovie={props.selectedMovie} /> : ""}
                 </div>
-                <div className="headerContent-main">
-                    <h1>Find your movie</h1>
-                    <SearchInput />
+                <div id="searchSection" className="hidden">
+                    <div className="headerBg"></div>
+                    <div className="headerContent-top">
+                        <img src={logo} alt="App Logo" className="logo" />
+                        <button className="btn addMovieBtn" data-action="add" onClick={props.onMovieCreate}>+ add movie</button>
+                    </div>
+                    <div className="headerContent-main">
+                        <h1>Find your movie</h1>
+                        <SearchInput />
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        </Context.Provider>
     )
 }
 
@@ -61,22 +67,3 @@ Header.propTypes = {
 }
 
 export default Header
-// export default class Header extends React.Component {
-//     render() {
-//         return (
-//             <>  
-                // <header>
-                //     <div className="headerBg"></div>
-                //     <div className="headerContent-top">
-                //         <img src={logo} alt="App Logo" className="logo" />
-                //         <button className="btn addMovieBtn" data-action="add" onClick={this.props.onMovieCreate}>+ add movie</button>
-                //     </div>
-                //     <div className="headerContent-main">
-                //         <h1>Find your movie</h1>
-                //         <SearchInput />
-                //     </div>
-                // </header>
-//             </>
-//         )
-//     }
-// }

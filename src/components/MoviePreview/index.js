@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import PropTypes from 'prop-types';
 import logo from '../../logo.svg';
 import search from '../../search.svg';
+import { Context } from '../../context';
 
 const MoviePreview = (props) => {
+
+    const { handleSearchButtonClick } = useContext(Context)
 
     return (
         <>
@@ -11,7 +14,7 @@ const MoviePreview = (props) => {
                 <a href="">
                     <img src={logo} alt="App Logo" className="logo" />
                 </a>
-                <a onClick={props.onSearchButtonClick}>
+                <a onClick={handleSearchButtonClick}>
                     <img src={search} alt="Search" className="search" />
                 </a>
             </div>
