@@ -64,7 +64,7 @@ class App extends React.Component {
   render() {
     return (
       <Context.Provider value={{
-        handleMovieSelect: this.handleMovieSelect.bind(this, ...arguments)
+        handleMovieSelect: this.handleMovieSelect
       }}>
         <>
           <Modal title={this.state.modalTitle} type={this.state.modalType} onClose={this.showModal} show={this.state.show} movieId={this.state.movieId}/>
