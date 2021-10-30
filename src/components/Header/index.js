@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { SearchInput, MoviePreview } from '@components';
 import PropTypes from 'prop-types';
 import logo from '../../logo.svg';
@@ -21,15 +21,15 @@ const Header = (props) => {
 
         handleMovieSelect(props.selectedMovie)
 
-        return () => {
-            return initialMovie
-        }
     }, [props.selectedMovie])
 
-    const handleSearchButtonClick = () => {
-        setPreviewActive(false)
-        handleMovieSelect(initialMovie)
-    }
+    const handleSearchButtonClick = useCallback(
+        () => {
+            setPreviewActive(false)
+            handleMovieSelect(initialMovie)
+        },
+        [setPreviewActive, handleMovieSelect],
+    )
 
     return(
         <Context.Provider value={{
