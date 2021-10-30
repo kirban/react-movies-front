@@ -26,11 +26,6 @@ const Header = (props) => {
         }
     }, [props.selectedMovie])
 
-    useEffect(() => {
-        document.getElementById("selectedMovie").classList.toggle("hidden")
-        document.getElementById("searchSection").classList.toggle("hidden")
-    }, [previewActive])
-
     const handleSearchButtonClick = () => {
         setPreviewActive(false)
         handleMovieSelect(initialMovie)
@@ -41,10 +36,10 @@ const Header = (props) => {
             handleSearchButtonClick
         }}>
             <header>
-                <div id="selectedMovie" className="">
+                <div id="selectedMovie" className={(!previewActive) ? "hidden" : ""}>
                     {(Object.keys(props.selectedMovie).length) ? <MoviePreview selectedMovie={props.selectedMovie} /> : ""}
                 </div>
-                <div id="searchSection" className="hidden">
+                <div id="searchSection" className={(previewActive) ? "hidden" : ""}>
                     <div className="headerBg"></div>
                     <div className="headerContent-top">
                         <img src={logo} alt="App Logo" className="logo" />
