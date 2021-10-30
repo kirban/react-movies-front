@@ -8,7 +8,6 @@ import { Context } from '../../context'
 
 const Header = (props) => {
     const initialMovie = {}
-    // const [selectedMovie, setSelectedMovie] = useState(initialMovie)
     const [previewActive, setPreviewActive] = useState(false)
 
     const { handleMovieSelect } = useContext(Context)
