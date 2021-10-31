@@ -49,7 +49,9 @@ Modal.propTypes = {
         if (props[propName] !== "form" && props[propName] !== "confirm") {
             return new Error("Wrong modal 'type' selected!")
         }
-    }
+    },
+    onClose: PropTypes.func,
+    onSubmit: PropTypes.func,
 }
 
 
