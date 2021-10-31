@@ -81,14 +81,14 @@ export default class MoviesList extends React.Component {
                                     </ul>
                                 </div>
                                 
-                                <img className="cardContentImage" src={"img/"+item.imageUrl} alt="" onClick={this.handleMovieSelect.bind({}, item)}/>
+                                <img className="cardContentImage" src={"img/"+item.poster_path} alt="" onClick={this.handleMovieSelect.bind({}, item)}/>
                             </div>
                             <div className="cardContent-bottom" onClick={this.handleMovieSelect.bind({}, item)}>
                                 <div className="cardContentRow-top">
                                     <div className="cardContentTitle">{item.title}</div>
                                     <div className="cardContentLabel">{item.releaseDate.slice(6)}</div>
                                 </div>
-                                <div className="cardContentDescription">{item.genre}</div>
+                                <div className="cardContentDescription">{item.genres.join(', ')}</div>
                             </div>
                         </div>
                     ))}

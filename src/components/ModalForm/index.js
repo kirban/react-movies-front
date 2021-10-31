@@ -11,11 +11,11 @@ export default class ModalForm extends React.Component {
             title: "",
             releaseDate: "",
             url: "",
-            rating: 0,
-            genre: [],
+            vote_avarage: 0,
+            genres: [],
             runtime: 0,
             overview: "",
-            imageUrl: ""
+            poster_path: ""
         }
     }
 
@@ -60,8 +60,8 @@ export default class ModalForm extends React.Component {
                     <input type="url" name="url" id="url" value={this.state.url} onChange={this.handleChange}/>
                 </div>
                 <div className="formControl">
-                    <label htmlFor="rating">Rating</label>
-                    <input type="number" name="rating" id="rating" min="0" max="10" step="0.1" value={this.state.rating} onChange={this.handleChange}/>
+                    <label htmlFor="vote_avarage">vote_avarage</label>
+                    <input type="number" name="vote_avarage" id="vote_avarage" min="0" max="10" step="0.1" value={this.state.vote_avarage} onChange={this.handleChange}/>
                 </div>
                 <div className="formControl">
                     <label htmlFor="genre">Genre</label>

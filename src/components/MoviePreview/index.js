@@ -19,11 +19,11 @@ const MoviePreview = (props) => {
                 </a>
             </div>
             <div className="previewMain">
-                <img src={`img/${props.selectedMovie.imageUrl}`} alt="" className="cardPreviewImage" />
+                <img src={`img/${props.selectedMovie.poster_path}`} alt="" className="cardPreviewImage" />
                 <div className="movieDetails">
                     <div className="movieDetailsMain">
                         <h2 className="movieDetailsHeading">{props.selectedMovie.title}</h2>
-                        <div className="movieDetailsRating">{props.selectedMovie.rating}</div>
+                        <div className="movieDetailsvote_avarage">{props.selectedMovie.vote_avarage}</div>
                     </div>
                     <div className="movieDetailsSubtitle">
                         <span className="movieDetailsGenres">{props.selectedMovie.genre}</span> {/* TODO: add .join(',') after changed to list in props.selectedMovie params */} 
