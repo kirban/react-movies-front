@@ -1,44 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ModalForm } from '@components';
+import {
+    ModalForm
+} from '@components';
 import "@styles/modal.scss";
 
-export default class Modal extends React.Component {
-    constructor(props){
-        super(props)
-    }
+const Modal = ({
+    show,
+    type,
+    title,
+    movieId,
+    onClose,
+    onSubmit
+}) => {
+    if (!show) return null;
+    if (!type) return null;
 
-    onClose = e => {
-        this.props.onClose && this.props.onClose(e);
-    };
-
-    render(){
-        if (!this.props.show) return null;
-        if (!this.props.type) return null;
-        return(
-            <div className="modalWindow">
-                <div className="modalContent">
-                    <h2 className="modalHead">{this.props.title}</h2>
-                    <span className="closeModal" onClick={this.onClose}>&times;</span>
-                    <div className="modalBody">
-                        {
-                            (this.props.type === "form" && !this.props.movieId) ? <ModalForm /> :
-                            (this.props.type === "form" && this.props.movieId) ? <ModalForm movieId={this.props.movieId}/> :
-                            (this.props.type === "confirm") ? <span className="removeSpan">Are you sure you want to delete this movie?</span> : 
-                            ""
-                        }
-                    </div>
-                    <div className="modalControls">
-                        {
-                            (this.props.type === "form") ? <button className="btn btn-outlined">Reset</button> :
-                            ""
-                        }
-                        <button className="btn btn-primary" onClick={this.onSubmit}>Confirm</button>
-                    </div>
+    return(
+        <div className="modalWindow">
+            <div className="modalContent">
+                <h2 className="modalHead">{title}</h2>
+                <span className="closeModal" onClick={onClose}>&times;</span>
+                <div className="modalBody">
+                    {
+                        (type === "form" && !movieId) ? <ModalForm /> :
+                        (type === "form" && movieId) ? <ModalForm movieId={movieId}/> :
+                        (type === "confirm") ? <span className="removeSpan">Are you sure you want to delete this movie?</span> : 
+                        ""
+                    }
+                </div>
+                <div className="modalControls">
+                    {
+                        (type === "form") ? <button className="btn btn-outlined">Reset</button> :
+                        ""
+                    }
+                    <button className="btn btn-primary" onClick={onSubmit}>Confirm</button>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 Modal.propTypes = {
@@ -50,4 +50,7 @@ Modal.propTypes = {
             return new Error("Wrong modal 'type' selected!")
         }
     }
-} 
+}
+
+
+export default Modal
