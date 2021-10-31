@@ -9,7 +9,7 @@ const MoviePreview = (props) => {
     const { handleSearchButtonClick } = useContext(Context)
 
     return (
-        <>
+        <div id="selectedMovie">
             <div className="previewTop">
                 <a href="">
                     <img src={logo} alt="App Logo" className="logo" />
@@ -35,7 +35,7 @@ const MoviePreview = (props) => {
                     <div className="movieDetailsDescription">{props.selectedMovie.overview}</div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

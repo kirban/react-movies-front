@@ -7,6 +7,7 @@ import ErrorBoundary from "./ErrorBoundary"
 import Modal from "./Modal"
 import ModalForm from "./ModalForm"
 import MoviePreview from "./MoviePreview"
+import MovieSearch from "./MovieSearch"
 
 export {
     Header,
@@ -17,5 +18,6 @@ export {
     ErrorBoundary,
     Modal,
     ModalForm,
-    MoviePreview
+    MoviePreview,
+    MovieSearch,
 }
