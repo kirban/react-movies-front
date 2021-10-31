@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import "@styles/moviesList.scss"
 import { GenreToggle, ErrorBoundary } from '@components';
 import { genres } from '../../constant';
 import * as movieSchema from '../../schemas/movie.js';
 import { connect } from 'react-redux';
+import fetchMovies from '../../actions/fetchMovies';
 
-const MoviesList = ({ movies, onMovieSelect, showModal }) => {
+const MoviesList = ({ movies, onMovieSelect, showModal, fetchInitialMovies }) => {
+    useEffect(() => {
+        console.log("effect working");
+        fetchInitialMovies();
+    }, [])
+
     const handleToggleActionsMenu = e => {
         const moviesMenu = e.target.closest(".moviesActionMenu");
         if (!moviesMenu) {
@@ -55,7 +61,7 @@ const MoviesList = ({ movies, onMovieSelect, showModal }) => {
                                 </ul>
                             </div>
                             
-                            <img className="cardContentImage" src={"img/"+item.poster_path} alt="" onClick={onMovieSelect.bind({}, item)}/>
+                            <img className="cardContentImage" src={item.poster_path} alt="" onClick={onMovieSelect.bind({}, item)}/>
                         </div>
                         <div className="cardContent-bottom" onClick={onMovieSelect.bind({}, item)}>
                             <div className="cardContentRow-top">
@@ -82,12 +88,17 @@ const selectMovie = (selectedMovie) => ({
     movie: selectedMovie,
 });
 
+const mapStateToProps = state => ({
+    movies: state.displayedMovies,
+})
+
 const mapDispatchToProps = dispatch => {
     return {
+        fetchInitialMovies: () => { dispatch(fetchMovies()) },
         onMovieSelect: movie => dispatch(selectMovie(movie)),
         onMovieEdit: movie => {},
         onMovieDelete: movie => {},
     }
 }
 
-export default connect(null, mapDispatchToProps)(MoviesList)
+export default connect(mapStateToProps, mapDispatchToProps)(MoviesList)
