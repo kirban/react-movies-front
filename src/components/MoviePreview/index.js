@@ -4,7 +4,7 @@ import logo from '../../logo.svg';
 import search from '../../search.svg';
 import { Context } from '../../context';
 
-const MoviePreview = (props) => {
+const MoviePreview = ({ selectedMovie }) => {
 
     const { handleSearchButtonClick } = useContext(Context)
 
@@ -19,20 +19,20 @@ const MoviePreview = (props) => {
                 </a>
             </div>
             <div className="previewMain">
-                <img src={`img/${props.selectedMovie.poster_path}`} alt="" className="cardPreviewImage" />
+                <img src={`img/${selectedMovie.poster_path}`} alt="" className="cardPreviewImage" />
                 <div className="movieDetails">
                     <div className="movieDetailsMain">
-                        <h2 className="movieDetailsHeading">{props.selectedMovie.title}</h2>
-                        <div className="movieDetailsvote_avarage">{props.selectedMovie.vote_avarage}</div>
+                        <h2 className="movieDetailsHeading">{selectedMovie.title}</h2>
+                        <div className="movieDetailsvote_avarage">{selectedMovie.vote_avarage}</div>
                     </div>
                     <div className="movieDetailsSubtitle">
-                        <span className="movieDetailsGenres">{props.selectedMovie.genre}</span> {/* TODO: add .join(',') after changed to list in props.selectedMovie params */} 
+                        <span className="movieDetailsGenres">{selectedMovie.genres.join(', ')}</span>
                     </div>
                     <div className="movieDetailsYearAndDuration">
-                        <span className="movieDetailsYear">{props.selectedMovie.release_date}</span>
-                        <span className="movieDetailsDuraiton">{props.selectedMovie.runtime}s</span>
+                        <span className="movieDetailsYear">{selectedMovie.release_date}</span>
+                        <span className="movieDetailsDuraiton">{selectedMovie.runtime}s</span>
                     </div>
-                    <div className="movieDetailsDescription">{props.selectedMovie.overview}</div>
+                    <div className="movieDetailsDescription">{selectedMovie.overview}</div>
                 </div>
             </div>
         </div>
@@ -41,7 +41,6 @@ const MoviePreview = (props) => {
 
 MoviePreview.propTypes = {
     selectedMovie: PropTypes.object,
-    onSearchButtonClick: PropTypes.func,
 }
 
 export default MoviePreview;
