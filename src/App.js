@@ -1,8 +1,10 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import '@styles/index.scss';
 import { Header, MoviesList, Footer, ErrorBoundary, Modal } from '@components';
 import { Context } from './context';
 import mockedMoviesList from './mocks/movies.js';
+import store from './store';
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -63,6 +65,7 @@ class App extends React.Component {
   
   render() {
     return (
+      // <Provider store={store}></Provider>
       <Context.Provider value={{
         handleMovieSelect: this.handleMovieSelect
       }}>
