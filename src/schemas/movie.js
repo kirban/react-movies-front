@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 
 export default {
+    id: PropTypes.string,
+    poster_path: PropTypes.string,
     title: PropTypes.string,
-    releaseDate: PropTypes.string,
+    release_date: PropTypes.string,
     url: PropTypes.string,
     vote_avarage: PropTypes.number,
-    genres: PropTypes.ArrayOf(PropTypes.string),
+    genres: PropTypes.arrayOf(PropTypes.string),
     runtime: PropTypes.number,
-    overview: PropTypes.string,
-    poster_path: PropTypes.string
+    overview: PropTypes.string
 }

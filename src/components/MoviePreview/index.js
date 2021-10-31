@@ -29,7 +29,7 @@ const MoviePreview = (props) => {
                         <span className="movieDetailsGenres">{props.selectedMovie.genre}</span> {/* TODO: add .join(',') after changed to list in props.selectedMovie params */} 
                     </div>
                     <div className="movieDetailsYearAndDuration">
-                        <span className="movieDetailsYear">{props.selectedMovie.releaseDate}</span>
+                        <span className="movieDetailsYear">{props.selectedMovie.release_date}</span>
                         <span className="movieDetailsDuraiton">{props.selectedMovie.runtime}s</span>
                     </div>
                     <div className="movieDetailsDescription">{props.selectedMovie.overview}</div>

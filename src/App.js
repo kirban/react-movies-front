@@ -1,8 +1,8 @@
 import React from 'react';
 import '@styles/index.scss';
 import { Header, MoviesList, Footer, ErrorBoundary, Modal } from '@components';
-import { Context } from './context'
-
+import { Context } from './context';
+import mockedMoviesList from './mocks/movies.js';
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -71,7 +71,7 @@ class App extends React.Component {
           <Header selectedMovie={this.state.selectedMovie} onMovieCreate={this.showModal} onMovieSelect={this.handleMovieSelect}/>
           <main className="content">
             <ErrorBoundary>
-              <MoviesList onMovieSelected={this.handleMovieSelect} showModal={this.showModal}/>
+              <MoviesList movies={mockedMoviesList} onMovieSelected={this.handleMovieSelect} showModal={this.showModal}/>
             </ErrorBoundary>
           </main>
           <Footer />

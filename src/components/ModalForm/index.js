@@ -9,7 +9,7 @@ export default class ModalForm extends React.Component {
         super(props)
         this.state = {
             title: "",
-            releaseDate: "",
+            release_date: "",
             url: "",
             vote_avarage: 0,
             genres: [],
@@ -52,8 +52,8 @@ export default class ModalForm extends React.Component {
                     <input type="text" name="title" id="title" value={this.state.title} onChange={this.handleChange}/>
                 </div>
                 <div className="formControl">
-                    <label htmlFor="releaseDate">Release Date</label>
-                    <input type="date" name="releaseDate" id="releaseDate" value={this.state.releaseDate} onChange={this.handleChange}/>
+                    <label htmlFor="release_date">Release Date</label>
+                    <input type="date" name="release_date" id="release_date" value={this.state.release_date} onChange={this.handleChange}/>
                 </div>
                 <div className="formControl">
                     <label htmlFor="url">Movie URL</label>
