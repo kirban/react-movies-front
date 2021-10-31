@@ -4,8 +4,9 @@ import "@styles/moviesList.scss"
 import { GenreToggle, ErrorBoundary } from '@components';
 import { genres } from '../../constant';
 import * as movieSchema from '../../schemas/movie.js';
+import { connect } from 'react-redux';
 
-const MoviesList = ({ movies, onMovieSelected, showModal }) => {
+const MoviesList = ({ movies, onMovieSelect, showModal }) => {
     const handleToggleActionsMenu = e => {
         const moviesMenu = e.target.closest(".moviesActionMenu");
         if (!moviesMenu) {
@@ -13,10 +14,6 @@ const MoviesList = ({ movies, onMovieSelected, showModal }) => {
         } else {
             moviesMenu.classList.toggle("active")
         }
-    }
-
-    const handleMovieSelect = movie => {
-        onMovieSelected(movie)
     }
 
     const moviesSort = e => {
@@ -58,9 +55,9 @@ const MoviesList = ({ movies, onMovieSelected, showModal }) => {
                                 </ul>
                             </div>
                             
-                            <img className="cardContentImage" src={"img/"+item.poster_path} alt="" onClick={handleMovieSelect.bind({}, item)}/>
+                            <img className="cardContentImage" src={"img/"+item.poster_path} alt="" onClick={onMovieSelect.bind({}, item)}/>
                         </div>
-                        <div className="cardContent-bottom" onClick={handleMovieSelect.bind({}, item)}>
+                        <div className="cardContent-bottom" onClick={onMovieSelect.bind({}, item)}>
                             <div className="cardContentRow-top">
                                 <div className="cardContentTitle">{item.title}</div>
                                 <div className="cardContentLabel">{item.release_date.slice(6)}</div>
@@ -76,8 +73,21 @@ const MoviesList = ({ movies, onMovieSelected, showModal }) => {
 
 MoviesList.propTypes = {
     movies: PropTypes.arrayOf(PropTypes.shape(movieSchema)).isRequired,
-    onMovieSelected: PropTypes.func.isRequired,
+    onMovieSelect: PropTypes.func.isRequired,
     showModal: PropTypes.func.isRequired
 }
 
-export default MoviesList
+const selectMovie = (selectedMovie) => ({
+    type: "SELECT_MOVIE",
+    movie: selectedMovie,
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onMovieSelect: movie => dispatch(selectMovie(movie)),
+        onMovieEdit: movie => {},
+        onMovieDelete: movie => {},
+    }
+}
+
+export default connect(null, mapDispatchToProps)(MoviesList)

@@ -1,12 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import logo from '../../logo.svg';
 import search from '../../search.svg';
-import { Context } from '../../context';
+import { connect } from "react-redux";
 
-const MoviePreview = ({ selectedMovie }) => {
-
-    const { handleSearchButtonClick } = useContext(Context)
+const MoviePreview = ({ selectedMovie, handleSearchButtonClick }) => {
 
     return (
         <div id="selectedMovie">
@@ -41,6 +39,20 @@ const MoviePreview = ({ selectedMovie }) => {
 
 MoviePreview.propTypes = {
     selectedMovie: PropTypes.object,
+    handleSearchButtonClick: PropTypes.func,
 }
 
-export default MoviePreview;
+const mapStateToProps = state => {
+    const { selectedMovie } = state;
+    return {
+        selectedMovie,
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        handleSearchButtonClick: () => dispatch(({ type: "SELECT_MOVIE", movie: {} })),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePreview);
