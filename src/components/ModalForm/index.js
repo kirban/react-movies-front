@@ -11,7 +11,7 @@ const ModalForm = ({ movieId }) => {
         title: "",
         release_date: "",
         url: "",
-        vote_avarage: 0,
+        vote_average: 0,
         genres: [],
         runtime: 0,
         overview: ""
@@ -57,8 +57,8 @@ const ModalForm = ({ movieId }) => {
                 <input type="url" name="url" id="url" value={movie.url} onChange={handleChange}/>
             </div>
             <div className="formControl">
-                <label htmlFor="vote_avarage">vote_avarage</label>
-                <input type="number" name="vote_avarage" id="vote_avarage" min="0" max="10" step="0.1" value={movie.vote_avarage} onChange={handleChange}/>
+                <label htmlFor="vote_average">vote_average</label>
+                <input type="number" name="vote_average" id="vote_average" min="0" max="10" step="0.1" value={movie.vote_average} onChange={handleChange}/>
             </div>
             <div className="formControl">
                 <label htmlFor="genre">Genre</label>

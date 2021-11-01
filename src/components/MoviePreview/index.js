@@ -21,7 +21,7 @@ const MoviePreview = ({ selectedMovie, handleSearchButtonClick }) => {
                 <div className="movieDetails">
                     <div className="movieDetailsMain">
                         <h2 className="movieDetailsHeading">{selectedMovie.title}</h2>
-                        <div className="movieDetailsvote_avarage">{selectedMovie.vote_avarage}</div>
+                        <div className="movieDetailsvote_avarage">{selectedMovie.vote_average}</div>
                     </div>
                     <div className="movieDetailsSubtitle">
                         <span className="movieDetailsGenres">{selectedMovie.genres.join(', ')}</span>

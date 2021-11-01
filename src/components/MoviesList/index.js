@@ -42,7 +42,7 @@ const MoviesList = ({ movies, onMovieSelect, showModal, fetchInitialMovies, sort
                     <select id="sortItems" onChange={sortByField}>
                         <option defaultValue value="release_date">release date</option>
                         <option value="title">title</option>
-                        <option value="vote_avarage">rating</option>
+                        <option value="vote_average">rating</option>
                     </select>
                     <i className="sort sort-asc"></i>
                 </div>
@@ -95,7 +95,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchInitialMovies: () => { dispatch(fetchMovies()) },
+        fetchInitialMovies: () => dispatch(fetchMovies()),
+        sortByField: e => dispatch(fetchMovies(`?limit=6&sortBy=${e.target.value}&sortOrder=asc`)), //TODO: make sort order dynamic
         onMovieSelect: movie => dispatch(selectMovie(movie)),
         onMovieEdit: movie => {},
         onMovieDelete: movie => {},

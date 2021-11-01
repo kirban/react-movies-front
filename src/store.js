@@ -8,7 +8,7 @@ const initialState = {
     selectedMovie: {},
     searchText: "",
     // sortByField: "", // field of movie
-    // sortOrder: "", // asc or desc
+    sortOrder: "", // asc or desc
     searchBy: "", // title or genres
     // genresFilter: "", // name of genre
     error: "",

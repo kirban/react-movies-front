@@ -6,7 +6,7 @@ export default {
     title: PropTypes.string,
     release_date: PropTypes.string,
     url: PropTypes.string,
-    vote_avarage: PropTypes.number,
+    vote_average: PropTypes.number,
     genres: PropTypes.arrayOf(PropTypes.string),
     runtime: PropTypes.number,
     overview: PropTypes.string
