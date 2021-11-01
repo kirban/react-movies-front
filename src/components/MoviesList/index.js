@@ -7,7 +7,7 @@ import * as movieSchema from '../../schemas/movie.js';
 import { connect } from 'react-redux';
 import fetchMovies from '../../actions/fetchMovies';
 
-const MoviesList = ({ movies, onMovieSelect, showModal, fetchInitialMovies }) => {
+const MoviesList = ({ movies, onMovieSelect, showModal, fetchInitialMovies, sortByField }) => {
     useEffect(() => {
         console.log("effect working");
         fetchInitialMovies();
@@ -22,14 +22,14 @@ const MoviesList = ({ movies, onMovieSelect, showModal, fetchInitialMovies }) =>
         }
     }
 
-    const moviesSort = e => {
-        const sortPropertyValue = e.target.value;
+    // const moviesSort = e => {
+    //     const sortPropertyValue = e.target.value;
 
-        movies = movies.sort((a, b) => (a[sortPropertyValue] > b[sortPropertyValue]) ? 1 : -1)
+    //     movies = movies.sort((a, b) => (a[sortPropertyValue] > b[sortPropertyValue]) ? 1 : -1)
 
-        const sortingIcon = e.target.nextSibling;
-        // TODO: rotate icon
-    }
+    //     const sortingIcon = e.target.nextSibling;
+    //     // TODO: rotate icon
+    // }
 
     return(
         <>
@@ -39,9 +39,10 @@ const MoviesList = ({ movies, onMovieSelect, showModal, fetchInitialMovies }) =>
                 </ErrorBoundary>
                 <div className="sortItemsContainer">
                     <label htmlFor="sortItems">sort by</label>
-                    <select id="sortItems" onChange={moviesSort}>
+                    <select id="sortItems" onChange={sortByField}>
                         <option defaultValue value="release_date">release date</option>
                         <option value="title">title</option>
+                        <option value="vote_avarage">rating</option>
                     </select>
                     <i className="sort sort-asc"></i>
                 </div>
