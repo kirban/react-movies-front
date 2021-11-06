@@ -27,7 +27,7 @@ MovieSearch.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
     onMovieSearch: () => {},
-    toggleModal: () => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { title: 'add movie', type: 'form' } }),
+    toggleModal: () => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { title: 'add movie', type: 'add' } }),
 })
 
 export default connect(null, mapDispatchToProps)(MovieSearch)

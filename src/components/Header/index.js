@@ -14,7 +14,7 @@ const Header = ({ selectedMovie }) => {
 
     return(
         <header>
-            { (previewActive) ? <MoviePreview selectedMovie={selectedMovie} /> : <MovieSearch />}
+            { (previewActive) ? <MoviePreview /> : <MovieSearch />}
         </header>
     )
 }
@@ -22,13 +22,6 @@ const Header = ({ selectedMovie }) => {
 Header.propTypes = {
     selectedMovie: PropTypes.object,
 }
-
-const createMovie = (createdMovie) => ({
-    type: "CREATE_MOVIE",
-    payload: {
-        movie: createdMovie,
-    },
-});
 
 const mapStateToProps = state => {
     return {

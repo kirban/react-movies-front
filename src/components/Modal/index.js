@@ -6,20 +6,27 @@ import {
 import "@styles/modal.scss";
 import { connect } from 'react-redux';
 
-// const Modal = ({
-//     show,
-//     type,
-//     title,
-//     movieId,
-//     onClose,
-//     onSubmit
-// }) => {
-const Modal = ({ show, title, type, onClose, addMovie }) => {
+const Modal = ({ show, title, type, onClose, addMovie, editMovie, deleteMovie }) => {
     if (!show) return null;
     if (!type) return null;
 
     const onSubmit = e => {
         console.log("submit", e.target)
+        // get data from form
+        const movie = {};
+        switch (type) {
+            case 'add':
+                addMovie(movie);
+                break;
+            case 'edit':
+                editMovie(movie);
+                break;
+            case 'delete':
+                deleteMovie(movie);
+                break;
+            default:
+                return null;
+        }
     }
 
     return(
@@ -29,14 +36,14 @@ const Modal = ({ show, title, type, onClose, addMovie }) => {
                 <span className="closeModal" onClick={onClose}>&times;</span>
                 <div className="modalBody">
                     {
-                        (type === "form") ? <ModalForm /> :
-                        (type === "confirm") ? <span className="removeSpan">Are you sure you want to delete this movie?</span> : 
+                        (type === "add" || type === "edit") ? <ModalForm /> :
+                        (type === "delete") ? <span className="removeSpan">Are you sure you want to delete this movie?</span> : 
                         ""
                     }
                 </div>
                 <div className="modalControls">
                     {
-                        (type === "form") ? <button className="btn btn-outlined">Reset</button> :
+                        (type === "add" || type === "edit") ? <button className="btn btn-outlined">Reset</button> :
                         ""
                     }
                     <button className="btn btn-primary" onClick={onSubmit}>Confirm</button>
@@ -52,7 +59,9 @@ Modal.propTypes = {
     show: PropTypes.bool,
     type: PropTypes.string,
     onClose: PropTypes.func,
-    onSubmit: PropTypes.func,
+    addMovie: PropTypes.func,
+    editMovie: PropTypes.func,
+    deleteMovie: PropTypes.func,
 }
 
 const mapStateToProps = state => ({
@@ -61,9 +70,32 @@ const mapStateToProps = state => ({
     type: state.modal.type,
 })
 
+const addMovie = movie => ({
+    type: 'ADD_MOVIE',
+    payload: {
+        movie
+    },
+});
+
+const editMovie = movie => ({
+    type: "EDIT_MOVIE",
+    payload: {
+        movie
+    },
+});
+
+const deleteMovie = movie => ({
+    type: "DELETE_MOVIE",
+    payload: {
+        movie
+    },
+});
+
 const mapDispatchToProps = dispatch => ({
     onClose: () => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { title: '', type: '' } }),
-    addMovie: (movie) => dispatch({ type: 'ADD_MOVIE', payload: { movie } }),
+    addMovie: (movie) => dispatch(addMovie(movie)),
+    editMovie: (movie) => dispatch(editMovie(movie)),
+    deleteMovie: (movie) => dispatch(deleteMovie(movie)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal)

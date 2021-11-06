@@ -1,7 +1,7 @@
 const initialState = {
     movieData: {},
     show: false,
-    type: "" // form | confirm(for delete) | info 
+    type: "" // add | edit | delete | info 
 }
 
 const postMovie = (movie) => {}
@@ -11,44 +11,65 @@ const deleteMovie = (id) => {}
 const modalReducer = (state = initialState, action) => {
     switch(action.type) {
         case 'TOGGLE_MODAL_SHOW':
-            return {
-                ...state,
-                title: action.payload.title,
-                type: action.payload.type,
-                show: !state.show
-            }
+            return (() => {
+                const title = (action.payload.type === 'add') ? 'add movie' :
+                    (action.payload.type === 'edit') ? 'edit movie' :
+                    (action.payload.type === 'delete') ? 'delete movie' :
+                    action.payload.title;
+                console.log('action.payload.movie,',action.payload.movie);
+                return {
+                    ...state,
+                    title,
+                    type: action.payload.type,
+                    show: !state.show,
+                    ...(action.payload.movie && { movieData: action.payload.movie })
+                }
+            })()
         case 'ADD_MOVIE':
             return (()=>{
+                console.log('movie added to reducer', action.payload.movie);
                 const { title, vote_average, release_date, overview, genres, runtime } = action.payload.movie;
                 return {
                     ...state,
                     show: false,
                     movieData: {
-                        "title": "Body of Lies",
-                        "vote_average": 6.5,
-                        "release_date": "2008-10-10",
-                        "overview": "The CIA’s hunt is on for the mastermind of a wave of terrorist attacks. Roger Ferris is the agency’s man on the ground, moving from place to place, scrambling to stay ahead of ever-shifting events. An eye in the sky – a satellite link – watches Ferris.  At the other end of that real-time link is the CIA’s Ed Hoffman, strategizing events from thousands of miles away. And as Ferris nears the target, he discovers trust can be just as dangerous as it is necessary for survival.",
-                        "genres": [
-                            "Action",
-                            "Drama",
-                            "Thriller"
-                        ],
-                        "runtime": 128
+                        title,
+                        vote_average,
+                        release_date,
+                        overview,
+                        genres,
+                        runtime,
                     },
                 }
             })()
         case 'EDIT_MOVIE':
             return (()=>{
+                console.log('movie edited in reducer', action.payload.movie);
                 const { id, title, vote_average, release_date, overview, genres, runtime } = action.payload.movie;
                 return {
                     ...state,
+                    show: false,
+                    movieData: {
+                        id,
+                        title,
+                        vote_average,
+                        release_date,
+                        overview,
+                        genres,
+                        runtime,
+                    },
                 }
             })()
         case 'DELETE_MOVIE':
             return (()=>{
+                console.log('movie deleted in reducer', action.payload.movie)
                 const { id } = action.payload.movie;
                 return {
                     ...state,
+                    show: false,
+                    movieData: {
+                        id
+                    },
                 }
             })()
         default:

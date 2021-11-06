@@ -7,9 +7,8 @@ import * as movieSchema from '../../schemas/movie.js';
 import { connect } from 'react-redux';
 import fetchMovies from '../../actions/fetchMovies';
 
-const MoviesList = ({ sortField, movies, onMovieSelect, showModal, fetchMoviesAction, sortByField }) => {
+const MoviesList = ({ sortField, movies, onMovieSelect, showModal, fetchMoviesAction, sortByField, showEdit, showDelete }) => {
     useEffect(() => {
-        console.log("effect working");
         fetchMoviesAction();
     }, [])
 
@@ -61,8 +60,8 @@ const MoviesList = ({ sortField, movies, onMovieSelect, showModal, fetchMoviesAc
                             <div className="moviesActionMenu">
                                 <a href="#" className="cross-close" onClick={handleToggleActionsMenu}></a>
                                 <ul className="actions-list" onClick={handleToggleActionsMenu}>
-                                    <li className="edit-item" data-action="edit" data-item-id={item.id} onClick={showModal}><a>Edit</a></li>
-                                    <li className="remove-item" data-action="delete" data-item-id={item.id} onClick={showModal}><a>Delete</a></li>
+                                    <li className="edit-item" data-action="edit" data-item-id={item.id} onClick={showEdit.bind(null, item)}><a>Edit</a></li>
+                                    <li className="remove-item" data-action="delete" data-item-id={item.id} onClick={showDelete.bind(null, item)}><a>Delete</a></li>
                                 </ul>
                             </div>
                             
@@ -85,7 +84,8 @@ const MoviesList = ({ sortField, movies, onMovieSelect, showModal, fetchMoviesAc
 MoviesList.propTypes = {
     movies: PropTypes.arrayOf(PropTypes.shape(movieSchema)),
     onMovieSelect: PropTypes.func,
-    showModal: PropTypes.func
+    showEdit: PropTypes.func,
+    showDelete: PropTypes.func,
 }
 
 const selectMovie = (selectedMovie) => ({
@@ -102,6 +102,7 @@ const sortByField = (fieldName) => ({
     }
 })
 
+
 const mapStateToProps = state => ({
     movies: state.movies.displayedMovies,
     sortField: state.movies.sortByField,
@@ -111,9 +112,9 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchMoviesAction: () => dispatch(fetchMovies()),
         sortByField: e => dispatch(sortByField(e.target.value)),
+        showEdit: movie => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { type: 'edit', movie } }),
+        showDelete: movie => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { type: 'delete', movie } }),
         onMovieSelect: movie => dispatch(selectMovie(movie)),
-        onMovieEdit: movie => {},
-        onMovieDelete: movie => {},
     }
 }
 
