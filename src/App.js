@@ -54,26 +54,16 @@ class App extends React.Component {
     })
   }
 
-  handleMovieSelect = movie => {
-    this.setState({
-      selectedMovie: movie,
-    })
-  }
-
-  
-  // <Context.Provider value={{
-  //   handleMovieSelect: this.handleMovieSelect
-  // }}>
   render() {
     return (
       <Provider store={store}>
-        <Modal title={this.state.modalTitle} type={this.state.modalType} onClose={this.showModal} show={this.state.show} movieId={this.state.movieId}/>
+        <Modal />
         <ErrorBoundary>
-          <Header selectedMovie={this.state.selectedMovie} onMovieCreate={this.showModal} onMovieSelect={this.handleMovieSelect}/>
+          <Header />
         </ErrorBoundary>
         <main className="content">
           <ErrorBoundary>
-            <MoviesList onMovieSelected={this.handleMovieSelect} showModal={this.showModal}/>
+            <MoviesList showModal={this.showModal}/>
           </ErrorBoundary>
         </main>
         <Footer />

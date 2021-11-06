@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 const MoviePreview = ({ selectedMovie, handleSearchButtonClick }) => {
 
-    if (!Object.keys(selectedMovie).length) return null
+    if (!selectedMovie || !Object.keys(selectedMovie).length) return null
     return (
         <div id="selectedMovie">
             <div className="previewTop">
@@ -44,9 +44,8 @@ MoviePreview.propTypes = {
 }
 
 const mapStateToProps = state => {
-    const { selectedMovie } = state;
     return {
-        selectedMovie,
+        selectedMovie: state.movies.selectedMovie,
     };
 }
 

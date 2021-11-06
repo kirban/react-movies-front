@@ -2,14 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import { SearchInput } from "@components";
 import logo from '../../logo.svg';
+import { connect } from "react-redux";
 
-const MovieSearch = ({ onMovieCreate }) => {
+const MovieSearch = ({ onMovieSearch, toggleModal }) => {
     return (
         <div id="searchSection">
             <div className="headerBg"></div>
             <div className="headerContent-top">
                 <img src={logo} alt="App Logo" className="logo" />
-                <button className="btn addMovieBtn" data-action="add" onClick={onMovieCreate}>+ add movie</button>
+                <button className="btn addMovieBtn" data-action="add" onClick={toggleModal}>+ add movie</button>
             </div>
             <div className="headerContent-main">
                 <h1>Find your movie</h1>
@@ -20,7 +21,13 @@ const MovieSearch = ({ onMovieCreate }) => {
 }
 
 MovieSearch.propTypes = {
-    onMovieCreate: PropTypes.func,
+    toggleModal: PropTypes.func,
+    onMovieSearch: PropTypes.func,
 }
 
-export default MovieSearch
+const mapDispatchToProps = dispatch => ({
+    onMovieSearch: () => {},
+    toggleModal: () => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { title: 'add movie', type: 'form' } }),
+})
+
+export default connect(null, mapDispatchToProps)(MovieSearch)

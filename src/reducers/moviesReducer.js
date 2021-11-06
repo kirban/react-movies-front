@@ -20,12 +20,6 @@ const moviesReducer = (state = initialState, action) => {
         case 'FETCH_MOVIES':
             fetchMovies();
             return state;
-        case 'ADD_MOVIE':
-            break;
-        case 'EDIT_MOVIE':
-            break;
-        case 'DELETE_MOVIE':
-            break;
         case 'SELECT_MOVIE':
             return {
                 ...state,

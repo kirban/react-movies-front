@@ -83,9 +83,9 @@ const MoviesList = ({ sortField, movies, onMovieSelect, showModal, fetchMoviesAc
 }
 
 MoviesList.propTypes = {
-    movies: PropTypes.arrayOf(PropTypes.shape(movieSchema)).isRequired,
-    onMovieSelect: PropTypes.func.isRequired,
-    showModal: PropTypes.func.isRequired
+    movies: PropTypes.arrayOf(PropTypes.shape(movieSchema)),
+    onMovieSelect: PropTypes.func,
+    showModal: PropTypes.func
 }
 
 const selectMovie = (selectedMovie) => ({
