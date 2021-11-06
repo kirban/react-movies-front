@@ -12,6 +12,7 @@ const Modal = ({ show, title, type, onClose, addMovie, editMovie, deleteMovie })
 
     const onSubmit = e => {
         console.log("submit", e.target)
+        console.log("modal component method");
         // get data from form
         const movie = {};
         switch (type) {
@@ -36,7 +37,7 @@ const Modal = ({ show, title, type, onClose, addMovie, editMovie, deleteMovie })
                 <span className="closeModal" onClick={onClose}>&times;</span>
                 <div className="modalBody">
                     {
-                        (type === "add" || type === "edit") ? <ModalForm /> :
+                        (type === "add" || type === "edit") ? <ModalForm onFormSubmit={onSubmit}/> :
                         (type === "delete") ? <span className="removeSpan">Are you sure you want to delete this movie?</span> : 
                         ""
                     }
@@ -48,6 +49,13 @@ const Modal = ({ show, title, type, onClose, addMovie, editMovie, deleteMovie })
                         </div>
                     ) : ""
                 }
+                {/* <div className="modalControls">
+                    {
+                        (type === "add" || type === "edit") ? <button className="btn btn-outlined">Reset</button> :
+                        ""
+                    }
+                    <button className="btn btn-primary" onClick={onSubmit}>Confirm</button>
+                </div> */}
 
             </div>
         </div>
