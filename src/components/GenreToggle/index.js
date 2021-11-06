@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import fetchMovies from '../../actions/fetchMovies';
+import fetchMoviesAction from '../../actions/fetchMovies';
 
-const GenreToggle = ({ genresList, sortByGenre }) => {
+const GenreToggle = ({ genresFilter, genresList, sortByGenre, fetchMovies }) => {
+
+  useEffect(() => {
+    fetchMovies()
+  }, [genresFilter])
+
   const genreItems = genresList.map((genreName, genreIndex) => (
     <li key={genreIndex.toString()}>
       <input type="radio" name="genres" id={`genres_${genreIndex}`} onChange={sortByGenre.bind({}, genreName)}/>
@@ -23,11 +28,27 @@ const GenreToggle = ({ genresList, sortByGenre }) => {
 }
 
 GenreToggle.propTypes = {
-  genresList: PropTypes.arrayOf(PropTypes.string)
+  genresList: PropTypes.arrayOf(PropTypes.string),
+  sortByGenre: PropTypes.func,
+  genresFilter: PropTypes.string,
+  fetchMovies: PropTypes.func,
 }
 
-const mapDispatchToProps = dispatch => ({
-  sortByGenre: genre => dispatch(fetchMovies(`?limit=6&searchBy=genres&filter=${genre}`))
+const sortByGenre = (genre) => ({
+  type: "SORT_BY_GENRE",
+  payload: {
+    genre
+  }
+});
+
+const mapStateToProps = state => ({
+  searchBy: state.searchBy,
+  genresFilter: state.genresFilter,
 })
 
-export default connect(null, mapDispatchToProps)(GenreToggle)
+const mapDispatchToProps = dispatch => ({
+  sortByGenre: genre => dispatch(sortByGenre(genre)),
+  fetchMovies: () => dispatch(fetchMoviesAction())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(GenreToggle)

@@ -15,7 +15,7 @@ const fetchMovies = () => (dispatch, getState) => {
 
     fetch(`${BASE_URL}/movies?${params.toString()}`)
         .then(response => response.json())
-        .then(movies => dispatch({ type: LOAD_MOVIES_SUCCESS, movies: movies.data }))
+        .then(movies => dispatch({ type: LOAD_MOVIES_SUCCESS, payload: { movies: movies.data } }))
         .catch(error => dispatch({ type: LOAD_MOVIES_ERROR, error }))
 }
 

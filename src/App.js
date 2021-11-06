@@ -4,20 +4,6 @@ import '@styles/index.scss';
 import { Header, MoviesList, Footer, ErrorBoundary, Modal } from '@components';
 import mockedMoviesList from './mocks/movies.js';
 import store from './store';
-
-// const App1 = ({ fetchMovies }) => {
-//   useEffect(() => {
-//     fetchMovies()
-//   })
-// }
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//       fetchMovies: () => dispatch(({ type: "FETCH_MOVIES", filterType: "all" })),
-//   }
-// }
-
-// export connect(null, mapDispatchToProps)(App)
 class App extends React.Component {
   constructor(props) {
     super(props)

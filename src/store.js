@@ -8,7 +8,7 @@ const initialState = {
     selectedMovie: {},
     searchText: "",
     sortByField: "", // field of movie
-    sortOrder: "", // asc or desc
+    sortOrder: "asc", // asc or desc
     searchBy: "", // title or genres
     genresFilter: "", // name of genre
     offset: "",
@@ -20,7 +20,7 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
     switch(action.type) {
         case 'FETCH_MOVIES':
-            fetchMovies(action.params);
+            fetchMovies();
             return state;
         case 'ADD_MOVIE':
             break;
@@ -30,8 +30,23 @@ const rootReducer = (state = initialState, action) => {
             break;
         case 'SELECT_MOVIE':
             break;
-        case 'SEARCH_MOVIE':
-            break;
+        case 'SEARCH_MOVIE_BY_TEXT':
+            return {
+                ...state,
+                searchBy: "title",
+                searchText: action.payload.text,
+            }
+        case 'SORT_BY_FIELD':
+            return {
+                ...state,
+                sortByField: action.payload.field
+            }
+        case 'SORT_BY_GENRE':
+            return {
+                ...state,
+                genresFilter: action.payload.genre,
+                searchBy: "genres",
+            }
         case LOAD_MOVIES_LOADING: {
             return {
                 ...state,
@@ -42,7 +57,7 @@ const rootReducer = (state = initialState, action) => {
         case LOAD_MOVIES_SUCCESS: {
             return {
                 ...state,
-                displayedMovies: action.movies,
+                displayedMovies: action.payload.movies,
                 loading: false
             }
         }
