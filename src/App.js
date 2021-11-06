@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import { connect, Provider } from 'react-redux';
+import React from 'react';
+import { Provider } from 'react-redux';
 import '@styles/index.scss';
 import { Header, MoviesList, Footer, ErrorBoundary, Modal } from '@components';
-import mockedMoviesList from './mocks/movies.js';
 import store from './store';
 class App extends React.Component {
   constructor(props) {

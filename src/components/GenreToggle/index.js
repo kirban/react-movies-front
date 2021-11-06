@@ -42,7 +42,7 @@ const sortByGenre = (genre) => ({
 });
 
 const mapStateToProps = state => ({
-  genresFilter: state.genresFilter,
+  genresFilter: state.movies.genresFilter,
 })
 
 const mapDispatchToProps = dispatch => ({

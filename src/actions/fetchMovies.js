@@ -2,7 +2,7 @@ import { LOAD_MOVIES_LOADING, LOAD_MOVIES_SUCCESS, LOAD_MOVIES_ERROR } from "../
 import { BASE_URL } from "../constant/index";
 
 const fetchMovies = () => (dispatch, getState) => {
-    const { searchText, sortByField, sortOrder, searchBy, genresFilter, offset, limit } = getState();
+    const { searchText, sortByField, sortOrder, searchBy, genresFilter, offset, limit } = getState().movies;
     dispatch({ type: LOAD_MOVIES_LOADING });
     const params = new URLSearchParams();
     params.set('sortBy', sortByField);

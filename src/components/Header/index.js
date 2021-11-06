@@ -34,7 +34,7 @@ const createMovie = (createdMovie) => ({
 
 const mapStateToProps = state => {
     return {
-        selectedMovie: state.selectedMovie,
+        selectedMovie: state.movies.selectedMovie,
     };
 }
 

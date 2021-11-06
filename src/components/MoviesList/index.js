@@ -103,8 +103,8 @@ const sortByField = (fieldName) => ({
 })
 
 const mapStateToProps = state => ({
-    movies: state.displayedMovies,
-    sortField: state.sortByField,
+    movies: state.movies.displayedMovies,
+    sortField: state.movies.sortByField,
 })
 
 const mapDispatchToProps = dispatch => {
