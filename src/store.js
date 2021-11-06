@@ -39,7 +39,8 @@ const rootReducer = (state = initialState, action) => {
         case 'SORT_BY_FIELD':
             return {
                 ...state,
-                sortByField: action.payload.field
+                sortByField: action.payload.field,
+                sortOrder: (action.payload.field === state.sortByField && state.sortOrder === "asc") ? "desc" : "asc",
             }
         case 'SORT_BY_GENRE':
             return {

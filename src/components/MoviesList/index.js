@@ -7,11 +7,15 @@ import * as movieSchema from '../../schemas/movie.js';
 import { connect } from 'react-redux';
 import fetchMovies from '../../actions/fetchMovies';
 
-const MoviesList = ({ movies, onMovieSelect, showModal, fetchInitialMovies, sortByField }) => {
+const MoviesList = ({ sortField, movies, onMovieSelect, showModal, fetchMoviesAction, sortByField }) => {
     useEffect(() => {
         console.log("effect working");
-        fetchInitialMovies();
+        fetchMoviesAction();
     }, [])
+
+    useEffect(() => {
+        fetchMoviesAction()
+    }, [sortField])
 
     const handleToggleActionsMenu = e => {
         const moviesMenu = e.target.closest(".moviesActionMenu");
@@ -89,14 +93,22 @@ const selectMovie = (selectedMovie) => ({
     movie: selectedMovie,
 });
 
+const sortByField = (fieldName) => ({
+    type: "SORT_BY_FIELD",
+    payload: {
+        field: fieldName
+    }
+})
+
 const mapStateToProps = state => ({
     movies: state.displayedMovies,
+    sortField: state.sortByField,
 })
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchInitialMovies: () => dispatch(fetchMovies()),
-        sortByField: e => dispatch(fetchMovies(`?limit=6&sortBy=${e.target.value}&sortOrder=asc`)), //TODO: make sort order dynamic
+        fetchMoviesAction: () => dispatch(fetchMovies()),
+        sortByField: e => dispatch(sortByField(e.target.value)),
         onMovieSelect: movie => dispatch(selectMovie(movie)),
         onMovieEdit: movie => {},
         onMovieDelete: movie => {},

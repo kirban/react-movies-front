@@ -42,7 +42,6 @@ const sortByGenre = (genre) => ({
 });
 
 const mapStateToProps = state => ({
-  searchBy: state.searchBy,
   genresFilter: state.genresFilter,
 })
 
