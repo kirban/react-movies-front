@@ -1,28 +1,49 @@
-import React from 'react';
-import { SearchInput } from '@components';
-import logo from '../../logo.svg';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
+import { MoviePreview } from '@components';
+import PropTypes from 'prop-types';
+
 import '@styles/header.scss';
+import * as _ from 'lodash';
+import { Context } from '../../context'
+import { MovieSearch } from '@components';
 
-export default class Header extends React.Component {
-    // onMovieCreate = e => {
-    //     this.props.onMovieCreate && this.props.onMovieCreate(e);
-    // }
+const Header = ({ selectedMovie, onMovieCreate }) => {
+    const initialMovie = {}
+    const [previewActive, setPreviewActive] = useState(false)
 
-    render() {
-        return (
-            <>  
-                <header>
-                    <div className="headerBg"></div>
-                    <div className="headerContent-top">
-                        <img src={logo} alt="App Logo" className="logo" />
-                        <button className="btn addMovieBtn" data-action="add" onClick={this.props.onMovieCreate}>+ add movie</button>
-                    </div>
-                    <div className="headerContent-main">
-                        <h1>Find your movie</h1>
-                        <SearchInput />
-                    </div>
-                </header>
-            </>
-        )
-    }
+    const { handleMovieSelect } = useContext(Context)
+
+    useEffect(() => {
+        
+        if(!_.isEmpty(selectedMovie) && previewActive === false) {
+            setPreviewActive(true)
+        }
+
+        handleMovieSelect(selectedMovie)
+
+    }, [selectedMovie])
+
+    const handleSearchButtonClick = useCallback(
+        () => {
+            setPreviewActive(false)
+            handleMovieSelect(initialMovie)
+        },
+        [setPreviewActive, handleMovieSelect],
+    )
+
+    return(
+        <Context.Provider value={{
+            handleSearchButtonClick
+        }}>
+            <header>
+                { (previewActive) ? <MoviePreview selectedMovie={selectedMovie} /> : <MovieSearch onMovieCreate={onMovieCreate} />}
+            </header>
+        </Context.Provider>
+    )
 }
+
+Header.propTypes = {
+    selectedMovie: PropTypes.object,
+}
+
+export default Header

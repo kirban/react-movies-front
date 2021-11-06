@@ -1,15 +1,17 @@
 import React from 'react';
 import '@styles/index.scss';
 import { Header, MoviesList, Footer, ErrorBoundary, Modal } from '@components';
-
+import { Context } from './context';
+import mockedMoviesList from './mocks/movies.js';
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      show: true,
+      show: false,
       modalType: "form",
       modalTitle: "add movie",
-      movieId: 0
+      movieId: 0,
+      selectedMovie: {},
     }
   }
 
@@ -52,18 +54,29 @@ class App extends React.Component {
     })
   }
 
+  handleMovieSelect = movie => {
+    this.setState({
+      selectedMovie: movie,
+    })
+  }
+
+  
   render() {
     return (
-      <>
-        <Modal title={this.state.modalTitle} type={this.state.modalType} onClose={this.showModal} show={this.state.show} movieId={this.state.movieId}/>
-        <Header onMovieCreate={this.showModal}/>
-        <main className="content">
-          <ErrorBoundary>
-            <MoviesList showModal={this.showModal}/>
-          </ErrorBoundary>
-        </main>
-        <Footer />
-      </>
+      <Context.Provider value={{
+        handleMovieSelect: this.handleMovieSelect
+      }}>
+        <>
+          <Modal title={this.state.modalTitle} type={this.state.modalType} onClose={this.showModal} show={this.state.show} movieId={this.state.movieId}/>
+          <Header selectedMovie={this.state.selectedMovie} onMovieCreate={this.showModal} onMovieSelect={this.handleMovieSelect}/>
+          <main className="content">
+            <ErrorBoundary>
+              <MoviesList movies={mockedMoviesList} onMovieSelected={this.handleMovieSelect} showModal={this.showModal}/>
+            </ErrorBoundary>
+          </main>
+          <Footer />
+        </>
+      </Context.Provider>
     );
   }
 }

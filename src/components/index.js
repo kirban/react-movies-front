@@ -6,6 +6,8 @@ import GenreToggle from "./GenreToggle"
 import ErrorBoundary from "./ErrorBoundary"
 import Modal from "./Modal"
 import ModalForm from "./ModalForm"
+import MoviePreview from "./MoviePreview"
+import MovieSearch from "./MovieSearch"
 
 export {
     Header,
@@ -15,5 +17,7 @@ export {
     GenreToggle,
     ErrorBoundary,
     Modal,
-    ModalForm
+    ModalForm,
+    MoviePreview,
+    MovieSearch,
 }

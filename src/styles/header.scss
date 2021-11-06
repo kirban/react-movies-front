@@ -17,70 +17,198 @@
     // opacity: 0.3;
     // filter: blur(8.15485px);
 }
+
 header {
-    background-image: url("../../public/bg_header.png");
-    background-position: bottom;
-    background-position-x: 10px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    
-    width: 100%;
-    height: 24.75rem;
     margin-bottom: 1.875rem;
 
-
-    .headerContent-top, .headerContent-main {
-        display: flex;
-        flex-direction: row;
-        padding: 2rem 3.75rem;
-    }
-
-    .headerContent-top {
-        height: 3rem;
-        justify-content: space-between;
-
-        .logo {
-            height: 1.5rem;
+    #selectedMovie {
+        &.hidden {
+            display: none;
         }
 
-        .btn.addMovieBtn {
-            width: 11rem;
-            height: 3rem;
-            padding: 0.68rem 1rem;
-            background: rgba(96, 96, 96, 0.68);
-            border-radius: .25rem;
-            
-            color: $red;
-            font-family: Montserrat;
-            font-style: normal;
-            font-weight: 600;
-            font-size: 20px;
-            line-height: 24px;
-            text-align: right;
-            text-transform: uppercase;
+        min-height: 606px;
+        background-color: $black;
+        display: flex;
+        flex-direction: column;
+        padding: 35px 60px;
 
-            &:hover {
-                cursor: pointer;
+        .previewTop {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            margin-bottom: 30px;
+
+            .logo {
+                width: 139px;
+                height: 24px;
+            }
+
+            .search {
+                width: 29px;
+                height: 29px;
+            }
+        }
+
+        .previewMain {
+            display: flex;
+
+            .cardPreviewImage {
+                margin-right: 60px;
+            }
+
+            .movieDetails {
+
+                .movieDetailsMain {
+                    display: flex;
+
+                    .movieDetailsHeading {
+                        margin: 0;
+                        margin-right: 25px;
+                        font-family: Montserrat;
+                        font-style: normal;
+                        font-weight: 300;
+                        font-size: 40px;
+                        line-height: 49px;
+                        /* identical to box height */
+
+                        text-align: left;
+                        letter-spacing: 1px;
+                        text-transform: uppercase;
+                        color: $white;
+                    }
+
+                    .movieDetailsvote_avarage {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 50px;
+                        height: 50px;
+                        color: $white;
+                        font-family: Montserrat;
+                        font-style: normal;
+                        font-weight: 300;
+                        font-size: 20px;
+                        line-height: 24px;
+                        text-align: center;
+                        text-transform: uppercase;
+
+                        border: 1px solid $white;
+                        border-radius: 50%;
+                    }
+                }
+
+                .movieDetailsSubtitle {
+                    width: 100%;
+
+                    .movieDetailsGenres {
+                        font-family: Montserrat;
+                        font-style: normal;
+                        font-weight: 500;
+                        font-size: 14px;
+                        line-height: 17px;
+                        color: $white;
+                        mix-blend-mode: normal;
+                        opacity: 0.5;
+                    }
+                }
+
+                .movieDetailsYearAndDuration {
+                    color: $red;
+                    font-family: Montserrat;
+                    font-style: normal;
+                    font-weight: 300;
+                    font-size: 24px;
+                    line-height: 29px;
+
+                    margin: 30px 0;
+
+                    .movieDetailsYear {
+                        margin-right: 50px;
+                    }
+                }
+
+                .movieDetailsDescription {
+                    font-family: Montserrat;
+                    font-style: normal;
+                    font-weight: 300;
+                    font-size: 20px;
+                    line-height: 24px;
+                    color: $white;
+                    mix-blend-mode: normal;
+                    opacity: 0.5;
+                }
             }
         }
     }
 
-    .headerContent-main {
-        height: 5.5rem;
-        flex-direction: column;
-        padding: 0 7.5rem;
+    #searchSection {
+        &.hidden {
+            display: none;
+        }
 
-        h1 {
-            color: #FFFFFF;
-            font-family: Montserrat;
-            font-style: normal;
-            font-weight: 300;
-            font-size: 40px;
-            line-height: 49px;
+        width: 100%;
+        height: 24.75rem;
+        background-image: url("../../public/bg_header.png");
+        background-position: bottom;
+        background-position-x: 10px;
+        background-repeat: no-repeat;
+        background-size: cover;
 
-            text-align: left;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        .headerContent-top,
+        .headerContent-main {
+            display: flex;
+            flex-direction: row;
+            padding: 2rem 3.75rem;
+        }
+
+        .headerContent-top {
+            height: 3rem;
+            justify-content: space-between;
+
+            .logo {
+                height: 1.5rem;
+            }
+
+            .btn.addMovieBtn {
+                width: 11rem;
+                height: 3rem;
+                padding: 0.68rem 1rem;
+                background: rgba(96, 96, 96, 0.68);
+                border-radius: .25rem;
+
+                color: $red;
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 24px;
+                text-align: right;
+                text-transform: uppercase;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .headerContent-main {
+            height: 5.5rem;
+            flex-direction: column;
+            padding: 0 7.5rem;
+
+            h1 {
+                color: #FFFFFF;
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 40px;
+                line-height: 49px;
+
+                text-align: left;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+            }
         }
     }
+
 }
