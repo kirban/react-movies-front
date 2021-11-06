@@ -7,10 +7,12 @@ const initialState = {
     displayedMovies: [],
     selectedMovie: {},
     searchText: "",
-    // sortByField: "", // field of movie
+    sortByField: "", // field of movie
     sortOrder: "", // asc or desc
     searchBy: "", // title or genres
-    // genresFilter: "", // name of genre
+    genresFilter: "", // name of genre
+    offset: "",
+    limit: "6",
     error: "",
     loading: false,
 }
@@ -18,7 +20,8 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
     switch(action.type) {
         case 'FETCH_MOVIES':
-            return fetchMovies(action.params);
+            fetchMovies(action.params);
+            return state;
         case 'ADD_MOVIE':
             break;
         case 'EDIT_MOVIE':
