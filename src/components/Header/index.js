@@ -27,7 +27,9 @@ Header.propTypes = {
 
 const createMovie = (createdMovie) => ({
     type: "CREATE_MOVIE",
-    movie: createdMovie,
+    payload: {
+        movie: createdMovie,
+    },
 });
 
 const mapStateToProps = state => {

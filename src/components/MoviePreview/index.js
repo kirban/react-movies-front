@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 
 const MoviePreview = ({ selectedMovie, handleSearchButtonClick }) => {
 
+    if (!Object.keys(selectedMovie).length) return null
     return (
         <div id="selectedMovie">
             <div className="previewTop">
@@ -17,7 +18,7 @@ const MoviePreview = ({ selectedMovie, handleSearchButtonClick }) => {
                 </a>
             </div>
             <div className="previewMain">
-                <img src={`img/${selectedMovie.poster_path}`} alt="" className="cardPreviewImage" />
+                <img src={`${selectedMovie.poster_path}`} alt="" className="cardPreviewImage" />
                 <div className="movieDetails">
                     <div className="movieDetailsMain">
                         <h2 className="movieDetailsHeading">{selectedMovie.title}</h2>
@@ -51,7 +52,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleSearchButtonClick: () => dispatch(({ type: "SELECT_MOVIE", movie: {} })),
+        handleSearchButtonClick: () => dispatch(({ type: "SELECT_MOVIE", payload: { movie: {} } })),
     }
 }
 

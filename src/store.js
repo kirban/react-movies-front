@@ -29,7 +29,10 @@ const rootReducer = (state = initialState, action) => {
         case 'DELETE_MOVIE':
             break;
         case 'SELECT_MOVIE':
-            break;
+            return {
+                ...state,
+                selectedMovie: action.payload.movie,
+            }
         case 'SEARCH_MOVIE_BY_TEXT':
             return {
                 ...state,

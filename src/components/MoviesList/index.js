@@ -90,7 +90,9 @@ MoviesList.propTypes = {
 
 const selectMovie = (selectedMovie) => ({
     type: "SELECT_MOVIE",
-    movie: selectedMovie,
+    payload: {
+        movie: selectedMovie,
+    },
 });
 
 const sortByField = (fieldName) => ({
