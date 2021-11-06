@@ -11,7 +11,7 @@ const MovieSchema = Yup.object({
     release_date: Yup.string().required('Required!'),
     url: Yup.string(),
     vote_average: Yup.number().min(0.1, 'Should be greater!').max(10, 'Should be less!').required('Required!'),
-    genres: Yup.array().of(Yup.mixed().oneOf([genres])).required('Required!'),
+    genres: Yup.array().of(Yup.mixed().oneOf([genres])).min(1, "Select at least 1 genre!").required('Required!'),
     runtime: Yup.number().min(1, "Should be greater!").required('Required!'),
     overview: Yup.string().min(5, 'Provide more detailed overview!').max(1000, 'Length is too much!').required('Required!'),
 });
@@ -27,23 +27,13 @@ const ModalForm = ({ movieData, onFormSubmit }) => {
         overview: ""
     }
 
-    console.log("movieData", movieData)
-
-    const handleSubmit = values => {
-        console.log('values', values)
-        onFormSubmit(values)
-    }
-
     return(
         <Formik
             initialValues = {{
                 ...((Object.keys(movieData).length > 0) ? movieData : initialMovie)
             }}
             validationSchema={MovieSchema}
-            onSubmit={values => {
-                // same shape as initial values
-                handleSubmit(values);
-              }}
+            onSubmit={onFormSubmit}
         >
             {({ errors, touched }) => (
             <Form>
@@ -77,15 +67,15 @@ const ModalForm = ({ movieData, onFormSubmit }) => {
                 </div>
                 <div className="formControl">
                     <label htmlFor="genre">Genre</label>
-                    <Field id="genre" name="genre" as="select" multiple>
+                    <Field id="genres" name="genres" as="select" multiple>
                         <option defaultValue disabled>Select Genre</option>
                         {
                             genres.map((genre, idx) => 
                             (<option key={idx} value={genre}>{genre.charAt(0).toUpperCase() + genre.slice(1)}</option>))
                         }
                     </Field>
-                    {errors.genre && touched.genre ? (
-                        <div>{errors.genre}</div>
+                    {errors.genres && touched.genres ? (
+                        <div>{errors.genres}</div>
                     ) : null}
                 </div>
                 <div className="formControl">

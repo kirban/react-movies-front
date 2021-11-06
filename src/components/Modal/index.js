@@ -6,15 +6,11 @@ import {
 import "@styles/modal.scss";
 import { connect } from 'react-redux';
 
-const Modal = ({ show, title, type, onClose, addMovie, editMovie, deleteMovie }) => {
+const Modal = ({ movieId, show, title, type, onClose, addMovie, editMovie, deleteMovie }) => {
     if (!show) return null;
     if (!type) return null;
 
-    const onSubmit = e => {
-        console.log("submit", e.target)
-        console.log("modal component method");
-        // get data from form
-        const movie = {};
+    const onSubmit = movie => {
         switch (type) {
             case 'add':
                 addMovie(movie);
@@ -23,7 +19,7 @@ const Modal = ({ show, title, type, onClose, addMovie, editMovie, deleteMovie })
                 editMovie(movie);
                 break;
             case 'delete':
-                deleteMovie(movie);
+                deleteMovie(movieId);
                 break;
             default:
                 return null;
@@ -49,13 +45,6 @@ const Modal = ({ show, title, type, onClose, addMovie, editMovie, deleteMovie })
                         </div>
                     ) : ""
                 }
-                {/* <div className="modalControls">
-                    {
-                        (type === "add" || type === "edit") ? <button className="btn btn-outlined">Reset</button> :
-                        ""
-                    }
-                    <button className="btn btn-primary" onClick={onSubmit}>Confirm</button>
-                </div> */}
 
             </div>
         </div>
@@ -77,6 +66,7 @@ const mapStateToProps = state => ({
     show: state.modal.show,
     title: state.modal.title,
     type: state.modal.type,
+    movieId: state.modal.movieData.id,
 })
 
 const addMovie = movie => ({
@@ -104,7 +94,7 @@ const mapDispatchToProps = dispatch => ({
     onClose: () => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { title: '', type: '' } }),
     addMovie: (movie) => dispatch(addMovie(movie)),
     editMovie: (movie) => dispatch(editMovie(movie)),
-    deleteMovie: (movie) => dispatch(deleteMovie(movie)),
+    deleteMovie: (movieId) => dispatch(deleteMovie(movieId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal)
