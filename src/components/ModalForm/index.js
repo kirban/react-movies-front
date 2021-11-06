@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
+import { Formik, Field, Form } from 'formik';
 import PropTypes from 'prop-types'
 import { genres } from '../../constant'
 import '@styles/modalForm.scss'
@@ -10,42 +11,53 @@ const ModalForm = ({ movieData }) => {
     const handleChange = e => {}
 
     return(
-        <form onSubmit={handleSubmit}>
-            <div className="formControl">
-                <label htmlFor="title">Title</label>
-                <input type="text" name="title" id="title" value={movieData.title} onChange={handleChange}/>
-            </div>
-            <div className="formControl">
-                <label htmlFor="release_date">Release Date</label>
-                <input type="date" name="release_date" id="release_date" value={movieData.release_date} onChange={handleChange}/>
-            </div>
-            <div className="formControl">
-                <label htmlFor="url">Movie URL</label>
-                <input type="url" name="url" id="url" value={movieData.url} onChange={handleChange}/>
-            </div>
-            <div className="formControl">
-                <label htmlFor="vote_average">vote_average</label>
-                <input type="number" name="vote_average" id="vote_average" min="0" max="10" step="0.1" value={movieData.vote_average} onChange={handleChange}/>
-            </div>
-            <div className="formControl">
-                <label htmlFor="genre">Genre</label>
-                <select name="genre" id="genre" multiple onChange={handleChange} value={movieData.genre}>
-                    <option defaultValue disabled>Select Genre</option>
-                    {
-                        genres.map((genre, idx) => 
-                        (<option key={idx} value={genre}>{genre.charAt(0).toUpperCase() + genre.slice(1)}</option>))
-                    }
-                </select>
-            </div>
-            <div className="formControl">
-                <label htmlFor="runtime">Runtime</label>
-                <input type="number" name="runtime" id="runtime" value={movieData.runtime} onChange={handleChange}/>
-            </div>
-            <div className="formControl w100">
-                <label htmlFor="overview">Overview</label>
-                <textarea name="overview" id="overview" value={movieData.overview} onChange={handleChange}></textarea>
-            </div>
-        </form>
+        <Formik
+            initialValues = {{
+                ...movieData
+            }}
+            onSubmit = {handleSubmit}
+        >
+            <Form>
+                <div className="formControl">
+                    <label htmlFor="title">Title</label>
+                    <Field id="title" name="title" placeholder="Enter movie title" />
+                </div>
+                <div className="formControl">
+                    <label htmlFor="release_date">Release Date</label>
+                    <Field id="release_date" name="release_date" type="date" />
+                </div>
+                <div className="formControl">
+                    <label htmlFor="url">Movie URL</label>
+                    <Field id="url" name="url" type="url" />
+                </div>
+                <div className="formControl">
+                    <label htmlFor="vote_average">Rating</label>
+                    <Field id="vote_average" name="vote_average" type="number" min="0" max="10" step="0.1" />
+                </div>
+                <div className="formControl">
+                    <label htmlFor="genre">Genre</label>
+                    <Field id="genre" name="genre" as="select" multiple>
+                        <option defaultValue disabled>Select Genre</option>
+                        {
+                            genres.map((genre, idx) => 
+                            (<option key={idx} value={genre}>{genre.charAt(0).toUpperCase() + genre.slice(1)}</option>))
+                        }
+                    </Field>
+                </div>
+                <div className="formControl">
+                    <label htmlFor="runtime">Runtime</label>
+                    <Field type="number" name="runtime" id="runtime" />
+                </div>
+                <div className="formControl w100">
+                    <label htmlFor="overview">Overview</label>
+                    <Field as="textarea" name="overview" id="overview"/>
+                </div>
+                <div className="modalControls">
+                    <button className="btn btn-outlined" type="reset">Reset</button>
+                    <button className="btn btn-primary" type="submit">Confirm</button>
+                </div>
+            </Form>
+        </Formik>
     )
 }
 

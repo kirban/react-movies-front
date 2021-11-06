@@ -41,13 +41,14 @@ const Modal = ({ show, title, type, onClose, addMovie, editMovie, deleteMovie })
                         ""
                     }
                 </div>
-                <div className="modalControls">
-                    {
-                        (type === "add" || type === "edit") ? <button className="btn btn-outlined">Reset</button> :
-                        ""
-                    }
-                    <button className="btn btn-primary" onClick={onSubmit}>Confirm</button>
-                </div>
+                {
+                    (type !== "add" && type !== "edit") ? (
+                        <div className="modalControls">
+                            <button className="btn btn-primary" onClick={onSubmit}>Confirm</button>
+                        </div>
+                    ) : ""
+                }
+
             </div>
         </div>
     )
