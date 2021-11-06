@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import "@styles/moviesList.scss"
 import { GenreToggle, ErrorBoundary } from '@components';
 import { genres } from '../../constant';
 import * as movieSchema from '../../schemas/movie.js';
+import { connect } from 'react-redux';
+import fetchMovies from '../../actions/fetchMovies';
 
-const MoviesList = ({ movies, onMovieSelected, showModal }) => {
+const MoviesList = ({ sortField, movies, onMovieSelect, showModal, fetchMoviesAction, sortByField, showEdit, showDelete }) => {
+    useEffect(() => {
+        fetchMoviesAction();
+    }, [])
+
+    useEffect(() => {
+        fetchMoviesAction()
+    }, [sortField])
+
     const handleToggleActionsMenu = e => {
         const moviesMenu = e.target.closest(".moviesActionMenu");
         if (!moviesMenu) {
@@ -15,18 +25,14 @@ const MoviesList = ({ movies, onMovieSelected, showModal }) => {
         }
     }
 
-    const handleMovieSelect = movie => {
-        onMovieSelected(movie)
-    }
+    // const moviesSort = e => {
+    //     const sortPropertyValue = e.target.value;
 
-    const moviesSort = e => {
-        const sortPropertyValue = e.target.value;
+    //     movies = movies.sort((a, b) => (a[sortPropertyValue] > b[sortPropertyValue]) ? 1 : -1)
 
-        movies = movies.sort((a, b) => (a[sortPropertyValue] > b[sortPropertyValue]) ? 1 : -1)
-
-        const sortingIcon = e.target.nextSibling;
-        // TODO: rotate icon
-    }
+    //     const sortingIcon = e.target.nextSibling;
+    //     // TODO: rotate icon
+    // }
 
     return(
         <>
@@ -36,9 +42,10 @@ const MoviesList = ({ movies, onMovieSelected, showModal }) => {
                 </ErrorBoundary>
                 <div className="sortItemsContainer">
                     <label htmlFor="sortItems">sort by</label>
-                    <select id="sortItems" onChange={moviesSort}>
+                    <select id="sortItems" onChange={sortByField}>
                         <option defaultValue value="release_date">release date</option>
                         <option value="title">title</option>
+                        <option value="vote_average">rating</option>
                     </select>
                     <i className="sort sort-asc"></i>
                 </div>
@@ -53,14 +60,14 @@ const MoviesList = ({ movies, onMovieSelected, showModal }) => {
                             <div className="moviesActionMenu">
                                 <a href="#" className="cross-close" onClick={handleToggleActionsMenu}></a>
                                 <ul className="actions-list" onClick={handleToggleActionsMenu}>
-                                    <li className="edit-item" data-action="edit" data-item-id={item.id} onClick={showModal}><a>Edit</a></li>
-                                    <li className="remove-item" data-action="delete" data-item-id={item.id} onClick={showModal}><a>Delete</a></li>
+                                    <li className="edit-item" data-action="edit" data-item-id={item.id} onClick={showEdit.bind(null, item)}><a>Edit</a></li>
+                                    <li className="remove-item" data-action="delete" data-item-id={item.id} onClick={showDelete.bind(null, item)}><a>Delete</a></li>
                                 </ul>
                             </div>
                             
-                            <img className="cardContentImage" src={"img/"+item.poster_path} alt="" onClick={handleMovieSelect.bind({}, item)}/>
+                            <img className="cardContentImage" src={item.poster_path} alt="" onClick={onMovieSelect.bind({}, item)}/>
                         </div>
-                        <div className="cardContent-bottom" onClick={handleMovieSelect.bind({}, item)}>
+                        <div className="cardContent-bottom" onClick={onMovieSelect.bind({}, item)}>
                             <div className="cardContentRow-top">
                                 <div className="cardContentTitle">{item.title}</div>
                                 <div className="cardContentLabel">{item.release_date.slice(6)}</div>
@@ -75,9 +82,40 @@ const MoviesList = ({ movies, onMovieSelected, showModal }) => {
 }
 
 MoviesList.propTypes = {
-    movies: PropTypes.arrayOf(PropTypes.shape(movieSchema)).isRequired,
-    onMovieSelected: PropTypes.func.isRequired,
-    showModal: PropTypes.func.isRequired
+    movies: PropTypes.arrayOf(PropTypes.shape(movieSchema)),
+    onMovieSelect: PropTypes.func,
+    showEdit: PropTypes.func,
+    showDelete: PropTypes.func,
 }
 
-export default MoviesList
+const selectMovie = (selectedMovie) => ({
+    type: "SELECT_MOVIE",
+    payload: {
+        movie: selectedMovie,
+    },
+});
+
+const sortByField = (fieldName) => ({
+    type: "SORT_BY_FIELD",
+    payload: {
+        field: fieldName
+    }
+})
+
+
+const mapStateToProps = state => ({
+    movies: state.movies.displayedMovies,
+    sortField: state.movies.sortByField,
+})
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchMoviesAction: () => dispatch(fetchMovies()),
+        sortByField: e => dispatch(sortByField(e.target.value)),
+        showEdit: movie => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { type: 'edit', movie } }),
+        showDelete: movie => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { type: 'delete', movie } }),
+        onMovieSelect: movie => dispatch(selectMovie(movie)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviesList)

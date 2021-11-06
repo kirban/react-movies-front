@@ -1,13 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import logo from '../../logo.svg';
 import search from '../../search.svg';
-import { Context } from '../../context';
+import { connect } from "react-redux";
 
-const MoviePreview = ({ selectedMovie }) => {
+const MoviePreview = ({ selectedMovie, handleSearchButtonClick }) => {
 
-    const { handleSearchButtonClick } = useContext(Context)
-
+    if (!selectedMovie || !Object.keys(selectedMovie).length) return null
     return (
         <div id="selectedMovie">
             <div className="previewTop">
@@ -19,11 +18,11 @@ const MoviePreview = ({ selectedMovie }) => {
                 </a>
             </div>
             <div className="previewMain">
-                <img src={`img/${selectedMovie.poster_path}`} alt="" className="cardPreviewImage" />
+                <img src={`${selectedMovie.poster_path}`} alt="" className="cardPreviewImage" />
                 <div className="movieDetails">
                     <div className="movieDetailsMain">
                         <h2 className="movieDetailsHeading">{selectedMovie.title}</h2>
-                        <div className="movieDetailsvote_avarage">{selectedMovie.vote_avarage}</div>
+                        <div className="movieDetailsvote_avarage">{selectedMovie.vote_average}</div>
                     </div>
                     <div className="movieDetailsSubtitle">
                         <span className="movieDetailsGenres">{selectedMovie.genres.join(', ')}</span>
@@ -41,6 +40,19 @@ const MoviePreview = ({ selectedMovie }) => {
 
 MoviePreview.propTypes = {
     selectedMovie: PropTypes.object,
+    handleSearchButtonClick: PropTypes.func,
 }
 
-export default MoviePreview;
+const mapStateToProps = state => {
+    return {
+        selectedMovie: state.movies.selectedMovie,
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        handleSearchButtonClick: () => dispatch(({ type: "SELECT_MOVIE", payload: { movie: {} } })),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePreview);
