@@ -5,6 +5,7 @@ import {
 } from '@components';
 import "@styles/modal.scss";
 import { connect } from 'react-redux';
+import { postMovieRequest, putMovieRequest, deleteMovieRequest } from '../../actions/movieRequests';
 
 const Modal = ({ movieId, show, title, type, onClose, addMovie, editMovie, deleteMovie }) => {
     if (!show) return null;
@@ -83,18 +84,20 @@ const editMovie = movie => ({
     },
 });
 
-const deleteMovie = movie => ({
+const deleteMovie = movieId => ({
     type: "DELETE_MOVIE",
     payload: {
-        movie
+        movie: {
+            id: movieId
+        }
     },
 });
 
 const mapDispatchToProps = dispatch => ({
     onClose: () => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { title: '', type: '' } }),
-    addMovie: (movie) => dispatch(addMovie(movie)),
-    editMovie: (movie) => dispatch(editMovie(movie)),
-    deleteMovie: (movieId) => dispatch(deleteMovie(movieId)),
+    addMovie: (movie) => {dispatch(addMovie(movie)); dispatch(postMovieRequest())},
+    editMovie: (movie) => {dispatch(editMovie(movie)); dispatch(putMovieRequest())},
+    deleteMovie: (movieId) => {dispatch(deleteMovie(movieId)); dispatch(deleteMovieRequest())},
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal)

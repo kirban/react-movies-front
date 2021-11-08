@@ -1,12 +1,22 @@
+import {
+    CREATE_MOVIE_LOADING,
+    CREATE_MOVIE_SUCCESS,
+    CREATE_MOVIE_ERROR,
+    UPDATE_MOVIE_LOADING,
+    UPDATE_MOVIE_SUCCESS,
+    UPDATE_MOVIE_ERROR,
+    DELETE_MOVIE_LOADING,
+    DELETE_MOVIE_SUCCESS,
+    DELETE_MOVIE_ERROR,
+} from "../constant/actionNames";
+
 const initialState = {
     movieData: {},
+    loading: false,
     show: false,
+    error: null,
     type: "" // add | edit | delete | info 
 }
-
-const postMovie = (movie) => {}
-const putMovie = (id, data) => {}
-const deleteMovie = (id) => {}
 
 const modalReducer = (state = initialState, action) => {
     switch(action.type) {
@@ -72,6 +82,12 @@ const modalReducer = (state = initialState, action) => {
                     },
                 }
             })()
+        case CREATE_MOVIE_LOADING:
+            return { ...state, loading: true, }
+        case CREATE_MOVIE_SUCCESS:
+            return { ...state, loading: false, }
+        case CREATE_MOVIE_ERROR:
+            return { ...state, loading: false, error: action.error }
         default:
             return state
     }
