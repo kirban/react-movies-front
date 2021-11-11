@@ -32,6 +32,7 @@ const moviesReducer = (state = initialState, action) => {
                 searchText: action.payload.text,
             }
         case 'SORT_BY_FIELD':
+            console.log("sort by field payload in reducer", JSON.stringify(action.payload))
             return {
                 ...state,
                 sortByField: action.payload.field,
@@ -42,6 +43,12 @@ const moviesReducer = (state = initialState, action) => {
                 ...state,
                 genresFilter: action.payload.genre,
                 searchBy: "genres",
+            }
+        case 'SEARCH_BY_TEXT':
+            return {
+                ...state,
+                searchText: action.payload.text,
+                searchBy: "title",
             }
         case LOAD_MOVIES_LOADING: {
             return {

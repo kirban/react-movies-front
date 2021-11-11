@@ -3,14 +3,38 @@ import PropTypes from 'prop-types';
 import "@styles/moviesList.scss"
 import { GenreToggle, ErrorBoundary } from '@components';
 import { genres } from '../../constant';
-import * as movieSchema from '../../schemas/movie.js';
 import { connect } from 'react-redux';
 import fetchMovies from '../../actions/fetchMovies';
+import { useLocation, useParams, useHistory } from 'react-router';
 
-const MoviesList = ({ sortField, movies, onMovieSelect, showModal, fetchMoviesAction, sortByField, showEdit, showDelete }) => {
+const useQuery = () => new URLSearchParams(useLocation().search);
+
+const MoviesList = ({ movies, onMovieSelect, sortByField, showEdit, showDelete, searchByText }) => {
+    const { pathname, search } = useLocation();
+    const history = useHistory();
+    const query = useQuery();
+    const sortByParam = query.get('sortBy');
+    const sortOrderParam = query.get('sortOrder');
+    const searchByParam = query.get('searchBy');
+    const filterParam = query.get('filter');
+    const offsetParam = query.get('offset');
+
+
     useEffect(() => {
-        fetchMoviesAction();
+        if (pathname === '/search') {
+            searchByText('');
+        }
+
+        if (pathname.slice(0,8) === '/search/') {
+            searchByText(pathname.slice(8))
+        }
     }, [])
+
+    useEffect(() => {
+        if (sortByParam) {
+            sortByField(sortByParam);
+        }
+    }, [sortByParam])
 
     const handleToggleActionsMenu = e => {
         const moviesMenu = e.target.closest(".moviesActionMenu");
@@ -19,6 +43,11 @@ const MoviesList = ({ sortField, movies, onMovieSelect, showModal, fetchMoviesAc
         } else {
             moviesMenu.classList.toggle("active")
         }
+    }
+
+    const handleFieldSort = e => {
+        const fieldName = e.target.value;
+        history.push({ search: `?sortBy=${fieldName}` })
     }
 
     // const moviesSort = e => {
@@ -38,7 +67,7 @@ const MoviesList = ({ sortField, movies, onMovieSelect, showModal, fetchMoviesAc
                 </ErrorBoundary>
                 <div className="sortItemsContainer">
                     <label htmlFor="sortItems">sort by</label>
-                    <select id="sortItems" onChange={sortByField}>
+                    <select id="sortItems" onChange={handleFieldSort}>
                         <option defaultValue value="release_date">release date</option>
                         <option value="title">title</option>
                         <option value="vote_average">rating</option>
@@ -78,7 +107,7 @@ const MoviesList = ({ sortField, movies, onMovieSelect, showModal, fetchMoviesAc
 }
 
 MoviesList.propTypes = {
-    movies: PropTypes.arrayOf(PropTypes.shape(movieSchema)),
+    movies: PropTypes.array,
     onMovieSelect: PropTypes.func,
     showEdit: PropTypes.func,
     showDelete: PropTypes.func,
@@ -91,23 +120,29 @@ const selectMovie = (selectedMovie) => ({
     },
 });
 
-const sortByField = (fieldName) => ({
+const sortByFieldAction = (fieldName) => ({
     type: "SORT_BY_FIELD",
     payload: {
         field: fieldName
     }
 })
 
+const searchByTextAction = (text) => ({
+    type: "SEARCH_BY_TEXT",
+    payload: {
+        text
+    }
+})
 
 const mapStateToProps = state => ({
     movies: state.movies.displayedMovies,
-    sortField: state.movies.sortByField,
 })
 
 const mapDispatchToProps = dispatch => {
     return {
         fetchMoviesAction: () => dispatch(fetchMovies()),
-        sortByField: e => {dispatch(sortByField(e.target.value)); dispatch(fetchMovies());},
+        sortByField: fieldName => {dispatch(sortByFieldAction(fieldName)); dispatch(fetchMovies());},
+        searchByText: text => { dispatch(searchByTextAction(text)); dispatch(fetchMovies()); },
         showEdit: movie => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { type: 'edit', movie } }),
         showDelete: movie => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { type: 'delete', movie } }),
         onMovieSelect: movie => dispatch(selectMovie(movie)),
