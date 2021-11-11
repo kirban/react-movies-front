@@ -8,6 +8,7 @@ import Modal from "./Modal"
 import ModalForm from "./ModalForm"
 import MoviePreview from "./MoviePreview"
 import MovieSearch from "./MovieSearch"
+import NotFound from "./NotFound"
 
 export {
     Header,
@@ -20,4 +21,5 @@ export {
     ModalForm,
     MoviePreview,
     MovieSearch,
+    NotFound,
 }
