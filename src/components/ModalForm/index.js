@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import { Prompt } from 'react-router';
 import PropTypes from 'prop-types'
 import { genres } from '../../constant'
 import '@styles/modalForm.scss'
+import * as _ from 'lodash';
 
 const MovieSchema = Yup.object({
     title: Yup.string().min(2, 'Too short!').max(50, 'Too long!').required('Required!'),
@@ -17,6 +19,20 @@ const MovieSchema = Yup.object({
 });
 
 const ModalForm = ({ movieData, onFormSubmit }) => {
+    const initialMovieData = Object.freeze(movieData);
+    const [isBlocking, setIsBlocking] = useState(false);
+
+    useEffect(() => {
+        if(!_.isEqual(initialMovieData, movieData)) {
+            setIsBlocking(true)
+        }
+    }, [movieData])
+
+    const onSubmit = (...args) => {
+        setIsBlocking(false);
+        onFormSubmit(...args)
+    }
+
     const initialMovie = {
         title: "",
         release_date: "",
@@ -33,10 +49,14 @@ const ModalForm = ({ movieData, onFormSubmit }) => {
                 ...((Object.keys(movieData).length > 0) ? movieData : initialMovie)
             }}
             validationSchema={MovieSchema}
-            onSubmit={onFormSubmit}
+            onSubmit={onSubmit}
         >
             {({ errors, touched }) => (
             <Form>
+                <Prompt
+                    when={isBlocking}
+                    message={ location => `Are you sure you want to go to ${location.pathname}?`} // TODO: implement onchange hanler onChange={setIsBlocking(event.target.value.length > 0)}
+                />
                 <div className="formControl">
                     <label htmlFor="title">Title</label>
                     <Field id="title" name="title" placeholder="Enter movie title" />
