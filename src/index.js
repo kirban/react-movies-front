@@ -8,11 +8,9 @@ ReactDOM.render((
     <Router>
     {
       <Switch>
-        <Route path="/search">
-            <App />
-        </Route>
+        <Route path="/search/:query?" component={App} />
         <Route exact path="/" render={({ location }) => <Redirect to={{ pathname: '/search', state: { from: location } }} />} />
-        <Route exact path="*" component={ NotFound } />
+        <Route path="*" component={ NotFound } />
       </Switch>
     }
     </Router>
