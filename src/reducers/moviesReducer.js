@@ -42,7 +42,7 @@ const moviesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 genresFilter: action.payload.genre,
-                searchBy: "genres",
+                searchBy: action.payload.searchBy, // genre || title || ''
             }
         case 'SEARCH_BY_TEXT':
             return {
