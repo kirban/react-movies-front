@@ -4,6 +4,9 @@ import {
     LOAD_MOVIES_LOADING,
     LOAD_MOVIES_SUCCESS,
     LOAD_MOVIES_ERROR,
+    LOAD_MOVIE_BY_ID_LOADING,
+    LOAD_MOVIE_BY_ID_SUCCESS,
+    LOAD_MOVIE_BY_ID_ERROR,
     CREATE_MOVIE_LOADING,
     CREATE_MOVIE_SUCCESS,
     CREATE_MOVIE_ERROR,
@@ -15,9 +18,18 @@ import {
     DELETE_MOVIE_ERROR,
 } from "../constant/actionNames";
 
+const getMovieByIdRequest = (movieId) => (dispatch) => {
+    console.log(movieId)
+    dispatch({ type: LOAD_MOVIE_BY_ID_LOADING });
+    fetch(`${BASE_URL}/movies/${movieId}`)
+        .then(response => response.json())
+        .then(movie => dispatch({ type: LOAD_MOVIE_BY_ID_SUCCESS, body: movie }))
+        .catch(error => dispatch({ type: LOAD_MOVIE_BY_ID_ERROR, error }))
+};
+
 const postMovieRequest = () => (dispatch, getState) => {
     const { movieData } = getState().modal;
-    dispatch({ type: CREATE_MOVIE_LOADING })
+    dispatch({ type: CREATE_MOVIE_LOADING });
     fetch(`${BASE_URL}/movies`, { method: 'POST', body: JSON.stringify({ ...movieData }) })
         .then(response => response.json())
         .then(newMovie => dispatch({ type: CREATE_MOVIE_SUCCESS, payload: { newMovie } }))
@@ -43,6 +55,7 @@ const deleteMovieRequest = () => (dispatch, getState) => {
 }
 
 export {
+    getMovieByIdRequest,
     postMovieRequest,
     putMovieRequest,
     deleteMovieRequest,

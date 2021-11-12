@@ -5,15 +5,16 @@ import { GenreToggle, ErrorBoundary } from '@components';
 import { genres } from '../../constant';
 import { connect } from 'react-redux';
 import fetchMovies from '../../actions/fetchMovies';
-import { useLocation, useParams, useHistory } from 'react-router';
+import { useLocation, useHistory } from 'react-router';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
-const MoviesList = ({ movies, onMovieSelect, sortByField, showEdit, showDelete, searchByText }) => {
+const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, searchByText }) => {
     const { pathname, search } = useLocation();
     const history = useHistory();
     const query = useQuery();
     const sortByParam = query.get('sortBy');
+    const movieIdParam = query.get('movie');
     const sortOrderParam = query.get('sortOrder');
     const searchByParam = query.get('searchBy');
     const filterParam = query.get('filter');
@@ -35,6 +36,16 @@ const MoviesList = ({ movies, onMovieSelect, sortByField, showEdit, showDelete, 
             sortByField(sortByParam);
         }
     }, [sortByParam])
+
+    useEffect(() => {
+        if (movieIdParam) {
+            selectMovie(movies.find(m => m.id === +movieIdParam));
+        }
+    },[movieIdParam])
+
+    const onMovieSelect = movie => {
+        history.push({ search: `?movie=${movie.id}` })
+    }
 
     const handleToggleActionsMenu = e => {
         const moviesMenu = e.target.closest(".moviesActionMenu");
@@ -113,7 +124,7 @@ MoviesList.propTypes = {
     showDelete: PropTypes.func,
 }
 
-const selectMovie = (selectedMovie) => ({
+const selectMovieAction = (selectedMovie) => ({
     type: "SELECT_MOVIE",
     payload: {
         movie: selectedMovie,
@@ -145,7 +156,7 @@ const mapDispatchToProps = dispatch => {
         searchByText: text => { dispatch(searchByTextAction(text)); dispatch(fetchMovies()); },
         showEdit: movie => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { type: 'edit', movie } }),
         showDelete: movie => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { type: 'delete', movie } }),
-        onMovieSelect: movie => dispatch(selectMovie(movie)),
+        selectMovie: movie => dispatch(selectMovieAction(movie)),
     }
 }
 
