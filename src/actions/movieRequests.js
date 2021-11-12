@@ -19,7 +19,6 @@ import {
 } from "../constant/actionNames";
 
 const getMovieByIdRequest = (movieId) => (dispatch) => {
-    console.log(movieId)
     dispatch({ type: LOAD_MOVIE_BY_ID_LOADING });
     fetch(`${BASE_URL}/movies/${movieId}`)
         .then(response => response.json())
@@ -46,9 +45,7 @@ const putMovieRequest = () => (dispatch, getState) => {
 
 const deleteMovieRequest = () => (dispatch, getState) => {
     dispatch({ type: DELETE_MOVIE_LOADING });
-    console.log('getState().modal',getState().modal.movieData);
     const { id } = getState().modal.movieData;
-    console.log('id',id);
     fetch(`${BASE_URL}/movies/${id}`, { method: 'DELETE' })
         .then(() => dispatch({ type: DELETE_MOVIE_SUCCESS }))
         .catch(error => dispatch({ type: DELETE_MOVIE_ERROR, error }))

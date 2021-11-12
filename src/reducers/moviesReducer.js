@@ -35,7 +35,6 @@ const moviesReducer = (state = initialState, action) => {
                 searchText: action.payload.text,
             }
         case 'SORT_BY_FIELD':
-            console.log("sort by field payload in reducer", JSON.stringify(action.payload))
             return {
                 ...state,
                 sortByField: action.payload.field,

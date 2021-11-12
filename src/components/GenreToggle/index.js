@@ -17,7 +17,6 @@ const GenreToggle = ({ genresList, sortByGenre }) => {
   }, [])
 
   useEffect(() => {
-    console.log('genreParam changed',genreParam);
     if(genreParam){
       sortByGenre(genreParam, 'genre');
     } else if (genreParam === null && init) {
