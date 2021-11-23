@@ -10,6 +10,5 @@ const store = createStore(
     reducer,
     composeEnhancers(applyMiddleware(...middleware)),
 );
-console.log(store.getState())
 
 export default store;

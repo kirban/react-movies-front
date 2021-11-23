@@ -26,7 +26,6 @@ const modalReducer = (state = initialState, action) => {
                     (action.payload.type === 'edit') ? 'edit movie' :
                     (action.payload.type === 'delete') ? 'delete movie' :
                     action.payload.title;
-                console.log('action.payload.movie,',action.payload.movie);
                 return {
                     ...state,
                     title,
@@ -37,13 +36,13 @@ const modalReducer = (state = initialState, action) => {
             })()
         case 'ADD_MOVIE':
             return (()=>{
-                console.log('movie added to reducer', action.payload.movie);
-                const { title, vote_average, release_date, overview, genres, runtime } = action.payload.movie;
+                const { title, vote_average, release_date, overview, genres, runtime, poster_path } = action.payload.movie;
                 return {
                     ...state,
                     show: false,
                     movieData: {
                         title,
+                        poster_path,
                         vote_average,
                         release_date,
                         overview,
@@ -55,13 +54,14 @@ const modalReducer = (state = initialState, action) => {
         case 'EDIT_MOVIE':
             return (()=>{
                 console.log('movie edited in reducer', action.payload.movie);
-                const { id, title, vote_average, release_date, overview, genres, runtime } = action.payload.movie;
+                const { id, title, vote_average, poster_path, release_date, overview, genres, runtime } = action.payload.movie;
                 return {
                     ...state,
                     show: false,
                     movieData: {
                         id,
                         title,
+                        poster_path,
                         vote_average,
                         release_date,
                         overview,

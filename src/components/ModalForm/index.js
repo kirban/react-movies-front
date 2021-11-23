@@ -1,38 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import { Formik, Field, Form } from 'formik';
-import * as Yup from 'yup';
 import PropTypes from 'prop-types'
 import { genres } from '../../constant'
 import '@styles/modalForm.scss'
-
-const MovieSchema = Yup.object({
-    title: Yup.string().min(2, 'Too short!').max(50, 'Too long!').required('Required!'),
-    release_date: Yup.string().required('Required!'),
-    url: Yup.string(),
-    vote_average: Yup.number().min(0.1, 'Should be greater!').max(10, 'Should be less!').required('Required!'),
-    genres: Yup.array().of(Yup.mixed().oneOf([genres])).min(1, "Select at least 1 genre!").required('Required!'),
-    runtime: Yup.number().min(1, "Should be greater!").required('Required!'),
-    overview: Yup.string().min(5, 'Provide more detailed overview!').max(1000, 'Length is too much!').required('Required!'),
-});
+import { MovieBaseSchema, MovieSchema } from '../../schemas/movie'
+import * as _ from 'lodash';
 
 const ModalForm = ({ movieData, onFormSubmit }) => {
+    const [ isNew, setIsNew ] = useState(true);
+
+    useEffect(() => {
+        setIsNew(_.isEmpty(movieData))
+    }, [])
+
     const initialMovie = {
         title: "",
-        release_date: "",
-        url: "",
+        tagline: "",
         vote_average: 0,
+        vote_count: 1,
+        release_date: "",
+        poster_path: "",
+        overview: "",
+        budget: 0,
+        revenue: 0,
         genres: [],
         runtime: 0,
-        overview: ""
     }
 
     return(
         <Formik
             initialValues = {{
-                ...((Object.keys(movieData).length > 0) ? movieData : initialMovie)
+                ...( isNew ? movieData : initialMovie)
             }}
-            validationSchema={MovieSchema}
+            validationSchema={ isNew ? MovieBaseSchema : MovieSchema}
             onSubmit={onFormSubmit}
         >
             {({ errors, touched }) => (
@@ -52,10 +53,10 @@ const ModalForm = ({ movieData, onFormSubmit }) => {
                     ) : null}
                 </div>
                 <div className="formControl">
-                    <label htmlFor="url">Movie URL</label>
-                    <Field id="url" name="url" type="url" />
-                    {errors.url && touched.url ? (
-                        <div>{errors.url}</div>
+                    <label htmlFor="poster_path">Movie Image URL</label>
+                    <Field id="poster_path" name="poster_path" type="url" />
+                    {errors.poster_path && touched.poster_path ? (
+                        <div>{errors.poster_path}</div>
                     ) : null}
                 </div>
                 <div className="formControl">
