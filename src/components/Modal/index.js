@@ -94,7 +94,7 @@ const deleteMovie = movieId => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onClose: () => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { title: '', type: '' } }),
+    onClose: () => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { title: '', type: '', movie: {} } }),
     addMovie: (movie) => {dispatch(addMovie(movie)); dispatch(postMovieRequest())},
     editMovie: (movie) => {dispatch(editMovie(movie)); dispatch(putMovieRequest())},
     deleteMovie: (movieId) => {dispatch(deleteMovie(movieId)); dispatch(deleteMovieRequest())},

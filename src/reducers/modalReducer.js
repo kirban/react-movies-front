@@ -36,12 +36,13 @@ const modalReducer = (state = initialState, action) => {
             })()
         case 'ADD_MOVIE':
             return (()=>{
-                const { title, vote_average, release_date, overview, genres, runtime } = action.payload.movie;
+                const { title, vote_average, release_date, overview, genres, runtime, poster_path } = action.payload.movie;
                 return {
                     ...state,
                     show: false,
                     movieData: {
                         title,
+                        poster_path,
                         vote_average,
                         release_date,
                         overview,
@@ -52,13 +53,14 @@ const modalReducer = (state = initialState, action) => {
             })()
         case 'EDIT_MOVIE':
             return (()=>{
-                const { id, title, vote_average, release_date, overview, genres, runtime } = action.payload.movie;
+                const { id, title, vote_average, poster_path, release_date, overview, genres, runtime } = action.payload.movie;
                 return {
                     ...state,
                     show: false,
                     movieData: {
                         id,
                         title,
+                        poster_path,
                         vote_average,
                         release_date,
                         overview,

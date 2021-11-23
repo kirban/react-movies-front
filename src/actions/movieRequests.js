@@ -28,8 +28,8 @@ const getMovieByIdRequest = (movieId) => (dispatch) => {
 
 const postMovieRequest = () => (dispatch, getState) => {
     const { movieData } = getState().modal;
-    dispatch({ type: CREATE_MOVIE_LOADING });
-    fetch(`${BASE_URL}/movies`, { method: 'POST', body: JSON.stringify({ ...movieData }) })
+    dispatch({ type: CREATE_MOVIE_LOADING })
+    fetch(`${BASE_URL}/movies`, { method: 'POST', body: JSON.stringify({ ...movieData }), headers: { 'Content-Type': 'application/json' }})
         .then(response => response.json())
         .then(newMovie => dispatch({ type: CREATE_MOVIE_SUCCESS, payload: { newMovie } }))
         .catch(error => dispatch({ type: CREATE_MOVIE_ERROR, error }))
@@ -38,7 +38,7 @@ const postMovieRequest = () => (dispatch, getState) => {
 const putMovieRequest = () => (dispatch, getState) => {
     const { movieData } = getState().modal;
     dispatch({ type: UPDATE_MOVIE_LOADING });
-    fetch(`${BASE_URL}/movies`, { method: 'PUT', body: JSON.stringify({ ...movieData }) })
+    fetch(`${BASE_URL}/movies`, { method: 'PUT', body: JSON.stringify({ ...movieData }), headers: { 'Content-Type': 'application/json' } })
         .then(newMovie => dispatch({ type: UPDATE_MOVIE_SUCCESS, payload: { newMovie } }))
         .catch(error => dispatch({ type: UPDATE_MOVIE_ERROR, error }))
 }
