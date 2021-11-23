@@ -7,7 +7,7 @@ const fetchMovies = () => (dispatch, getState) => {
     const params = new URLSearchParams();
     params.set('sortBy', sortByField);
     params.set('sortOrder', sortOrder);
-    params.set('searchText', searchText);
+    params.set('search', searchText);
     params.set('searchBy', searchBy);
     params.set('filter', genresFilter);
     params.set('offset', offset);

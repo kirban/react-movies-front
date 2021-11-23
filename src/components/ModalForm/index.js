@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
+import { Prompt } from 'react-router';
 import { Formik, Field, Form } from 'formik';
 import PropTypes from 'prop-types'
 import { genres } from '../../constant'
@@ -8,11 +9,24 @@ import { MovieBaseSchema, MovieSchema } from '../../schemas/movie'
 import * as _ from 'lodash';
 
 const ModalForm = ({ movieData, onFormSubmit }) => {
+    const initialMovieData = Object.freeze(movieData);
+    const [isBlocking, setIsBlocking] = useState(false);
     const [ isNew, setIsNew ] = useState(true);
 
     useEffect(() => {
         setIsNew(_.isEmpty(movieData))
     }, [])
+
+    useEffect(() => {
+        if(!_.isEqual(initialMovieData, movieData)) {
+            setIsBlocking(true)
+        }
+    }, [movieData])
+
+    const onSubmit = (...args) => {
+        setIsBlocking(false);
+        onFormSubmit(...args)
+    }
 
     const initialMovie = {
         title: "",
@@ -33,11 +47,15 @@ const ModalForm = ({ movieData, onFormSubmit }) => {
             initialValues = {{
                 ...( isNew ? movieData : initialMovie)
             }}
+            onSubmit={onSubmit}
             validationSchema={ isNew ? MovieBaseSchema : MovieSchema}
-            onSubmit={onFormSubmit}
         >
             {({ errors, touched }) => (
             <Form>
+                <Prompt
+                    when={isBlocking}
+                    message={ location => `Are you sure you want to go to ${location.pathname}?`} // TODO: implement onchange hanler onChange={setIsBlocking(event.target.value.length > 0)}
+                />
                 <div className="formControl">
                     <label htmlFor="title">Title</label>
                     <Field id="title" name="title" placeholder="Enter movie title" />

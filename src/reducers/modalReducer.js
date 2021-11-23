@@ -53,7 +53,6 @@ const modalReducer = (state = initialState, action) => {
             })()
         case 'EDIT_MOVIE':
             return (()=>{
-                console.log('movie edited in reducer', action.payload.movie);
                 const { id, title, vote_average, poster_path, release_date, overview, genres, runtime } = action.payload.movie;
                 return {
                     ...state,
@@ -72,7 +71,6 @@ const modalReducer = (state = initialState, action) => {
             })()
         case 'DELETE_MOVIE':
             return (()=>{
-                console.log('movie deleted in reducer', action.payload.movie)
                 const { id } = action.payload.movie;
                 return {
                     ...state,

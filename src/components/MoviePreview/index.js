@@ -3,8 +3,16 @@ import PropTypes from 'prop-types';
 import logo from '../../logo.svg';
 import search from '../../search.svg';
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
 
-const MoviePreview = ({ selectedMovie, handleSearchButtonClick }) => {
+const MoviePreview = ({ selectedMovie, selectMovie }) => {
+    const history = useHistory();
+
+    const handleSearchButtonClick = (e) => {
+        e.preventDefault();
+        history.push({ search: '' })
+        selectMovie({});
+    }
 
     if (!selectedMovie || !Object.keys(selectedMovie).length) return null
     return (
@@ -51,7 +59,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleSearchButtonClick: () => dispatch(({ type: "SELECT_MOVIE", payload: { movie: {} } })),
+        selectMovie: movie => dispatch({ type: "SELECT_MOVIE", payload: { movie } }),
     }
 }
 

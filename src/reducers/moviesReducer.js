@@ -1,5 +1,11 @@
-import fetchMovies from "../actions/fetchMovies";
-import { LOAD_MOVIES_LOADING, LOAD_MOVIES_SUCCESS, LOAD_MOVIES_ERROR } from "../constant/actionNames";
+import {
+    LOAD_MOVIES_LOADING,
+    LOAD_MOVIES_SUCCESS,
+    LOAD_MOVIES_ERROR,
+    LOAD_MOVIE_BY_ID_LOADING,
+    LOAD_MOVIE_BY_ID_SUCCESS,
+    LOAD_MOVIE_BY_ID_ERROR,
+} from "../constant/actionNames";
 
 const initialState = {
     displayedMovies: [],
@@ -17,9 +23,6 @@ const initialState = {
 
 const moviesReducer = (state = initialState, action) => {
     switch(action.type) {
-        case 'FETCH_MOVIES':
-            fetchMovies();
-            return state;
         case 'SELECT_MOVIE':
             return {
                 ...state,
@@ -41,7 +44,13 @@ const moviesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 genresFilter: action.payload.genre,
-                searchBy: "genres",
+                searchBy: action.payload.searchBy, // genre || title || ''
+            }
+        case 'SEARCH_BY_TEXT':
+            return {
+                ...state,
+                searchText: action.payload.text,
+                searchBy: "title",
             }
         case LOAD_MOVIES_LOADING: {
             return {
@@ -64,6 +73,25 @@ const moviesReducer = (state = initialState, action) => {
                 error: action.error
             };
         }
+        case LOAD_MOVIE_BY_ID_LOADING:
+            return {
+                ...state,
+                loading: true,
+                error: "",
+            }
+        case LOAD_MOVIE_BY_ID_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: "",
+                selectedMovie: { ...action.body },
+            }
+        case LOAD_MOVIE_BY_ID_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.error
+            }
         default:
             return state;
     }
