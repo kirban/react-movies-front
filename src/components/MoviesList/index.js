@@ -5,12 +5,12 @@ import { GenreToggle, ErrorBoundary } from '@components';
 import { genres } from '../../constant';
 import { connect } from 'react-redux';
 import fetchMovies from '../../actions/fetchMovies';
-import { useLocation, useHistory } from 'react-router';
+import { useLocation, useHistory, useParams } from 'react-router';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
 const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, searchByText }) => {
-    const { pathname, search } = useLocation();
+    const { query: searchString = '' } = useParams();
     const history = useHistory();
     const query = useQuery();
     const sortByParam = query.get('sortBy');
@@ -20,16 +20,9 @@ const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, se
     const filterParam = query.get('filter');
     const offsetParam = query.get('offset');
 
-
     useEffect(() => {
-        if (pathname === '/search') {
-            searchByText('');
-        }
-
-        if (pathname.slice(0,8) === '/search/') {
-            searchByText(pathname.slice(8))
-        }
-    }, [])
+        searchByText(searchString)
+    }, [searchString])
 
     useEffect(() => {
         if (sortByParam) {
