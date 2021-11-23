@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import fetchMoviesAction from '../../actions/fetchMovies';
 
-const GenreToggle = ({ genresFilter, genresList, sortByGenre, fetchMovies }) => {
-
-  useEffect(() => {
-    fetchMovies()
-  }, [genresFilter])
+const GenreToggle = ({ genresFilter, genresList, sortByGenre }) => {
 
   const genreItems = genresList.map((genreName, genreIndex) => (
     <li key={genreIndex.toString()}>
@@ -46,8 +42,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  sortByGenre: genre => dispatch(sortByGenre(genre)),
-  fetchMovies: () => dispatch(fetchMoviesAction())
+  sortByGenre: genre => {dispatch(sortByGenre(genre)); dispatch(fetchMoviesAction())},
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GenreToggle)

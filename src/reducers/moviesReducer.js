@@ -35,7 +35,7 @@ const moviesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 sortByField: action.payload.field,
-                sortOrder: (action.payload.field === state.movies.sortByField && state.movies.sortOrder === "asc") ? "desc" : "asc",
+                sortOrder: (action.payload.field === state.sortByField && state.sortOrder === "asc") ? "desc" : "asc",
             }
         case 'SORT_BY_GENRE':
             return {

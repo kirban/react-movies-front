@@ -12,10 +12,6 @@ const MoviesList = ({ sortField, movies, onMovieSelect, showModal, fetchMoviesAc
         fetchMoviesAction();
     }, [])
 
-    useEffect(() => {
-        fetchMoviesAction()
-    }, [sortField])
-
     const handleToggleActionsMenu = e => {
         const moviesMenu = e.target.closest(".moviesActionMenu");
         if (!moviesMenu) {
@@ -111,7 +107,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
     return {
         fetchMoviesAction: () => dispatch(fetchMovies()),
-        sortByField: e => dispatch(sortByField(e.target.value)),
+        sortByField: e => {dispatch(sortByField(e.target.value)); dispatch(fetchMovies());},
         showEdit: movie => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { type: 'edit', movie } }),
         showDelete: movie => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { type: 'delete', movie } }),
         onMovieSelect: movie => dispatch(selectMovie(movie)),
