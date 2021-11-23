@@ -16,10 +16,10 @@ const Header = ({ selectedMovie, getMovie }) => {
 
     useEffect(() => {
         if(movieIdParam) {
-            setPreviewActive(true);
+            setPreviewActive(!!movieIdParam);
             getMovie(movieIdParam);
         }
-    }, [])
+    }, [movieIdParam])
 
     useEffect(() => {
         if (selectedMovie) {
