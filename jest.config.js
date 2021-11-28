@@ -82,10 +82,12 @@ module.exports = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   // moduleNameMapper: {},
+  // "\\.(css|scss)$": "identity-obj-proxy"
   moduleNameMapper: {
     "^@components(.*)$": "<rootDir>/src/components$1",
     "^@styles(.*)$": "<rootDir>/src/styles$1",
-    "^.+\\.(css|scss|less)$": "<rootDir>/src/config/CSSStub.js"
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":"<rootDir>/__mocks__/imageFilesStub.js",
+    "\\.(scss|css)$": "<rootDir>/__mocks__/styleFilesStub.js"
   },
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
