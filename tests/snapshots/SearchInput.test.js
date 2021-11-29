@@ -1,11 +1,15 @@
 import React from 'react'
 import { render, cleanup } from '@testing-library/react'
-import App from '../../src/App'
+import SearchInput from '@components/SearchInput/index'
 
+jest.mock('react-router', () => ({
+    ...jest.requireActual('react-router'),
+    useParams: jest.fn().mockReturnValue({ query: 'test' })
+}))
 
 afterEach(cleanup)
 
-it("renders", () => {
-    const { asFragment } = render(<App />)
-    expect(asFragment(<App />)).toMatchSnapshot()
+it("renders search panel", () => {
+    const { asFragment } = render(<SearchInput />)
+    expect(asFragment(<SearchInput />)).toMatchSnapshot()
 })

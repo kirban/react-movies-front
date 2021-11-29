@@ -1,29 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders 1`] = `
+exports[`renders search panel 1`] = `
 <DocumentFragment>
-  <h1>
-    Something went wrong.
-  </h1>
-  <main
-    class="content"
-  >
-    <h1>
-      Something went wrong.
-    </h1>
-  </main>
-  <footer>
-    <a
-      href="http://google.com"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <img
-        alt="App Logo"
-        class="logo"
-        src="test-file-stub"
-      />
-    </a>
-  </footer>
+  <form>
+    <input
+      class="searchInput"
+      id=""
+      name="search"
+      placeholder="What do you want to watch?"
+      type="text"
+      value="test"
+    />
+    <input
+      class="searchButton"
+      type="submit"
+      value="Search"
+    />
+  </form>
 </DocumentFragment>
 `;
