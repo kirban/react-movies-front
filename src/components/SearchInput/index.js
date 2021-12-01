@@ -22,7 +22,7 @@ const SearchInput = () => {
 
   return (
     <form onSubmit={onFormSubmit}>
-      <input className="searchInput" type="text" name="search" id="" placeholder="What do you want to watch?" value={searchText ? searchText : ''} onChange={onSearchInput} />
+      <input className="searchInput" autoFocus type="text" name="search" id="" placeholder="What do you want to watch?" value={searchText ? searchText : ''} onChange={onSearchInput} />
       <input className="searchButton" type="submit" value="Search" />
     </form>
   );
