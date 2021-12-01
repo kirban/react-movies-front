@@ -1,4 +1,4 @@
-describe('movie selection use-case', () => {
+describe('searched movie selection use-case', () => {
     it('should visit home page and redirects to empty search', () => {
         cy.visit('/')
         cy.url().should('match', /search/)
@@ -12,5 +12,12 @@ describe('movie selection use-case', () => {
             .type(searchValue)
             .should('have.value', searchValue)
             .type('{enter}')
+
+        cy.get('.cardContentTitle')
+            .each(title => {
+                cy
+                    .wrap(title)
+                    .should('contain.text', searchValue)
+            })
     });
 })
