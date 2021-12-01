@@ -183,4 +183,3 @@ sketch
 # End of https://www.toptal.com/developers/gitignore/api/react,node,visualstudiocode,macos
 coverage
 cypress/
-!tests/e2e/cypress/integration/**
