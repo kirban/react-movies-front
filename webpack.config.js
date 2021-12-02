@@ -22,12 +22,16 @@ const config = {
     },
   },
   devServer: {
+    port: 8080,
+    historyApiFallback: true,
     open: true,
     host: "localhost",
   },
+  devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
+      publicPath: "/",
     }),
 
     // Add your plugins here

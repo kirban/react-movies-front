@@ -73,6 +73,7 @@
             }
 
             select {
+                text-align: right;
                 overflow: hidden;
                 position: relative;
                 appearance: none;
@@ -93,19 +94,19 @@
                 &:hover {
                     cursor: pointer;
                 }
+            }
 
-                &::after {
-                    content: "▼";
-                    padding: 12px 8px;
-                    position: absolute;
-                    right: 10px;
-                    top: 0;
-                    z-index: 1;
-                    text-align: center;
-                    width: 10%;
-                    height: 100%;
-                    pointer-events: none;
-                }
+            .sort-asc {
+                cursor: pointer;
+                left: 3px;
+                display: inline-block;
+                width: 0;
+                height: 0;
+                border: solid 5px transparent;
+                margin: 4px 4px 0 3px;
+                background: transparent;
+                border-bottom: solid 7px $red;
+                border-top-width: 0;
             }
         }
     }
@@ -143,40 +144,99 @@
             cursor: pointer;
             
             .cardContent-top {
+                position: relative;
+
                 .cardContentImage {
                     height: 28.5rem;
+                    width: 20.125rem;
+                }
+
+                .breadcrumbs {
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: visibility 0s, opacity 0.5s linear;
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 50%;
+                    position: absolute;
+                    left: 258px;
+                    top: 51px;
     
-                    .breadcrumbs {
-                        visibility: hidden;
-                        opacity: 0;
-                        transition: visibility 0s, opacity 0.5s linear;
-                        width: 36px;
-                        height: 36px;
-                        border-radius: 50%;
-                        position: relative;
-                        left: 269px;
-                        top: 20px;
-        
-                        background: #2A202D;
-                        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.196596);
-    
-                        &:after {
-                            content: '•••';
+                    background: #2A202D;
+                    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.196596);
+
+                    &:after {
+                        content: '•••';
+                        position: absolute;
+                        top: 50%;
+                        left: 54%;
+                        transform: translate(-50%, -50%) rotate(90deg);
+                        font-size: 24px;
+                    }
+                }
+
+                &:hover div.breadcrumbs {
+                    visibility: visible;
+                    opacity: 1;
+                }
+
+                .moviesActionMenu {
+                    &.active {
+                        visibility: visible;
+                    }
+
+                    visibility: hidden;
+                    position: absolute;
+                    top: 12px;
+                    left: 115px;
+                    width: 190px;
+                    height: 111px;
+                    border-radius: 4px;
+                    background: rgba(35, 35, 35, 0.918051);
+                    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.1), 0px 10px 20px rgba(0, 0, 0, 0.1), 0px 10px 50px rgba(0, 0, 0, 0.1);
+                    backdrop-filter: blur(27.1828px);
+
+                    a.cross-close {
+                        display: block;
+                        width: 100%;
+                        height: 29px;
+                        opacity: 0.3;
+
+                        &:hover {
+                            opacity: 1;
+                        }
+
+                        &:before, &:after {
                             position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%) rotate(90deg);
-                            font-size: 28px;
+                            top: 8px;
+                            left: 170px;
+                            content: ' ';
+                            height: 12px;
+                            width: 2px;
+                            background-color: $white;
+                        }
+
+                        &:before {
+                            transform: rotate(45deg);
+                        }
+
+                        &:after {
+                            transform: rotate(-45deg);
                         }
                     }
-                    
-                    &.img1 {
-                        background-image: url("../../public/img/1.png");
-                    }
-    
-                    &:hover div.breadcrumbs {
-                        visibility: visible;
-                        opacity: 1;
+
+                    ul.actions-list {
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+
+                        li {
+                            padding: 0.5rem 1.5rem;
+
+                            &:hover {
+                                background-color: $red;
+                            }
+                        }
                     }
                 }
     

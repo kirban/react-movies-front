@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders search panel 1`] = `
+<DocumentFragment>
+  <form>
+    <input
+      class="searchInput"
+      id=""
+      name="search"
+      placeholder="What do you want to watch?"
+      type="text"
+      value="test"
+    />
+    <input
+      class="searchButton"
+      type="submit"
+      value="Search"
+    />
+  </form>
+</DocumentFragment>
+`;

@@ -1,0 +1,62 @@
+@import 'colors';
+
+form {
+    .formControl {
+        display: flex;
+        margin-bottom: 30px;
+        flex-direction: column;
+        color: $red;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        /* identical to box height */
+
+        letter-spacing: 0.888889px;
+        text-transform: uppercase;
+
+        &:nth-child(-n+6) {
+            display: inline-flex;
+        }
+        &:nth-child(odd) {
+            width: 60%;
+            margin-right: 30px;
+        }
+        &:nth-child(even) {
+            width: 38%;
+        }
+
+        &.w100 {
+            width: 100%;
+        }
+
+        input, select, textarea {
+            padding: 17px;
+            border: none;
+            background: rgba(50, 50, 50, 0.8);
+            mix-blend-mode: normal;
+            opacity: 0.8;
+            border-radius: 4px;
+            color: $white;
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 20px;
+            line-height: 24px;
+            height: 57px;
+        }
+
+        textarea {
+            min-height: 197px;
+            width: 100%;
+            resize: none;
+            margin: 0;
+        }
+        
+        label {
+            margin-bottom: 13px;
+        }
+    }
+    
+}

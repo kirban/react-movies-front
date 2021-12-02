@@ -1,24 +1,52 @@
-import React from 'react';
-import { SearchInput } from '@components';
-import logo from '../../logo.svg';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
+import { MoviePreview, MovieSearch } from '@components';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getMovieByIdRequest } from "../../actions/movieRequests";
+
 import '@styles/header.scss';
 
-export default class Header extends React.Component {
-    render() {
-        return (
-            <>  
-                <header>
-                    <div className="headerBg"></div>
-                    <div className="headerContent-top">
-                        <img src={logo} alt="App Logo" className="logo" />
-                        <button className="btn addMovieBtn">+ add movie</button>
-                    </div>
-                    <div className="headerContent-main">
-                        <h1>Find your movie</h1>
-                        <SearchInput />
-                    </div>
-                </header>
-            </>
-        )
-    }
+const useQuery = () => new URLSearchParams(useLocation().search);
+
+const Header = ({ selectedMovie, getMovie }) => {
+    const query = useQuery();
+    const movieIdParam = query.get('movie');
+    const [previewActive, setPreviewActive] = useState(false)
+
+    useEffect(() => {
+        if(movieIdParam) {
+            setPreviewActive(!!movieIdParam);
+            getMovie(movieIdParam);
+        }
+    }, [movieIdParam])
+
+    useEffect(() => {
+        if (selectedMovie) {
+            setPreviewActive(Object.keys(selectedMovie).length !== 0)
+        }
+    }, [selectedMovie])
+
+    return(
+        <header>
+            { (previewActive) ? <MoviePreview /> : <MovieSearch />}
+        </header>
+    )
 }
+
+Header.propTypes = {
+    selectedMovie: PropTypes.object,
+    getMovie: PropTypes.func,
+}
+
+const mapStateToProps = state => {
+    return {
+        selectedMovie: state.movies.selectedMovie,
+    };
+}
+
+const mapDispatchToProps = dispatch => ({
+    getMovie: movieId => dispatch(getMovieByIdRequest(movieId)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

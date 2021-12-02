@@ -4,6 +4,11 @@ import Footer from "./Footer"
 import SearchInput from "./SearchInput"
 import GenreToggle from "./GenreToggle"
 import ErrorBoundary from "./ErrorBoundary"
+import Modal from "./Modal"
+import ModalForm from "./ModalForm"
+import MoviePreview from "./MoviePreview"
+import MovieSearch from "./MovieSearch"
+import NotFound from "./NotFound"
 
 export {
     Header,
@@ -11,5 +16,10 @@ export {
     Footer,
     SearchInput,
     GenreToggle,
-    ErrorBoundary
+    ErrorBoundary,
+    Modal,
+    ModalForm,
+    MoviePreview,
+    MovieSearch,
+    NotFound,
 }
