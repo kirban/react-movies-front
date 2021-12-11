@@ -5,14 +5,18 @@ import { GenreToggle, ErrorBoundary } from '@components';
 import { genres } from '../../constant';
 import { connect } from 'react-redux';
 import fetchMovies from '../../actions/fetchMovies';
-import { useLocation, useHistory, useParams } from 'react-router';
+// import { useLocation, useHistory, useParams } from 'react-router';
+import { useRouter } from 'next/router';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
 const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, searchByText }) => {
-    const { query: searchString = '' } = useParams();
-    const history = useHistory();
-    const query = useQuery();
+    const router = useRouter();
+    const searchQuery = router.query.searchQuery;
+    // const { query: searchString = '' } = useParams();
+    // const history = useHistory();
+    // const query = useQuery();
+    const query = router.query;
     const sortByParam = query.get('sortBy');
     const movieIdParam = query.get('movie');
     const sortOrderParam = query.get('sortOrder');
@@ -37,7 +41,8 @@ const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, se
     },[movieIdParam])
 
     const onMovieSelect = movie => {
-        history.push({ search: `?movie=${movie.id}` })
+        // history.push({ search: `?movie=${movie.id}` })
+        router.push(`/search/?movie=${movie.id}`);
     }
 
     const handleToggleActionsMenu = e => {
@@ -51,7 +56,13 @@ const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, se
 
     const handleFieldSort = e => {
         const fieldName = e.target.value;
-        history.push({ search: `?sortBy=${fieldName}` })
+        // router.push(`/search/?sortBy=${fieldName}`)
+        router.push({
+            pathname: '/search',
+            query: {
+                sortBy: fieldName
+            }
+        }, 'as', {})
     }
 
     // const moviesSort = e => {

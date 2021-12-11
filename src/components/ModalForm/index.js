@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
-import { Prompt } from 'react-router';
+// import { Prompt } from 'react-router';
 import { Formik, Field, Form } from 'formik';
 import PropTypes from 'prop-types'
 import { genres } from '../../constant'
@@ -52,10 +52,10 @@ const ModalForm = ({ movieData, onFormSubmit }) => {
         >
             {({ errors, touched }) => (
             <Form>
-                <Prompt
+                {/* <Prompt
                     when={isBlocking}
                     message={ location => `Are you sure you want to go to ${location.pathname}?`} // TODO: implement onchange hanler onChange={setIsBlocking(event.target.value.length > 0)}
-                />
+                /> */}
                 <div className="formControl">
                     <label htmlFor="title">Title</label>
                     <Field id="title" name="title" placeholder="Enter movie title" />

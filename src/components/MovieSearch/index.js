@@ -3,16 +3,17 @@ import PropTypes from "prop-types";
 import { SearchInput } from "@components";
 import logo from '../../logo.svg';
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import Link from 'next/link'
+// import { NavLink } from "react-router-dom";
 
 const MovieSearch = ({ onMovieSearch, toggleModal }) => {
     return (
         <div id="searchSection">
             <div className="headerBg"></div>
             <div className="headerContent-top">
-                <NavLink to="/" className='nav-link'>
+                <Link href="/" className='nav-link'>
                     <img src={logo} alt="App Logo" className="logo" />
-                </NavLink>
+                </Link>
                 <button className="btn addMovieBtn" data-action="add" onClick={toggleModal}>+ add movie</button>
             </div>
             <div className="headerContent-main">

@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import logo from '../../logo.svg';
 import search from '../../search.svg';
 import { connect } from "react-redux";
-import { useHistory } from "react-router";
+import { useRouter } from 'next/router';
+// import { useHistory } from "react-router";
 
 const MoviePreview = ({ selectedMovie, selectMovie }) => {
-    const history = useHistory();
+    // const history = useHistory();
+    const router = useRouter();
 
     const handleSearchButtonClick = (e) => {
         e.preventDefault();
-        history.push({ search: '' })
+        // history.push({ search: '' })
+        router.push({ pathname: '/search' })
         selectMovie({});
     }
 
