@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import fetchMoviesAction from '../../actions/fetchMovies';
-import { useHistory, useLocation } from 'react-router';
-
-const useQuery = () => new URLSearchParams(useLocation().search);
+import { useRouter } from 'next/router';
 
 const GenreToggle = ({ genresList, sortByGenre }) => {
-  const query = useQuery();
+  const router = useRouter();
+  const query = router.query;
   const genreParam = query.get('genre');
-  const history = useHistory();
   const [init, setInit] = useState();
-
+  
   useEffect(() => {
     setInit(true)
   }, [])
@@ -26,9 +24,9 @@ const GenreToggle = ({ genresList, sortByGenre }) => {
 
   const handleGenreChange = genreName => {
     if (genreName.length === 0) {
-      history.push({ search: '' })
+      router.push('/search');
     } else {
-      history.push({ search: `?genre=${genreName}` });
+      router.push(`/search/?genre=${genreName}`);
     }
   };
 
