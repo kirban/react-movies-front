@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router';
+// import { useHistory, useParams } from 'react-router';
+import { useRouter } from 'next/router'; 
 import './index.css';
 
 const SearchInput = () => {
-  const { query: searchQuery } = useParams()
-  const history = useHistory();
+  const router = useRouter();
+  const searchQuery = router.query.searchQuery;
+  // const { query: searchQuery } = useParams()
+  // const history = useHistory();
   const [ searchText, setSearchText ] = useState();
 
   useEffect(() => {
@@ -13,7 +16,8 @@ const SearchInput = () => {
 
   const onFormSubmit = e => {
     e.preventDefault();
-    history.push({ pathname: `/search/${searchText}` });
+    router.push(`/search/${searchText}`)
+    // history.push({ pathname: `/search/${searchText}` });
   }
 
   const onSearchInput = e => {
