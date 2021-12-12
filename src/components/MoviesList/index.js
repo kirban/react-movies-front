@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import fetchMovies from '../../actions/fetchMovies';
 // import { useLocation, useHistory, useParams } from 'react-router';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import * as _ from 'lodash';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
@@ -25,7 +27,11 @@ const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, se
     const offsetParam = query['offset'];
 
     useEffect(() => {
-        searchByText(searchString)
+        if (_.isEmpty(query)){
+            searchByText("")
+        } else {
+            searchByText(searchString)
+        }
     }, [searchString])
 
     useEffect(() => {
@@ -105,7 +111,8 @@ const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, se
                                 </ul>
                             </div>
                             
-                            <img className="cardContentImage" src={item.poster_path} alt="" onClick={onMovieSelect.bind({}, item)}/>
+                            {/* <img className="cardContentImage" src={item.poster_path} alt="" onClick={onMovieSelect.bind({}, item)}/> */}
+                            <Image className="cardContentImage" src={item.poster_path} alt="" onClick={onMovieSelect.bind({}, item)} height={456} width={322} />
                         </div>
                         <div className="cardContent-bottom" onClick={onMovieSelect.bind({}, item)}>
                             <div className="cardContentRow-top">

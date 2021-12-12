@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { useHistory, useParams } from 'react-router';
 import { useRouter } from 'next/router'; 
+import * as _ from 'lodash';
 // import '@styles/searchInput.scss';
 
 const SearchInput = () => {
@@ -11,7 +12,11 @@ const SearchInput = () => {
   const [ searchText, setSearchText ] = useState();
 
   useEffect(() => {
-    setSearchText(searchQuery)
+    if (_.isEmpty(router.query)) {
+      setSearchText("")
+    } else {
+      setSearchText(searchQuery)
+    }
   }, [searchQuery])
 
   const onFormSubmit = e => {

@@ -4,6 +4,7 @@ import logo from '../../logo.svg';
 import search from '../../search.svg';
 import { connect } from "react-redux";
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 // import { useHistory } from "react-router";
 
 const MoviePreview = ({ selectedMovie, selectMovie }) => {
@@ -22,10 +23,12 @@ const MoviePreview = ({ selectedMovie, selectMovie }) => {
         <div id="selectedMovie">
             <div className="previewTop">
                 <a href="">
-                    <img src={logo} alt="App Logo" className="logo" />
+                    <Image src='/logo.svg' alt="App Logo" className="logo" width={139} height={24}/>
+                    {/* <img src={logo} alt="App Logo" className="logo" /> */}
                 </a>
                 <a onClick={handleSearchButtonClick}>
-                    <img src={search} alt="Search" className="search" />
+                    <Image src='/search.svg' alt="Search" className="search" width={139} height={24}/>
+                    {/* <img src={search} alt="Search" className="search" /> */}
                 </a>
             </div>
             <div className="previewMain">
