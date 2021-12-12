@@ -7,8 +7,7 @@ export default class Footer extends React.PureComponent {
         return (
             <footer>
                 <a href="http://google.com" target="_blank" rel="noopener noreferrer">
-                    <Image src='/logo.svg' alt="App Logo" className="logo" width={139} height={24}/>
-                    {/* <img src={logo} alt="App Logo" className="logo" /> */}
+                    <img src='/logo.svg' alt="App Logo" className="logo" />
                 </a>
             </footer>
         )

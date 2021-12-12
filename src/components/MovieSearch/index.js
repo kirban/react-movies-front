@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { SearchInput } from "@components";
-import logo from '../../logo.svg';
+// import logo from '../../logo.svg';
 import { connect } from "react-redux";
 import Link from 'next/link';
 import Image from 'next/image';
@@ -13,8 +13,8 @@ const MovieSearch = ({ onMovieSearch, toggleModal }) => {
             <div className="headerBg"></div>
             <div className="headerContent-top">
                 <Link href="/" className='nav-link'>
-                    <Image src='/logo.svg' alt="App Logo" className="logo" width={139} height={39}/>
-                    {/* <img src={logo} alt="App Logo" className="logo" /> */}
+                    {/* <Image src='/logo.svg' alt="App Logo" className="logo" width={139} height={39}/> */}
+                    <img src='/logo.svg' alt="App Logo" className="logo" />
                 </Link>
                 <button className="btn addMovieBtn" data-action="add" onClick={toggleModal}>+ add movie</button>
             </div>

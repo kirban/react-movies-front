@@ -12,8 +12,8 @@ const fetchMovies = () => (dispatch, getState) => {
     params.set('filter', genresFilter);
     params.set('offset', offset);
     params.set('limit', limit);
-debugger
-    fetch(`${BASE_URL}/movies?${params.toString()}`)
+
+    fetch(`${BASE_URL}/movies?sortOrder=asc&limit=6`)
         .then(response => response.json())
         .then(movies => dispatch({ type: LOAD_MOVIES_SUCCESS, payload: { movies: movies.data } }))
         .catch(error => dispatch({ type: LOAD_MOVIES_ERROR, error }))

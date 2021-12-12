@@ -12,15 +12,16 @@ const SearchInput = () => {
   const [ searchText, setSearchText ] = useState();
 
   useEffect(() => {
-    if (_.isEmpty(router.query)) {
-      setSearchText("")
-    } else {
+    // if (_.isEmpty(router.query)) {
+    //   setSearchText("")
+    // } else {
       setSearchText(searchQuery)
-    }
+    // }
   }, [searchQuery])
 
   const onFormSubmit = e => {
     e.preventDefault();
+    console.log('submitted')
     router.push(`/search/${searchText}`)
     // history.push({ pathname: `/search/${searchText}` });
   }

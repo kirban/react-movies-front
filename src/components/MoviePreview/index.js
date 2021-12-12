@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import logo from '../../logo.svg';
-import search from '../../search.svg';
+// import logo from '../../logo.svg';
+// import search from '../../search.svg';
 import { connect } from "react-redux";
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -23,12 +23,10 @@ const MoviePreview = ({ selectedMovie, selectMovie }) => {
         <div id="selectedMovie">
             <div className="previewTop">
                 <a href="">
-                    <Image src='/logo.svg' alt="App Logo" className="logo" width={139} height={24}/>
-                    {/* <img src={logo} alt="App Logo" className="logo" /> */}
+                    <img src='/logo.svg' alt="App Logo" className="logo" />
                 </a>
                 <a onClick={handleSearchButtonClick}>
-                    <Image src='/search.svg' alt="Search" className="search" width={139} height={24}/>
-                    {/* <img src={search} alt="Search" className="search" /> */}
+                    <img src='/search.svg' alt="Search" className="search" />
                 </a>
             </div>
             <div className="previewMain">

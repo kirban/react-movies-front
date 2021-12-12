@@ -27,11 +27,11 @@ const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, se
     const offsetParam = query['offset'];
 
     useEffect(() => {
-        if (_.isEmpty(query)){
-            searchByText("")
-        } else {
+        // if (_.isEmpty(query)){
+        //     searchByText("")
+        // } else {
             searchByText(searchString)
-        }
+        // }
     }, [searchString])
 
     useEffect(() => {
@@ -168,6 +168,18 @@ const mapDispatchToProps = dispatch => {
         showEdit: movie => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { type: 'edit', movie } }),
         showDelete: movie => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { type: 'delete', movie } }),
         selectMovie: movie => dispatch(selectMovieAction(movie)),
+    }
+}
+
+export async function getStaticProps() {
+    const res = await fetch(`${BASE_URL}/movies?${params.toString()}`);
+    const movies = await res.json();
+
+    return {
+        props: {
+            movies,
+        },
+        revalidate: 10
     }
 }
 
