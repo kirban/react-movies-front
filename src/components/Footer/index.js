@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../../logo.svg';
-import "@styles/footer.scss";
+// import "@styles/footer.scss";
 export default class Footer extends React.PureComponent {
     render() {
         return (

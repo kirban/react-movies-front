@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
     ModalForm
 } from '@components';
-import "@styles/modal.scss";
+// import "@styles/modal.scss";
 import { connect } from 'react-redux';
 import { postMovieRequest, putMovieRequest, deleteMovieRequest } from '../../actions/movieRequests';
 

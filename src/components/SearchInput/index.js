@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { useHistory, useParams } from 'react-router';
 import { useRouter } from 'next/router'; 
-import './index.css';
+// import '@styles/searchInput.scss';
 
 const SearchInput = () => {
   const router = useRouter();

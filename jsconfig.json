@@ -2,10 +2,12 @@
     "compilerOptions": {
         "target": "es2017",
         "allowSyntheticDefaultImports": false,
-        "baseUrl": "./",
+        "baseUrl": ".",
         "paths": {
-            "@components": [ "src/components/*" ],
-            "@styles": [ "src/styles/*" ]
+            "@components/*": [ "src/components/*" ],
+            "@components": ["src/components/index.js"],
+            "@styles/*": [ "src/styles/*" ],
+            "@styles": ["src/styles/index.scss"],
         }
     },
     "exclude": [ "node_modules" ]

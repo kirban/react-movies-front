@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 const GenreToggle = ({ genresList, sortByGenre }) => {
   const router = useRouter();
   const query = router.query;
-  const genreParam = query.get('genre');
+  const genreParam = query['genre'];
   const [init, setInit] = useState();
   
   useEffect(() => {

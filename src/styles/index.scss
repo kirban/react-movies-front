@@ -1,5 +1,12 @@
 @import "fonts";
 @import "colors";
+@import "./footer.scss";
+@import "./header.scss";
+@import "./modal.scss";
+@import "./modalForm.scss";
+@import "./moviesList.scss";
+@import "./searchInput.scss";
+
 
 body {
     background-color: #555555;

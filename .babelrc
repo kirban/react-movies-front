@@ -1,6 +1,7 @@
 {
     "plugins": [
-        "@babel/syntax-dynamic-import"
+        "@babel/syntax-dynamic-import",
+        "@babel/plugin-transform-runtime"
     ],
     "presets": [
         [

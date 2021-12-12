@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import "@styles/moviesList.scss"
+// import "@styles/moviesList.scss"
 import { GenreToggle, ErrorBoundary } from '@components';
 import { genres } from '../../constant';
 import { connect } from 'react-redux';
@@ -12,17 +12,17 @@ const useQuery = () => new URLSearchParams(useLocation().search);
 
 const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, searchByText }) => {
     const router = useRouter();
-    const searchQuery = router.query.searchQuery;
+    const searchString = router.query.searchQuery;
     // const { query: searchString = '' } = useParams();
     // const history = useHistory();
     // const query = useQuery();
     const query = router.query;
-    const sortByParam = query.get('sortBy');
-    const movieIdParam = query.get('movie');
-    const sortOrderParam = query.get('sortOrder');
-    const searchByParam = query.get('searchBy');
-    const filterParam = query.get('filter');
-    const offsetParam = query.get('offset');
+    const sortByParam = query['sortBy'];
+    const movieIdParam = query['movie'];
+    const sortOrderParam = query['sortOrder'];
+    const searchByParam = query['searchBy'];
+    const filterParam = query['filter'];
+    const offsetParam = query['offset'];
 
     useEffect(() => {
         searchByText(searchString)

@@ -1,6 +1,6 @@
 module.exports = {
-    basePath: '/search',
-    async redirects() {
+    basePath: '',
+    async rewrites() {
         return [
             {
                 source: '/',

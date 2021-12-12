@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Formik, Field, Form } from 'formik';
 import PropTypes from 'prop-types'
 import { genres } from '../../constant'
-import '@styles/modalForm.scss'
+// import '@styles/modalForm.scss'
 import { MovieBaseSchema, MovieSchema } from '../../schemas/movie'
 import * as _ from 'lodash';
 
