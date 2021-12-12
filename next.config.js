@@ -1,7 +1,12 @@
+const path = require('path')
+
 module.exports = {
     basePath: '',
     images: {
         domains: ['image.tmdb.org']
+    },
+    sassOptions: {
+        includePaths: [path.join(__dirname, 'src/styles')]
     },
     async redirects() {
         return [

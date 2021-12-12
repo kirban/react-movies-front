@@ -13,7 +13,7 @@ const fetchMovies = () => (dispatch, getState) => {
     params.set('offset', offset);
     params.set('limit', limit);
 
-    fetch(`${BASE_URL}/movies?sortOrder=asc&limit=6`)
+    fetch(`${BASE_URL}/movies?${params.toString()}`)
         .then(response => response.json())
         .then(movies => dispatch({ type: LOAD_MOVIES_SUCCESS, payload: { movies: movies.data } }))
         .catch(error => dispatch({ type: LOAD_MOVIES_ERROR, error }))

@@ -27,11 +27,11 @@ const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, se
     const offsetParam = query['offset'];
 
     useEffect(() => {
-        // if (_.isEmpty(query)){
-        //     searchByText("")
-        // } else {
+        if (_.isEmpty(query)){
+            searchByText("")
+        } else {
             searchByText(searchString)
-        // }
+        }
     }, [searchString])
 
     useEffect(() => {
@@ -172,7 +172,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 export async function getStaticProps() {
-    const res = await fetch(`${BASE_URL}/movies?${params.toString()}`);
+    const res = await fetch(`${BASE_URL}/movies?sortOrder=asc&limit=6`);
     const movies = await res.json();
 
     return {

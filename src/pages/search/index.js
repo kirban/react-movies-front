@@ -1,11 +1,7 @@
-import React from 'react'
-import { useRouter } from 'next/router'
+import React from 'react';
 
 export default function Search() {
-    const router = useRouter()
     return (
-        <>
-            Router
-        </>
+        <h1>indexsearch</h1>
     )
 }
