@@ -92,7 +92,7 @@ const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, se
                 </ErrorBoundary>
                 <div className="sortItemsContainer">
                     <label htmlFor="sortItems">sort by</label>
-                    <select id="sortItems" onChange={handleFieldSort}>
+                    <select id="sortItems" onChange={handleFieldSort} value={sortByParam}>
                         <option defaultValue value="release_date">release date</option>
                         <option value="title">title</option>
                         <option value="vote_average">rating</option>

@@ -12,7 +12,7 @@ function Search() {
 export async function getServerSideProps (ctx) {
     const { dispatch } = store;
     const { sortBy, sortOrder, genre } = ctx.query;
-
+    console.log('url', `${BASE_URL}/movies?sortBy=${(sortBy)?sortBy:''}&sortOrder=${(sortOrder)?sortOrder:'asc'}&searchBy=${(genre && genre.split(',').length)?'genre':'title'}&filter=${(genre)?genre:''}&offset=&limit=6`)
     const res = await fetch(`${BASE_URL}/movies?sortBy=${(sortBy)?sortBy:''}&sortOrder=${(sortOrder)?sortOrder:'asc'}&searchBy=${(genre && genre.split(',').length)?'genre':'title'}&filter=${(genre)?genre:''}&offset=&limit=6`);
     const movies = await res.json();
 
