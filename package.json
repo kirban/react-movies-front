@@ -6,14 +6,15 @@
   "main": "index.js",
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.16.4",
+    "@babel/runtime": "^7.16.3",
     "formik": "^2.2.9",
     "identity-obj-proxy": "^3.0.0",
     "jest-css-modules": "^2.1.0",
     "lodash": "^4.17.21",
+    "next": "^12.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
-    "react-router-dom": "^5.3.0",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.0",
     "yup": "^0.32.11"
@@ -21,8 +22,10 @@
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@babel/plugin-transform-modules-commonjs": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.4",
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-react": "^7.14.5",
+    "@svgr/webpack": "^6.1.1",
     "@testing-library/react": "^12.1.2",
     "@webpack-cli/generators": "^2.3.0",
     "autoprefixer": "^10.3.6",
@@ -40,7 +43,8 @@
     "html-webpack-plugin": "^5.3.2",
     "jest": "^27.3.1",
     "mini-css-extract-plugin": "^2.3.0",
-    "postcss": "^8.3.8",
+    "postcss": "^8.4.4",
+    "postcss-focus": "^5.0.1",
     "postcss-loader": "^6.1.1",
     "prettier": "^2.4.1",
     "prop-types": "^15.7.2",
@@ -51,6 +55,9 @@
     "webpack": "^5.54.0",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.3.0"
+  },
+  "peerDependencies": {
+    "postcss": "^8.4.4"
   },
   "scripts": {
     "test": "jest",
@@ -64,7 +71,10 @@
     "backend-serve": "cd /Users/Kirill_Romanov2/Projects/Learn/React/MoviesAPI.ReactJS && npm run start",
     "serve": "concurrently --kill-others \"npm:backend-serve\" \"webpack serve\"",
     "lint": "eslint ./src/ --ext=js",
-    "lint:fix": "eslint ./src/ --ext=js --fix"
+    "lint:fix": "eslint ./src/ --ext=js --fix",
+    "next:start": "next start",
+    "next:dev": "next dev",
+    "next:build": "next build"
   },
   "keywords": [],
   "author": "",

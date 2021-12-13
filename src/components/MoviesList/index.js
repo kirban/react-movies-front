@@ -1,27 +1,26 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import "@styles/moviesList.scss"
 import { GenreToggle, ErrorBoundary } from '@components';
 import { genres } from '../../constant';
 import { connect } from 'react-redux';
 import fetchMovies from '../../actions/fetchMovies';
-import { useLocation, useHistory, useParams } from 'react-router';
-
-const useQuery = () => new URLSearchParams(useLocation().search);
+import { useRouter } from 'next/router';
+import Image from 'next/image';
+import * as _ from 'lodash';
 
 const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, searchByText }) => {
-    const { query: searchString = '' } = useParams();
-    const history = useHistory();
-    const query = useQuery();
-    const sortByParam = query.get('sortBy');
-    const movieIdParam = query.get('movie');
-    const sortOrderParam = query.get('sortOrder');
-    const searchByParam = query.get('searchBy');
-    const filterParam = query.get('filter');
-    const offsetParam = query.get('offset');
+    const router = useRouter();
+    const searchString = router.query.searchQuery;
+    const query = router.query;
+    const sortByParam = query['sortBy'];
+    const movieIdParam = query['movie'];
 
     useEffect(() => {
-        searchByText(searchString)
+        if (_.isEmpty(query)){
+            searchByText("")
+        } else {
+            searchByText(searchString)
+        }
     }, [searchString])
 
     useEffect(() => {
@@ -37,7 +36,18 @@ const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, se
     },[movieIdParam])
 
     const onMovieSelect = movie => {
-        history.push({ search: `?movie=${movie.id}` })
+        if (router.query.searchQuery) {
+            const searchQuery = router.query.searchQuery;
+            router.push({
+                pathname: '/search/[searchQuery]',
+                query: { searchQuery, movie: movie.id }
+            })
+        } else {
+            router.push({
+                pathname: '/search',
+                query: { movie: movie.id }
+            })
+        }
     }
 
     const handleToggleActionsMenu = e => {
@@ -51,7 +61,18 @@ const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, se
 
     const handleFieldSort = e => {
         const fieldName = e.target.value;
-        history.push({ search: `?sortBy=${fieldName}` })
+        if (router.query.searchQuery) {
+            const searchQuery = router.query.searchQuery
+            router.push({
+                pathname: '/search/[searchQuery]',
+                query: { sortBy: fieldName, searchQuery }
+            })
+        } else {
+            router.push({
+                pathname: '/search',
+                query: { sortBy: fieldName }
+            })
+        }
     }
 
     // const moviesSort = e => {
@@ -71,7 +92,7 @@ const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, se
                 </ErrorBoundary>
                 <div className="sortItemsContainer">
                     <label htmlFor="sortItems">sort by</label>
-                    <select id="sortItems" onChange={handleFieldSort}>
+                    <select id="sortItems" onChange={handleFieldSort} value={sortByParam}>
                         <option defaultValue value="release_date">release date</option>
                         <option value="title">title</option>
                         <option value="vote_average">rating</option>
@@ -94,7 +115,8 @@ const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, se
                                 </ul>
                             </div>
                             
-                            <img className="cardContentImage" src={item.poster_path} alt="" onClick={onMovieSelect.bind({}, item)}/>
+                            {/* <img className="cardContentImage" src={item.poster_path} alt="" onClick={onMovieSelect.bind({}, item)}/> */}
+                            <Image className="cardContentImage" src={item.poster_path} alt="" onClick={onMovieSelect.bind({}, item)} height={456} width={322} />
                         </div>
                         <div className="cardContent-bottom" onClick={onMovieSelect.bind({}, item)}>
                             <div className="cardContentRow-top">

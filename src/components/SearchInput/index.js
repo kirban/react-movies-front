@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router';
-import './index.css';
+import { useRouter } from 'next/router'; 
+import * as _ from 'lodash';
 
 const SearchInput = () => {
-  const { query: searchQuery } = useParams()
-  const history = useHistory();
+  const router = useRouter();
+  const searchQuery = router.query.searchQuery;
   const [ searchText, setSearchText ] = useState();
 
   useEffect(() => {
-    setSearchText(searchQuery)
+    if (_.isEmpty(router.query)) {
+      setSearchText("")
+    } else {
+      setSearchText(searchQuery)
+    }
   }, [searchQuery])
 
   const onFormSubmit = e => {
     e.preventDefault();
-    history.push({ pathname: `/search/${searchText}` });
+    console.log('submitted')
+    console.log('router',router)
+    router.push(`/search/${searchText}`)
+    // history.push({ pathname: `/search/${searchText}` });
   }
 
   const onSearchInput = e => {

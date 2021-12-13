@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import fetchMoviesAction from '../../actions/fetchMovies';
-import { useHistory, useLocation } from 'react-router';
-
-const useQuery = () => new URLSearchParams(useLocation().search);
+import { useRouter } from 'next/router';
 
 const GenreToggle = ({ genresList, sortByGenre }) => {
-  const query = useQuery();
-  const genreParam = query.get('genre');
-  const history = useHistory();
+  const router = useRouter();
+  const query = router.query;
+  const genreParam = query['genre'];
   const [init, setInit] = useState();
-
+  
   useEffect(() => {
     setInit(true)
   }, [])
@@ -26,15 +24,15 @@ const GenreToggle = ({ genresList, sortByGenre }) => {
 
   const handleGenreChange = genreName => {
     if (genreName.length === 0) {
-      history.push({ search: '' })
+      router.push('/search');
     } else {
-      history.push({ search: `?genre=${genreName}` });
+      router.push(`/search/?genre=${genreName}`);
     }
   };
 
   const genreItems = genresList.map((genreName, genreIndex) => (
     <li key={genreIndex.toString()}>
-      <input type="radio" name="genres" id={`genres_${genreIndex}`} onChange={handleGenreChange.bind({}, genreName)}/>
+      <input type="radio" name="genres" id={`genres_${genreIndex}`} onChange={handleGenreChange.bind({}, genreName)} checked={genreParam === genreName}/>
       <label htmlFor={`genres_${genreIndex}`}>{genreName}</label>
     </li>
   ));
@@ -42,7 +40,7 @@ const GenreToggle = ({ genresList, sortByGenre }) => {
   return (
       <ul className="genresList">
         <li key="default">
-          <input type="radio" name="genres" id="genres_default" onChange={handleGenreChange.bind({}, "")}/>
+          <input type="radio" name="genres" id="genres_default" onChange={handleGenreChange.bind({}, "")} checked={(!!genreParam)}/>
           <label htmlFor="genres_default">All</label>
         </li>
         {genreItems}

@@ -1,16 +1,14 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import logo from '../../logo.svg';
-import search from '../../search.svg';
 import { connect } from "react-redux";
-import { useHistory } from "react-router";
+import { useRouter } from 'next/router';
 
 const MoviePreview = ({ selectedMovie, selectMovie }) => {
-    const history = useHistory();
+    const router = useRouter();
 
     const handleSearchButtonClick = (e) => {
         e.preventDefault();
-        history.push({ search: '' })
+        router.push({ query: {} })
         selectMovie({});
     }
 
@@ -19,10 +17,10 @@ const MoviePreview = ({ selectedMovie, selectMovie }) => {
         <div id="selectedMovie">
             <div className="previewTop">
                 <a href="">
-                    <img src={logo} alt="App Logo" className="logo" />
+                    <img src='/logo.svg' alt="App Logo" className="logo" />
                 </a>
                 <a onClick={handleSearchButtonClick}>
-                    <img src={search} alt="Search" className="search" />
+                    <img src='/search.svg' alt="Search" className="search" />
                 </a>
             </div>
             <div className="previewMain">
