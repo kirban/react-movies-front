@@ -1,30 +1,19 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-// import "@styles/moviesList.scss"
 import { GenreToggle, ErrorBoundary } from '@components';
 import { genres } from '../../constant';
 import { connect } from 'react-redux';
 import fetchMovies from '../../actions/fetchMovies';
-// import { useLocation, useHistory, useParams } from 'react-router';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import * as _ from 'lodash';
 
-const useQuery = () => new URLSearchParams(useLocation().search);
-
 const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, searchByText }) => {
     const router = useRouter();
     const searchString = router.query.searchQuery;
-    // const { query: searchString = '' } = useParams();
-    // const history = useHistory();
-    // const query = useQuery();
     const query = router.query;
     const sortByParam = query['sortBy'];
     const movieIdParam = query['movie'];
-    const sortOrderParam = query['sortOrder'];
-    const searchByParam = query['searchBy'];
-    const filterParam = query['filter'];
-    const offsetParam = query['offset'];
 
     useEffect(() => {
         if (_.isEmpty(query)){
@@ -47,8 +36,18 @@ const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, se
     },[movieIdParam])
 
     const onMovieSelect = movie => {
-        // history.push({ search: `?movie=${movie.id}` })
-        router.push(`/search/?movie=${movie.id}`);
+        if (router.query.searchQuery) {
+            const searchQuery = router.query.searchQuery;
+            router.push({
+                pathname: '/search/[searchQuery]',
+                query: { searchQuery, movie: movie.id }
+            })
+        } else {
+            router.push({
+                pathname: '/search',
+                query: { movie: movie.id }
+            })
+        }
     }
 
     const handleToggleActionsMenu = e => {
@@ -62,13 +61,18 @@ const MoviesList = ({ movies, sortByField, selectMovie, showEdit, showDelete, se
 
     const handleFieldSort = e => {
         const fieldName = e.target.value;
-        // router.push(`/search/?sortBy=${fieldName}`)
-        router.push({
-            pathname: '/search',
-            query: {
-                sortBy: fieldName
-            }
-        }, 'as', {})
+        if (router.query.searchQuery) {
+            const searchQuery = router.query.searchQuery
+            router.push({
+                pathname: '/search/[searchQuery]',
+                query: { sortBy: fieldName, searchQuery }
+            })
+        } else {
+            router.push({
+                pathname: '/search',
+                query: { sortBy: fieldName }
+            })
+        }
     }
 
     // const moviesSort = e => {
@@ -168,18 +172,6 @@ const mapDispatchToProps = dispatch => {
         showEdit: movie => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { type: 'edit', movie } }),
         showDelete: movie => dispatch({ type: 'TOGGLE_MODAL_SHOW', payload: { type: 'delete', movie } }),
         selectMovie: movie => dispatch(selectMovieAction(movie)),
-    }
-}
-
-export async function getStaticProps() {
-    const res = await fetch(`${BASE_URL}/movies?sortOrder=asc&limit=6`);
-    const movies = await res.json();
-
-    return {
-        props: {
-            movies,
-        },
-        revalidate: 10
     }
 }
 
